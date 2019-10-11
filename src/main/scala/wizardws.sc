@@ -4,3 +4,4 @@ case class test(name: Integer) {
 
 
 val wert1: Integer = 42
+ :)
