@@ -1,9 +1,10 @@
 case class test(name: Integer) {
-  def function()
+  def function(): Unit {
+      val i: Integer = 1
+  }
 }
 
 
-val wert1: Integer = 42
- :)
+val value1: Integer = 42
 
-Hello
+:)
