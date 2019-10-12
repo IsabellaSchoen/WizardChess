@@ -4,7 +4,6 @@ case class test(name: Integer) {
   }
 }
 
-
-val value12: Integer = 42
+val value1: Integer = 42
 
 :)
