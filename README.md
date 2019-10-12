@@ -2,5 +2,5 @@
 Project in Software Engineering
 
 # authors
-Isabella Schön
+Isabella Schön \
 Leon Budimovic
