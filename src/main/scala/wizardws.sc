@@ -1,25 +1,10 @@
-var i: Integer = 0;
-
-while(i < 5)
-{
-  println("Hello")
-  i = i + 1
+case class test(name: Integer) {
+  def function(): Unit {
+      val i: Integer = 1
+  }
 }
 
 
-1 + 573
-1 + 547.5
-"Hallo"
+val value1: Integer = 42
 
-
-object loop {
-  var x: Integer = 5
-}
-
-if (loop.x < 10) {
-  println("5 is smaller than 10")
-}
-
-i + 5
-
-
+:)
