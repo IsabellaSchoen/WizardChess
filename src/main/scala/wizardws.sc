@@ -1,9 +1,22 @@
-case class test(name: Integer) {
-  def function(): Unit {
-      val i: Integer = 1
-  }
+var i: Integer = 0
+while (i < 5) {
+  println("Hello")
+  i = i + 1
 }
 
-val value1: Integer = 42
+1+573
 
-:)
+object test {
+  var f: Integer = 3
+}
+
+if (test.f.equals(i)) {
+  println("oof")
+} else {
+  println("big oof")
+}
+
+case class test2(a: Integer, b: Integer) {
+  var c = a + b
+  c = c * c
+}
