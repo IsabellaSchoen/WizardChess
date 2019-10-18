@@ -20,22 +20,17 @@ case class test2(a: Integer, b: Integer) {
   var c = a + b
   c = c * c
 }
-val variable = test2(8, 7)
+val variable = test2(2, 3)
 print(variable.c.toString)
 print(variable.a.toString)
 print(variable.b.toString)
 
 for (i <- 5 to 10)
-  print(i)
+  println(i)
 
 println(f"${i.hashCode()}")
 
 println("wfhqp".charAt(0))
-
-
-
-"WizardChess"
-
 
 val game = List('W', 'i', 'z', 'a', 'r',
   'd', 'C', 'h', 'e', 's', 's')
