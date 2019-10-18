@@ -54,3 +54,5 @@ for (y <- 0 to 7) {
 }
 
 b1.matrix.foreach(a => a.foreach(c => println(c.toString())))
+
+println(b1.matrix(4)(6)) // E7

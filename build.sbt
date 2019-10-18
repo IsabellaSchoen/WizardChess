@@ -1,5 +1,3 @@
-import com.sun.tools.javac.resources.version
-
 name := "WizardChess"
 
 version := "0.1"
