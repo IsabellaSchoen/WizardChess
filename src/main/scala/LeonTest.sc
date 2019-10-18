@@ -7,25 +7,29 @@ class figure(id: Int) {
   }
 }
 
-val testpawn = new figure(1)
-val testnone = new figure(0)
+val testPawn = new figure(1)
+val nullTest = new figure(0)
 
-println(testpawn.name)
-println(testnone.name)
+println(testPawn.name)
+println(nullTest.name)
 
 class cell(x: Char, y: Int) {
   var figure = null.asInstanceOf[figure]
   val posX = x
   val posY = y
+
+  override def toString: String = {
+    return posX.toString + posY.toString
+  }
 }
 
 val cell_1 = new cell('A', 1)
 
-cell_1.figure = testpawn
+cell_1.figure = testPawn
 
 println(cell_1.figure.name)
 
-println(cell_1.posX.toString + cell_1.posY)
+println(cell_1.toString())
 
 class board {
   val matrix = Array.ofDim[cell](8, 8)
@@ -49,4 +53,4 @@ for (y <- 0 to 7) {
   }
 }
 
-b1.matrix.foreach()
+b1.matrix.foreach(a => a.foreach(c => println(c.toString())))
