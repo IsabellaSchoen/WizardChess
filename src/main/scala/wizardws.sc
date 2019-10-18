@@ -40,6 +40,3 @@ println(f"We are cool and Harry Potter fans so we gonna creat this game called: 
 for(b <- game) {
   print(b)
 }
-
-
-:(
