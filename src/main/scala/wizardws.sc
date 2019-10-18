@@ -4,6 +4,7 @@ while (i < 5) {
   i = i + 1
 }
 
+
 1+573
 
 object test {
@@ -39,3 +40,6 @@ println(f"We are cool and Harry Potter fans so we gonna creat this game called: 
 for(b <- game) {
   print(b)
 }
+
+
+:)
