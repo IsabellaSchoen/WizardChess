@@ -3,6 +3,11 @@
 class figure(id: Int) {
   val name = id match {
     case 1 => "pawn"
+    case 2 => "knight"
+    case 3 => "bishop"
+    case 4 => "rook"
+    case 5 => "queen"
+    case 6 => "king"
     case _ => null
   }
 }
@@ -19,7 +24,7 @@ class cell(x: Char, y: Int) {
   val posY = y
 
   override def toString: String = {
-    return posX.toString + posY.toString
+    posX.toString + posY.toString
   }
 }
 
@@ -56,3 +61,40 @@ for (y <- 0 to 7) {
 b1.matrix.foreach(a => a.foreach(c => println(c.toString())))
 
 println(b1.matrix(4)(6)) // E7
+
+// initialization
+
+// rooks
+b1.matrix(0)(0).figure = new figure(4)
+b1.matrix(0)(7).figure = new figure(4)
+b1.matrix(7)(0).figure = new figure(4)
+b1.matrix(7)(7).figure = new figure(4)
+
+// knights
+b1.matrix(1)(0).figure = new figure(2)
+b1.matrix(6)(0).figure = new figure(2)
+b1.matrix(1)(7).figure = new figure(2)
+b1.matrix(6)(7).figure = new figure(2)
+
+// bishops
+b1.matrix(2)(0).figure = new figure(3)
+b1.matrix(5)(0).figure = new figure(3)
+b1.matrix(2)(7).figure = new figure(3)
+b1.matrix(5)(7).figure = new figure(3)
+
+// queens
+b1.matrix(3)(0).figure = new figure(5)
+b1.matrix(3)(7).figure = new figure(5)
+
+// kings
+b1.matrix(4)(0).figure = new figure(6)
+b1.matrix(4)(7).figure = new figure(6)
+
+// pawns
+b1.matrix.foreach(a => a.foreach(c => { if (c.posY.equals(2) || c.posY.equals(7)) {
+  c.figure = new figure(1)
+}}))
+
+b1.matrix.foreach(a => a.foreach(c => if (c.figure != null) {
+  println(c.figure.name + " " + c)
+}))
