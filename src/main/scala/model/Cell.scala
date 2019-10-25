@@ -1,10 +1,12 @@
 package model
 
-case class Cell(value: Char, value1: Int) {
-  def isEmpty : Boolean = figure == null
+case class Cell(value: Char, value1: Int, var figure: Option[Figure]) {
+  def isEmpty : Boolean = figure match {
+    case Some(x) => false
+    case None => true
+  }
 
-    var figure : Figure = null
-
+//    val king : Option[Figure] = Some(new Figure("King")
   val x = value
   val y = value1
   def getX = x
