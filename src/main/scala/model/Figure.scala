@@ -1,5 +1,3 @@
 package model
 
-case class Figure(value: String) {
-  val name = value
-}
+case class Figure(name: String)
