@@ -1,5 +1,0 @@
-package wizardchess
-
-class figures {
-
-}
