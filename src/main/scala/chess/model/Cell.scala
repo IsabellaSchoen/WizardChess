@@ -15,3 +15,13 @@ case class Cell(value: Char, value1: Int, figure: Option[Figure]= None) {
   def getY = y
 
 }
+
+/*lass cell(x: Char, y: Int) {
+  var figure = null.asInstanceOf[figure]
+  val posX = x
+  val posY = y
+
+  override def toString: String = {
+    posX.toString + posY.toString
+  }
+}*/
