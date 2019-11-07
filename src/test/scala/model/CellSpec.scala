@@ -5,10 +5,10 @@ import org.scalatest.{Matchers, WordSpec}
 class CellSpec extends WordSpec with Matchers{
   "A Cell" should {
     "have a x value" in {
-      new Cell('A', 1).getX should be ('A')
+      new Cell('A', 1).x should be ('A')
     }
     "have a y value" in {
-      new Cell('A', 1).getY should be (1)
+      new Cell('A', 1).y should be (1)
     }
   }
   "A Cell" when {
@@ -18,10 +18,13 @@ class CellSpec extends WordSpec with Matchers{
       }
     }
     "not empty" should {
+      var test : Cell = new Cell('B', 7, Some(Figure("TEST")))
+      test = test.set("pawn")
       "have a figure" in {
-        var test : Cell = new Cell('B', 7)
-        test = test.set(new Figure("pawn"))
         test.isEmpty should be (false)
+        }
+      "have a String representation for its figure" in {
+        test.toString should be ("pawn B7")
       }
     }
   }

@@ -1,6 +1,8 @@
 // Prototypes for classes
 
-class figure(id: Int) {
+import model.{Cell, Figure}
+
+/*class figure(id: Int) {
   val name = id match {
     case 1 => "pawn"
     case 2 => "knight"
@@ -10,16 +12,16 @@ class figure(id: Int) {
     case 6 => "king"
     case _ => null
   }
-}
+}*/
 
-val testPawn = new figure(1)
-val nullTest = new figure(0)
+val testPawn = new Figure("test")
+val nullTest = new Figure("none")
 
 println(testPawn.name)
 println(nullTest.name)
 
 class cell(x: Char, y: Int) {
-  var figure = null.asInstanceOf[figure]
+  var figure = null.asInstanceOf[Figure]
   val posX = x
   val posY = y
 
@@ -65,34 +67,34 @@ println(b1.matrix(4)(6)) // E7
 // initialization
 
 // rooks
-b1.matrix(0)(0).figure = new figure(4)
-b1.matrix(0)(7).figure = new figure(4)
-b1.matrix(7)(0).figure = new figure(4)
-b1.matrix(7)(7).figure = new figure(4)
+b1.matrix(0)(0).figure = new Figure("rook")
+b1.matrix(0)(7).figure = new Figure("rook")
+b1.matrix(7)(0).figure = new Figure("rook")
+b1.matrix(7)(7).figure = new Figure("rook")
 
 // knights
-b1.matrix(1)(0).figure = new figure(2)
-b1.matrix(6)(0).figure = new figure(2)
-b1.matrix(1)(7).figure = new figure(2)
-b1.matrix(6)(7).figure = new figure(2)
+b1.matrix(1)(0).figure = new Figure("knight")
+b1.matrix(6)(0).figure = new Figure("knight")
+b1.matrix(1)(7).figure = new Figure("knight")
+b1.matrix(6)(7).figure = new Figure("knight")
 
 // bishops
-b1.matrix(2)(0).figure = new figure(3)
-b1.matrix(5)(0).figure = new figure(3)
-b1.matrix(2)(7).figure = new figure(3)
-b1.matrix(5)(7).figure = new figure(3)
+b1.matrix(2)(0).figure = new Figure("bishop")
+b1.matrix(5)(0).figure = new Figure("bishop")
+b1.matrix(2)(7).figure = new Figure("bishop")
+b1.matrix(5)(7).figure = new Figure("bishop")
 
 // queens
-b1.matrix(3)(0).figure = new figure(5)
-b1.matrix(3)(7).figure = new figure(5)
+b1.matrix(3)(0).figure = new Figure("queen")
+b1.matrix(3)(7).figure = new Figure("queen")
 
 // kings
-b1.matrix(4)(0).figure = new figure(6)
-b1.matrix(4)(7).figure = new figure(6)
+b1.matrix(4)(0).figure = new Figure("king")
+b1.matrix(4)(7).figure = new Figure("king")
 
 // pawns
 b1.matrix.foreach(a => a.foreach(c => { if (c.posY.equals(2) || c.posY.equals(7)) {
-  c.figure = new figure(1)
+  c.figure = new Figure("pawn")
 }}))
 
 b1.matrix.foreach(a => a.foreach(c => if (c.figure != null) {
