@@ -1,2 +1,3 @@
-import model._
+import chess.model._
 
+Figure()

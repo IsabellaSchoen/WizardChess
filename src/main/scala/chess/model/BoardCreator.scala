@@ -3,11 +3,11 @@
 
 package chess.model
 
-import model.{Board,Cell,Figure}
+import chess.model.{Board,Cell,Figure}
 
 class BoardCreator(size:Int) {
 
-  val b1 = new Board(8)
+  val b1 = Board(8)
   for (y <- 0 to 7) {
     for (x <- 0 to 7) {
       val ch = x match {
@@ -21,7 +21,7 @@ class BoardCreator(size:Int) {
         case 7 => 'H'
       }
 
-      b1.Matrix(x)(y) = new Cell(ch, y + 1)
+      b1.Matrix(x)(y) = Cell(ch, y + 1)
     }
   }
 
