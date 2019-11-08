@@ -7,7 +7,12 @@ case class Cell(x: Int, y: Int, figure: Option[Figure] = None) {
   }
 
   //    val king : Option[Figure] = Some(Figure("King")
-  def set(new_figure: String): Cell = copy(figure = Some(Figure(new_figure)))
+  def set(new_figure: String): Cell = {
+    if (!new_figure.equals("none"))
+      copy(figure = Some(Figure(new_figure)))
+    else
+      copy(figure = None)
+  }
 
   override def toString: String = {
     if (figure.isDefined)

@@ -8,6 +8,16 @@ import chess.model.Matrix
 case class Board(size: Int) {
   val Matrix: Array[Array[Cell]] = Array.ofDim[Cell](size, size)
 
+  def move(x1: Int, x2: Int, y1: Int, y2: Int): Board = {
+    val tmp: Cell = Matrix(x1)(x2)
+    if (Matrix(x2)(y2).figure.isEmpty) {
+      Matrix(x2)(y2).set(tmp.figure.get.name)
+      tmp.set("none")
+    } else
+    println("Not allowed")
+    this
+  }
+
   override def toString: String = {
     val numbers = "    A   B   C   D   E   F   G   H\n"
     val lineseparator = ("  +-" + ("--" * (2 * size - 1))) + "+\n"
