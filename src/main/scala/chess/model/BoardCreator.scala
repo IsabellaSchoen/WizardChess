@@ -3,10 +3,8 @@
 
 package chess.model
 
-import chess.model.{Board, Cell, Figure}
-
-class BoardCreator {
-  def create(size: Int): Board = {
+case class BoardCreator(size: Int) {
+  def create: Board = {
     val b1 = Board(size)
     for (y <- 0 to 7) {
       for (x <- 0 to 7) {

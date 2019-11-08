@@ -7,7 +7,7 @@ import scala.io.StdIn.readLine
 
 
 object WizardChess {
-  var board = new BoardCreator().create(8)
+  var board: Board = BoardCreator(8).create
   val tui = new Tui
 
   def main(args:Array[String]): Unit = {
