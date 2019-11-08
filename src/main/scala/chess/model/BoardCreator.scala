@@ -44,6 +44,13 @@ class BoardCreator {
     // kings
     b1.matrix(4)(0) = b1.matrix(4)(0).set("king")
     b1.matrix(4)(7) = b1.matrix(4)(7).set("king")
+
+    // pawns
+    b1.matrix.foreach(a => a.foreach(c => {
+      if (c.x.equals(2) || c.y.equals(7)) {
+        b1.matrix(c.x)(c.y) = c.set("pawn")
+      }
+    }))
   }
 
 }
