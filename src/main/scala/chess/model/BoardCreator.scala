@@ -16,41 +16,44 @@ class BoardCreator {
     init(b1)
   }
 
-  def init(b1: Board): Unit = {
-    // initialization
 
-    // rooks
-    b1.matrix(0)(0) = b1.matrix(0)(0).set("rook")
-    b1.matrix(0)(7) = b1.matrix(0)(7).set("rook")
-    b1.matrix(7)(0) = b1.matrix(7)(0).set("rook")
-    b1.matrix(7)(7) = b1.matrix(7)(7).set("rook")
+    def init(b1: Board): Board = {
+      // initialization
 
-    // knights
-    b1.matrix(1)(0) = b1.matrix(1)(0).set("knight")
-    b1.matrix(6)(0) = b1.matrix(6)(0).set("knight")
-    b1.matrix(1)(7) = b1.matrix(1)(7).set("knight")
-    b1.matrix(6)(7) = b1.matrix(6)(7).set("knight")
+      // rooks
+      b1.Matrix(0)(0) = b1.Matrix(0)(0).set("rook")
+      b1.Matrix(0)(7) = b1.Matrix(0)(7).set("rook")
+      b1.Matrix(7)(0) = b1.Matrix(7)(0).set("rook")
+      b1.Matrix(7)(7) = b1.Matrix(7)(7).set("rook")
 
-    // bishops
-    b1.matrix(6)(7) = b1.matrix(2)(0).set("bishop")
-    b1.matrix(5)(0) = b1.matrix(5)(0).set("bishop")
-    b1.matrix(2)(7) = b1.matrix(2)(7).set("bishop")
-    b1.matrix(5)(7) = b1.matrix(5)(7).set("bishop")
+      // knights
+      b1.Matrix(1)(0) = b1.Matrix(1)(0).set("knight")
+      b1.Matrix(6)(0) = b1.Matrix(6)(0).set("knight")
+      b1.Matrix(1)(7) = b1.Matrix(1)(7).set("knight")
+      b1.Matrix(6)(7) = b1.Matrix(6)(7).set("knight")
 
-    // queens
-    b1.matrix(3)(0) = b1.matrix(3)(0).set("queen")
-    b1.matrix(3)(7) = b1.matrix(3)(7).set("queen")
+      // bishops
+      b1.Matrix(6)(7) = b1.Matrix(2)(0).set("bishop")
+      b1.Matrix(5)(0) = b1.Matrix(5)(0).set("bishop")
+      b1.Matrix(2)(7) = b1.Matrix(2)(7).set("bishop")
+      b1.Matrix(5)(7) = b1.Matrix(5)(7).set("bishop")
 
-    // kings
-    b1.matrix(4)(0) = b1.matrix(4)(0).set("king")
-    b1.matrix(4)(7) = b1.matrix(4)(7).set("king")
+      // queens
+      b1.Matrix(3)(0) = b1.Matrix(3)(0).set("queen")
+      b1.Matrix(3)(7) = b1.Matrix(3)(7).set("queen")
 
-    // pawns
-    b1.matrix.foreach(a => a.foreach(c => {
-      if (c.x.equals(2) || c.y.equals(7)) {
-        b1.matrix(c.x)(c.y) = c.set("pawn")
-      }
-    }))
+      // kings
+      b1.Matrix(4)(0) = b1.Matrix(4)(0).set("king")
+      b1.Matrix(4)(7) = b1.Matrix(4)(7).set("king")
+
+      // pawns
+      b1.Matrix.foreach(a => a.foreach(c => {
+        if (c.x.equals(2) || c.y.equals(7)) {
+          b1.Matrix(c.x)(c.y) = c.set("pawn")
+        }
+      }))
+      b1
+    }
+
+
   }
-
-}

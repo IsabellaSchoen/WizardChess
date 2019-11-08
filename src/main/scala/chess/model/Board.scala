@@ -25,3 +25,4 @@ case class Board(size: Int) {
     box
   }
 }
+

@@ -2,7 +2,7 @@
 
 import chess.model._
 
-/*class figure(id: Int) {
+class figure(id: Int) {
   val name = id match {
     case 1 => "pawn"
     case 2 => "knight"
@@ -12,7 +12,7 @@ import chess.model._
     case 6 => "king"
     case _ => null
   }
-}*/
+}
 
 val testPawn = Figure("test")
 val nullTest = Figure("none")
@@ -52,7 +52,7 @@ for (y <- 0 to 7) {
 
 b1.matrix.foreach(a => a.foreach(c => println(c)))
 
-println(b1.matrix(4)(6)) // E7
+//println(b1.matrix(4)(6)) // E7
 
 // initialization
 

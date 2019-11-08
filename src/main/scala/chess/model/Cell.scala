@@ -17,12 +17,4 @@ case class Cell(x: Int, y: Int, figure: Option[Figure] = None) {
   }
 }
 
-/*lass cell(x: Char, y: Int) {
-  var figure = null.asInstanceOf[figure]
-  val posX = x
-  val posY = y
 
-  override def toString: String = {
-    posX.toString + posY.toString
-  }
-}*/

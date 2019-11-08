@@ -8,7 +8,7 @@ class Tui {
     input match {
       case "new" => Board(8) //Erstellung eines Boards mit 64 Feldern und den Figuren
       case "exit" => board //Beenden des Programmes
-      case _ => board
+      case _ => board //Beenden des Programmes
     }
   }
 }
