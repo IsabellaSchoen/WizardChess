@@ -15,9 +15,12 @@ case class Board(size: Int) {
     for {
       row <- 0 until size
       col <- 0 until size
+    } {
+      if (Matrix(row)(col).figure.isDefined)
+        box = box.replaceFirst("x", Matrix(row)(col).figure.get.toString)
+      else
+        box = box.replaceFirst("x", " ")
     }
-        if (Matrix
-      box = box.replaceFirst("x", Cell(row, col).figure.get.toString)
     box
   }
 }

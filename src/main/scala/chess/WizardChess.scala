@@ -1,13 +1,13 @@
 package chess
 
-import model.{Board,Cell,Figure}
+import model._
 import tui.Tui
 
 import scala.io.StdIn.readLine
 
 
 object WizardChess {
-  var board = Board(8)
+  var board = new BoardCreator().create(8)
   val tui = new Tui
 
   def main(args:Array[String]): Unit = {
