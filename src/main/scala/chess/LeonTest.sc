@@ -30,7 +30,7 @@ println(nullTest.name)
   }
 }*/
 
-val cell_1 = Cell('A', 1)
+val cell_1 = Cell(0, 0)
 
 cell_1.set(testPawn.name)
 
@@ -46,18 +46,7 @@ class board {
 val b1 = new board
 for (y <- 0 to 7) {
   for (x <- 0 to 7) {
-    val ch = x match {
-      case 0 => 'A'
-      case 1 => 'B'
-      case 2 => 'C'
-      case 3 => 'D'
-      case 4 => 'E'
-      case 5 => 'F'
-      case 6 => 'G'
-      case 7 => 'H'
-    }
-
-    b1.matrix(x)(y) = Cell(ch, y + 1)
+    b1.matrix(x)(y) = Cell(x, y)
   }
 }
 
@@ -93,10 +82,15 @@ b1.matrix(3)(7) = b1.matrix(3)(7).set("queen")
 b1.matrix(4)(0) = b1.matrix(4)(0).set("king")
 b1.matrix(4)(7) = b1.matrix(4)(7).set("king")
 
+val o = b1.matrix(4)(0)
+
+print(b1.matrix(o.x)(o.y))
+
+
 // pawns
 b1.matrix.foreach(a => a.foreach(c => {
   if (c.x.equals(2) || c.y.equals(7)) {
-    b1.matrix(c.getX)(c.getY) = c.set("pawn")
+    b1.matrix(c.x)(c.y) = c.set("pawn")
   }
 }))
 
