@@ -9,7 +9,7 @@ case class Figure(name: String = "pawn") {
       case "king" => 'K'
       case "bishop" => 'B'
       case "queen" => 'Q'
-      case "knight" => 'k'
+      case "horse" => 'H'
       case "rook" => 'R'
       case _ => ' '
     }
