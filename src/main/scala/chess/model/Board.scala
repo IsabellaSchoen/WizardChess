@@ -18,7 +18,7 @@ case class Board(size: Int) {
       col <- 0 until size
     } {
       if (Matrix(row)(col).figure.isDefined)
-        box = box.replaceFirst("x", Matrix(row)(col).figure.get.toString)
+        box = box.replaceFirst("x", Matrix(row)(col).figure.get.caption.toString)
       else
         box = box.replaceFirst("x", " ")
     }

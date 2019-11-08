@@ -16,9 +16,8 @@ class BoardCreator {
     init(b1)
   }
 
-
-    def init(b1: Board): Board = {
-      // initialization
+  def init(b1: Board): Board = {
+    // initialization
 
       // rooks
       b1.Matrix(0)(0) = b1.Matrix(0)(0).set("rook")
@@ -56,4 +55,4 @@ class BoardCreator {
     }
 
 
-  }
+}
