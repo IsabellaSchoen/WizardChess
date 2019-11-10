@@ -3,16 +3,18 @@
 
 package chess.model
 
-import chess.model.Matrix
-
 case class Board(size: Int) {
   val Matrix: Array[Array[Cell]] = Array.ofDim[Cell](size, size)
 
   def move(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
-    val tmp: Cell = Matrix(index(x1))(y1 - '1')
-    if (Matrix(index(x2))(y2 - '1').figure.isEmpty) {
-      Matrix(index(x2))(y2 - '1') = Matrix(index(x2))(y2 - '1').set(tmp.figure.get.toString)
-      Matrix(index(x1))(y1 - '1') = tmp.set("none")
+    if ((xi(x1) == -1) || (yi(y1) == -1) || (xi(x2) == -1) || (yi(y2) == -1)) {
+      println("not allowed!")
+      return this
+    }
+    val tmp: Cell = Matrix(xi(x1))(yi(y1))
+    if (Matrix(xi(x2))(yi(y2)).figure.isEmpty) {
+      Matrix(xi(x2))(yi(y2)) = Matrix(xi(x2))(yi(y2)).set(tmp.figure.get.toString)
+      Matrix(xi(x1))(yi(y1)) = tmp.set("none")
     } else
     println("Not allowed")
     this
@@ -37,6 +39,20 @@ case class Board(size: Int) {
     box
   }
 
-  def index(x: Char): Int  = x - 'A'
+  def xi(x: Char): Int  = {
+    val tmp: Int = x - 'A'
+    if (tmp >= 0 && tmp < size)
+      tmp
+    else
+      -1
+  }
+
+  def yi(y: Char): Int = {
+    val tmp: Int = y - '1'
+    if (tmp >= 0 && tmp < size)
+      tmp
+    else
+      -1
+  }
 }
 
