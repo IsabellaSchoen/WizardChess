@@ -5,4 +5,4 @@ import chess.model._
 'C'.toInt
 'Z'.toInt
 
-90 - 65 + 1
+'1'.toInt

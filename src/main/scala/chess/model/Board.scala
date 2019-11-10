@@ -8,11 +8,11 @@ import chess.model.Matrix
 case class Board(size: Int) {
   val Matrix: Array[Array[Cell]] = Array.ofDim[Cell](size, size)
 
-  def move(x1: Int, y1: Int, x2: Int, y2: Int): Board = {
-    val tmp: Cell = Matrix(x1)(y1)
-    if (Matrix(x2)(y2).figure.isEmpty) {
-      Matrix(x2)(y2) = Matrix(x2)(y2).set(tmp.figure.get.toString)
-      Matrix(x1)(y1) = tmp.set("none")
+  def move(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
+    val tmp: Cell = Matrix(index(x1))(y1 - '1')
+    if (Matrix(index(x2))(y2 - '1').figure.isEmpty) {
+      Matrix(index(x2))(y2 - '1') = Matrix(index(x2))(y2 - '1').set(tmp.figure.get.toString)
+      Matrix(index(x1))(y1 - '1') = tmp.set("none")
     } else
     println("Not allowed")
     this
@@ -36,5 +36,7 @@ case class Board(size: Int) {
     }
     box
   }
+
+  def index(x: Char): Int  = x - 'A'
 }
 
