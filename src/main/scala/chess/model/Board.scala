@@ -22,7 +22,7 @@ case class Board(size: Int) {
 
   override def toString: String = {
     val numbers = "    A   B   C   D   E   F   G   H\n"
-    val lineseparator = ("  +-" + ("--" * (2 * size - 1))) + "+\n"
+    val lineseparator = ("  " + "+-" + ("--" * (2 * size - 1))) + "+" +  "\n"
     val line = ("y | " + ("x | " * size)) + "\n"
     val sep = "  " + "--" * 2 * size + "\n"
     var box = "\n" +numbers + (lineseparator + ((line + sep) * (size - 1))) + line + lineseparator
@@ -32,7 +32,7 @@ case class Board(size: Int) {
     } {
       box = box.replaceFirst("y", (col + 1).toString)
       if (Matrix(col)(row).figure.isDefined)
-        box = box.replaceFirst("x", Matrix(col)(row).figure.get.caption.toString)
+        box = box.replaceFirst("x", Console.WHITE + Matrix(col)(row).figure.get.caption.toString + Console.RESET)
       else
         box = box.replaceFirst("x", " ")
     }

@@ -6,3 +6,5 @@ import chess.model._
 'Z'.toInt
 
 '1'.toInt
+
+print(Console.BLUE + "Hallo")
