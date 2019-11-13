@@ -8,5 +8,8 @@ class FigureSpec extends WordSpec with Matchers{
     "have a name" in {
       Figure("king").toString should be ("king")
     }
+    "have a color" in {
+      Figure("king").color should be ('B')
+    }
   }
 }

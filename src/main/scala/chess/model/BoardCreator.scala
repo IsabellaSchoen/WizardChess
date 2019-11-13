@@ -18,36 +18,37 @@ case class BoardCreator(size: Int) {
     // initialization
 
       // rooks
-      b1.Matrix(0)(0) = b1.Matrix(0)(0).set("rook")
+      b1.Matrix(0)(0) = b1.Matrix(0)(0).set("rook", 'W')
       b1.Matrix(0)(7) = b1.Matrix(0)(7).set("rook")
-      b1.Matrix(7)(0) = b1.Matrix(7)(0).set("rook")
+      b1.Matrix(7)(0) = b1.Matrix(7)(0).set("rook", 'W')
       b1.Matrix(7)(7) = b1.Matrix(7)(7).set("rook")
 
       // horse
-      b1.Matrix(1)(0) = b1.Matrix(1)(0).set("horse")
-      b1.Matrix(6)(0) = b1.Matrix(6)(0).set("horse")
+      b1.Matrix(1)(0) = b1.Matrix(1)(0).set("horse", 'W')
+      b1.Matrix(6)(0) = b1.Matrix(6)(0).set("horse", 'W')
       b1.Matrix(1)(7) = b1.Matrix(1)(7).set("horse")
       b1.Matrix(6)(7) = b1.Matrix(6)(7).set("horse")
 
       // bishops
       b1.Matrix(5)(7) = b1.Matrix(5)(7).set("bishop")
-      b1.Matrix(5)(0) = b1.Matrix(5)(0).set("bishop")
+      b1.Matrix(5)(0) = b1.Matrix(5)(0).set("bishop", 'W')
       b1.Matrix(2)(7) = b1.Matrix(2)(7).set("bishop")
-      b1.Matrix(2)(0) = b1.Matrix(2)(0).set("bishop")
+      b1.Matrix(2)(0) = b1.Matrix(2)(0).set("bishop", 'W')
 
       // queens
-      b1.Matrix(3)(0) = b1.Matrix(3)(0).set("queen")
+      b1.Matrix(3)(0) = b1.Matrix(3)(0).set("queen", 'W')
       b1.Matrix(3)(7) = b1.Matrix(3)(7).set("queen")
 
       // kings
-      b1.Matrix(4)(0) = b1.Matrix(4)(0).set("king")
+      b1.Matrix(4)(0) = b1.Matrix(4)(0).set("king", 'W')
       b1.Matrix(4)(7) = b1.Matrix(4)(7).set("king")
 
       // pawns
       b1.Matrix.foreach(a => a.foreach(c => {
-        if (c.y.equals(1) || c.y.equals(6)) {
+        if (c.y.equals(1))
+          b1.Matrix(c.x)(c.y) = c.set("pawn", 'W')
+        else if (c.y.equals(6))
           b1.Matrix(c.x)(c.y) = c.set("pawn")
-        }
       }))
       b1
     }

@@ -8,3 +8,5 @@ import chess.model._
 '1'.toInt
 
 print(Console.BLUE + "Hallo")
+
+val a = Board(8)
