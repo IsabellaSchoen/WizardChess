@@ -1,8 +1,8 @@
 name := "tests"
 
-version := "1.1.1"
+version := "0.1"
 
-scalaVersion := "2.13.0"
+scalaVersion := "2.12.7"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.5"
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.5" % "test"
