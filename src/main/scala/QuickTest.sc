@@ -1,12 +1,11 @@
-import chess.model._
+import chess.model.Figure
 
-'A'.toInt
-'B'.toInt
-'C'.toInt
-'Z'.toInt
+var x: Vector[Figure] = Vector(Figure("bishop"))
 
-'1'.toInt
+x = x.appended(Figure("queen")) :+ Figure("king")
 
-print(Console.BLUE + "Hallo")
+x.toString()
 
-val a = Board(8)
+x = x.filterNot(o => o == Figure("queen"))
+
+x.toString()

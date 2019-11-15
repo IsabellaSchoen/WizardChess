@@ -2,21 +2,21 @@ package chess
 
 import model._
 import tui.Tui
-
 import scala.io.StdIn.readLine
+import chess.control._
 
 
 object WizardChess {
-  var board: Board = BoardCreator(8).create
-  val tui = new Tui
+  var controller: Controller = new Controller(BoardCreator(8).create)
+  val tui = new Tui(controller)
+  controller.notifyObservers()
 
   def main(args:Array[String]): Unit = {
     var input:String = ""
 
     do {
-      println(board)
       input = readLine()
-      board = tui.inputprocess(input, board)
+      tui.inputprocess(input)
     } while (input != "exit")
   }
 }
