@@ -28,7 +28,7 @@ case class Board(size: Int) {
     val line1 = ("y " + (("\u001b[47;1m x \u001b[0m x ") * (size / 2))) + "\n"
     val line2 = ("y " + ((" x \u001b[47;1m x \u001b[0m") * (size / 2))) + "\n"
     val sep = "  " + "--" * 2 * size + "\n"
-    var box = "\n" + numbers + (((line2 + line1) * ((size / 2))))
+    var box = "\n" + numbers + (((line1 + line2) * ((size / 2))))
     for {
       row <- 0 until size
       col <- 0 until size
