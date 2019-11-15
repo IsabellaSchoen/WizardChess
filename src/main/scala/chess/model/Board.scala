@@ -26,7 +26,7 @@ case class Board(size: Int) {
     val numbers = "   A  B  C  D  E  F  G  H\n"
     val lineseparator = ("  " + "+-" + ("--" * (2 * size))) + "+" + "\n"
     val line1 = ("y " + ((Console.WHITE_B + " x " + Console.RESET + " x ") * (size / 2))) + "\n"
-    val line2 = ("y " + ((" x " + Console.WHITE_B  + " x " + Console.RESET) * (size / 2))) + "\n"
+    val line2 = ("y " + ((" x " + Console.WHITE_B  + " x " + Console.RESET) * (size / 2))) + " \n"
     val sep = "  " + "--" * 2 * size + "\n"
     var box = "\n" + numbers + ((line1 + line2) * (size / 2))
     for {
