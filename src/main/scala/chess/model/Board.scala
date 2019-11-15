@@ -38,7 +38,7 @@ case class Board(size: Int) {
         if (Matrix(col)(row).figure.get.color.equals('W'))
           box = box.replaceFirst("x ", Console.BLUE + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
         else
-          box = box.replaceFirst("x ", Console.RED + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
+          box = box.replaceFirst("x ", Console.UNDERLINED + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
       else
         box = box.replaceFirst("x", " ")
     }
