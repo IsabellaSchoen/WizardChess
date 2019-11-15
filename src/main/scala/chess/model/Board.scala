@@ -25,10 +25,10 @@ case class Board(size: Int) {
       return "empty Board"
     val numbers = "   A  B  C  D  E  F  G  H\n"
     val lineseparator = ("  " + "+-" + ("--" * (2 * size))) + "+" + "\n"
-    val line1 = ("y " + (("\u001b[47;1m x \u001b[0m x ") * (size / 2))) + "\n"
-    val line2 = ("y " + ((" x \u001b[47;1m x \u001b[0m") * (size / 2))) + "\n"
+    val line1 = ("y " + ((Console.WHITE_B + " x " + Console.RESET + " x ") * (size / 2))) + "\n"
+    val line2 = ("y " + ((" x " + Console.WHITE_B  + " x " + Console.RESET) * (size / 2))) + "\n"
     val sep = "  " + "--" * 2 * size + "\n"
-    var box = "\n" + numbers + (((line1 + line2) * ((size / 2))))
+    var box = "\n" + numbers + ((line1 + line2) * (size / 2))
     for {
       row <- 0 until size
       col <- 0 until size
@@ -36,9 +36,9 @@ case class Board(size: Int) {
       box = box.replaceFirst("y", (col + 1).toString)
       if (Matrix(col)(row).figure.isDefined)
         if (Matrix(col)(row).figure.get.color.equals('W'))
-          box = box.replaceFirst("x ", "\u001b[38;5;27;1m" + Matrix(col)(row).figure.get.caption.toString + " \u001b[0m")
+          box = box.replaceFirst("x ", Console.BLUE + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
         else
-          box = box.replaceFirst("x ", "\u001b[38;5;196;1m" + Matrix(col)(row).figure.get.caption.toString + " \u001b[0m")
+          box = box.replaceFirst("x ", Console.RED + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
       else
         box = box.replaceFirst("x", " ")
     }

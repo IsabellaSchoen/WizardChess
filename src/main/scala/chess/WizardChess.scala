@@ -12,6 +12,7 @@ object WizardChess {
   controller.notifyObservers()
 
   def main(args:Array[String]): Unit = {
+    //print(Console.RED + "hallo")
     var input:String = ""
 
     do {

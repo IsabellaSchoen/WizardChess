@@ -9,3 +9,5 @@ x.toString()
 x = x.filterNot(o => o == Figure("queen"))
 
 x.toString()
+
+print(Console.RED + "hello")
