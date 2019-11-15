@@ -23,11 +23,12 @@ case class Board(size: Int) {
   override def toString: String = {
     if (Matrix(0)(0) == null)
       return "empty Board"
-    val numbers = "    A   B   C   D   E   F   G   H\n"
-    val lineseparator = ("  " + "+-" + ("--" * (2 * size - 1))) + "+" + "\n"
-    val line = ("y | " + ("x | " * size)) + "\n"
+    val numbers = "   A  B  C  D  E  F  G  H\n"
+    val lineseparator = ("  " + "+-" + ("--" * (2 * size))) + "+" + "\n"
+    val line1 = ("y " + (("\u001b[47;1m x \u001b[0m x ") * (size / 2))) + "\n"
+    val line2 = ("y " + ((" x \u001b[47;1m x \u001b[0m") * (size / 2))) + "\n"
     val sep = "  " + "--" * 2 * size + "\n"
-    var box = "\n" + numbers + (lineseparator + ((line + sep) * (size - 1))) + line + lineseparator
+    var box = "\n" + numbers + (((line2 + line1) * ((size / 2))))
     for {
       row <- 0 until size
       col <- 0 until size
@@ -35,9 +36,9 @@ case class Board(size: Int) {
       box = box.replaceFirst("y", (col + 1).toString)
       if (Matrix(col)(row).figure.isDefined)
         if (Matrix(col)(row).figure.get.color.equals('W'))
-          box = box.replaceFirst("x", "\u001b[31;1m" + Matrix(col)(row).figure.get.caption.toString + Console.RESET)
+          box = box.replaceFirst("x ", "\u001b[38;5;27;1m" + Matrix(col)(row).figure.get.caption.toString + " \u001b[0m")
         else
-          box = box.replaceFirst("x", "\u001b[34;1m" + Matrix(col)(row).figure.get.caption.toString + Console.RESET)
+          box = box.replaceFirst("x ", "\u001b[38;5;196;1m" + Matrix(col)(row).figure.get.caption.toString + " \u001b[0m")
       else
         box = box.replaceFirst("x", " ")
     }
