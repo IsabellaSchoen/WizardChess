@@ -17,10 +17,19 @@ class BoardSpec extends WordSpec with Matchers {
     "have Cells" which {
       "have an x value" in {
         Board(8).xi('A') should be (0)
+        Board(8).xi('a') should be (0)
+        Board(8).xi('Z') should be (-1)
       }
       "have a y value" in {
         Board(8).yi('1') should be (0)
+        Board(8).yi('Z') should be (-1)
       }
+    }
+    "be able to move figures" in {
+      val t1: Board = BoardCreator(8).create
+      val t2: Board = t1
+      t1.move('Z', 'Z', 'Z', 'Z') should be (t2)
+      t1.move('A', '2', 'B', '4') should be (t2)
     }
   }
 }
