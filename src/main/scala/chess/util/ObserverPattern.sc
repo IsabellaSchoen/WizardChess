@@ -1,3 +1,4 @@
+/*
 import chess.util.{Observable, Observer}
 
 class TestObject extends Observer {
@@ -15,4 +16,4 @@ observable.remove(observer1)
 observable.notifyObservers()                      //> Ping
 observable.remove(observer2)
 observable.notifyObservers()
-//}
+//}*/
