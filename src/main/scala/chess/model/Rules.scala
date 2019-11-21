@@ -10,6 +10,10 @@ object Rules {
   def valid(board: Board, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     val start: Cell = board.Matrix(x1)(y1)
     val end: Cell = board.Matrix(x2)(y2)
+
+    if (start.isEmpty)
+      return false
+
     //Regeln:
 
     //Bauern - pawn:
