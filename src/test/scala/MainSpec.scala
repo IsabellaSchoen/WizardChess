@@ -4,7 +4,7 @@ import org.scalatest.{Matchers, WordSpec}
 class MainSpec extends WordSpec with Matchers {
   "main" should {
     "run the main game" in{
-      WizardChess.main(null) should be ()
+      WizardChess.main(Array("exit")) should be ()
     }
   }
 }

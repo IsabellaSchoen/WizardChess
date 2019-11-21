@@ -15,7 +15,10 @@ object WizardChess {
     var input: String = ""
 
     do {
-      input = readLine()
+      if (args.length == 0)
+        input = readLine()
+      else
+        input = args(0)
       tui.inputprocess(input)
     } while (input != "exit")
   }
