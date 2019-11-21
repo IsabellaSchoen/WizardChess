@@ -19,6 +19,7 @@ class RulesSpec extends WordSpec with Matchers{
       Rules.valid(test, 0, 2, 0, 4) should be (false)
       Rules.valid(test, 0, 5, 0, 4) should be (true)
       Rules.valid(test, 0, 5, 0, 3) should be (false)
+      Rules.valid(test, 5, 5, 5, 6) should be (false)
     }
   }
 }
