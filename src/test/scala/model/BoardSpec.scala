@@ -30,6 +30,9 @@ class BoardSpec extends WordSpec with Matchers {
       val t2: Board = t1
       t1.move('Z', 'Z', 'Z', 'Z') should be (t2)
       t1.move('A', '2', 'B', '4') should be (t2)
+      t1.move('A', '1', 'A', '2') should be (t2)
+      t1.move('A', '2', 'A', '4').Matrix(0)(1).figure should be (None)
+      t1.Matrix(0)(3).figure.get.caption should be ('P')
     }
   }
 }
