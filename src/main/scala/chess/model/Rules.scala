@@ -16,18 +16,23 @@ object Rules {
 
     if (start.figure.get.name.equals("pawn")) {
       if (start.figure.get.moved) {
-        if (board.Matrix(x1)(y1).figure.get.color.equals('B')) {
-          return x1 == x2 && y2 == y1 + 1
-        } else if (board.Matrix(x1)(y1).figure.get.color.equals('W')) {
-          return x1 == x2 && y2 == y1 - 1
+        if (start.figure.get.color.equals('B')) {
+          if (x1 == x2 && y2 == y1 + 1)
+            return true
+        } else if (start.figure.get.color.equals('W')) {
+          if (x1 == x2 && y2 == y1 - 1)
+            return true
         }
       } else {
-        if (board.Matrix(x1)(y1).figure.get.color.equals('B')) {
-          return x1 == x2 && y2 == y1 + 2
-        } else if (board.Matrix(x1)(y1).figure.get.color.equals('W')) {
-          return x1 == x2 && y2 == y1 - 2
+        if (start.figure.get.color.equals('B')) {
+          if (x1 == x2 && y2 == y1 + 2 || x1 == x2 && y2 == y1 + 1)
+            return true
+        } else if (start.figure.get.color.equals('W')) {
+          if (x1 == x2 && y2 == y1 - 2 || x1 == x2 && y2 == y1 - 1)
+            return true
         }
       }
+      return false
     }
     true
   }
