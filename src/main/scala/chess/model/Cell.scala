@@ -16,9 +16,9 @@ case class Cell(x: Int, y: Int, figure: Option[Figure] = None) {
 
   override def toString: String = {
     if (figure.isDefined)
-      figure.get + " " + x + y
+      figure.get + " " + (x + 'A').toChar + (y + 1)
     else
-      "None " + x + y
+      "None " + (x + 'A').toChar + (y + 1)
   }
 }
 
