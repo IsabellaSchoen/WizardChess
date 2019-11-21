@@ -31,10 +31,8 @@ case class Board(size: Int) {
     if (Matrix(0)(0) == null)
       return "empty Board"
     val numbers = "   A  B  C  D  E  F  G  H\n"
-    val lineseparator = ("  " + "+-" + ("--" * (2 * size))) + "+" + "\n"
     val line1 = ("y " + ((Console.WHITE_B + " x " + Console.RESET + " x ") * (size / 2))) + "\n"
     val line2 = ("y " + ((" x " + Console.WHITE_B  + " x " + Console.RESET) * (size / 2))) + "\n"
-    val sep = "  " + "--" * 2 * size + "\n"
     var box = "\n" + numbers + ((line1 + line2) * (size / 2))
     for {
       row <- 0 until size
@@ -45,7 +43,7 @@ case class Board(size: Int) {
         if (Matrix(col)(row).figure.get.color.equals('W'))
           box = box.replaceFirst("x ", Console.BLUE + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
         else
-          box = box.replaceFirst("x ", Console.UNDERLINED + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
+          box = box.replaceFirst("x ", Console.MAGENTA + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
       else
         box = box.replaceFirst("x", " ")
     }
