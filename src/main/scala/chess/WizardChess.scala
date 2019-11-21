@@ -11,7 +11,7 @@ object WizardChess {
   val tui = new Tui(controller)
   controller.notifyObservers()
 
-  def main(args:Array[String]): Unit = {
+  def main(args:Array[String]): Int = {
     //print(Console.RED + "hallo")
     var input:String = ""
 
@@ -19,5 +19,7 @@ object WizardChess {
       input = readLine()
       tui.inputprocess(input)
     } while (input != "exit")
+
+    0
   }
 }
