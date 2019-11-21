@@ -3,6 +3,8 @@
 
 package chess.model
 
+import chess.model.Rules
+
 case class Board(size: Int) {
   val Matrix: Array[Array[Cell]] = Array.ofDim[Cell](size, size)
 
@@ -11,10 +13,15 @@ case class Board(size: Int) {
       println("not allowed!")
       return this
     }
-    val tmp: Cell = Matrix(xi(x1))(yi(y1))
-    if (Matrix(xi(x2))(yi(y2)).figure.isEmpty) {
-      Matrix(xi(x2))(yi(y2)) = Matrix(xi(x2))(yi(y2)).set(tmp.figure.get.toString, tmp.figure.get.color)
-      Matrix(xi(x1))(yi(y1)) = tmp.set("none")
+    if (!Rules.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
+      println("Not a valid move!")
+      return this
+    }
+    val start: Cell = Matrix(xi(x1))(yi(y1))
+    val end: Cell = Matrix(xi(x2))(yi(y2))
+    if (end.figure.isEmpty) {
+      Matrix(xi(x2))(yi(y2)) = end.set(start.figure.get.toString, start.figure.get.color, moved = true)
+      Matrix(xi(x1))(yi(y1)) = start.set("none")
     } else
       println("Not allowed")
     this

@@ -1,6 +1,6 @@
 package chess.model
 
-case class Figure(name: String = "pawn", color: Char = 'B') {
+case class Figure(name: String = "pawn", color: Char = 'B', moved: Boolean = false) {
   override def toString: String = name
 
   def caption: Char = {
