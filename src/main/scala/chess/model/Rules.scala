@@ -39,5 +39,24 @@ object Rules {
       return false
     }
     true
+
+
+
+
+
+  if (start.figure.get.name.equals("knight")) {
+      if (start.figure.get.moved) {
+        if (start.figure.get.color.equals('B')) {
+          if ((x2 == x1 - 2 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 2) || (x2 == x1 - 1 && y2 == y1 + 2) ||
+            (x2 == x1 + 1 && y2 == y1 + 2) || (x2 == x1 + 2 && y2 == y1 + 1))
+            return true
+        } else if (start.figure.get.color.equals('W')) {
+          if ((x2 == x1 + 2 && y2 == y1 - 1) || (x2 == x1 + 1 && y2 == y1 - 2) || (x2 == x1 + 1 && y2 == y1 - 2) ||
+            (x2 == x1 - 1 && y2 == y1 - 2) || (x2 == x1 - 2 && y2 == y1 - 1))
+            return true
+        }
+      }
+    true
   }
+
 }
