@@ -14,6 +14,14 @@ class BoardSpec extends WordSpec with Matchers {
       val test: Board = BoardCreator(8).create
       test.toString should be (test.toString)
     }
+    "have Cells" which {
+      "have an x value" in {
+        Board(8).xi('A') should be (0)
+      }
+      "have a y value" in {
+        Board(8).yi('1') should be (0)
+      }
+    }
   }
 }
 
