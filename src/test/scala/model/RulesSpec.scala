@@ -17,6 +17,8 @@ class RulesSpec extends WordSpec with Matchers{
       test.move('B', '7', 'B', '6')
       Rules.valid(test, 0, 2, 0, 3) should be (true)
       Rules.valid(test, 0, 2, 0, 4) should be (false)
+      Rules.valid(test, 0, 5, 0, 4) should be (true)
+      Rules.valid(test, 0, 5, 0, 3) should be (false)
     }
   }
 }
