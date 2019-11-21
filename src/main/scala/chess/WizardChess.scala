@@ -17,8 +17,12 @@ object WizardChess {
     do {
       if (args.length == 0)
         input = readLine()
-      else
-        input = args(0)
+      else { // test
+        if (!input.equals(args(0)))
+          input = args(0)
+        else
+          input = args(1)
+      }
       tui.inputprocess(input)
     } while (input != "exit")
   }

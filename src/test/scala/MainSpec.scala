@@ -3,8 +3,8 @@ import org.scalatest.{Matchers, WordSpec}
 
 class MainSpec extends WordSpec with Matchers {
   "main" should {
-    "run the main game" in{
-      WizardChess.main(Array("exit")) should be ()
+    "be able to exit" in{
+      WizardChess.main(Array("random stuff", "exit")) should be ()
     }
   }
 }
