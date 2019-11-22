@@ -103,8 +103,25 @@ class RulesSpec extends WordSpec with Matchers{
 
   }
 
+  val bishop: Board = BoardCreator(8).init(BoardCreator(8).create)
+  king.put('D', '4', 'B', 'B')
   "a bishop" should {
-
+    "be able to move rigth down" in{
+      Rules.valid(bishop, 4, 3, 5, 4) should be (true)
+      Rules.valid(bishop, 4, 3, 6, 5) should be (true)
+    }
+    "be able to move left down" in{
+      Rules.valid(bishop, 4, 3, 3, 4) should be (true)
+      Rules.valid(bishop, 4, 3, 2, 5) should be (true)
+    }
+    "be able to move right up" in {
+      Rules.valid(bishop, 4, 3, 5, 2) should be(true)
+      Rules.valid(bishop, 4, 3, 6, 1) should be(true)
+    }
+    "be able to move left up" in {
+      Rules.valid(bishop, 4, 3, 3, 2) should be(true)
+      Rules.valid(bishop, 4, 3, 2, 1) should be(true)
+    }
   }
 
   "a queen" should {
