@@ -15,3 +15,17 @@ case class Figure(name: String = "pawn", color: Char = 'B', moved: Boolean = fal
     }
   }
 }
+
+object Figure {
+  def translate(f: Char): String = {
+    f match {
+      case 'P' | 'p' => "pawn"
+      case 'K' | 'k' => "king"
+      case 'B' | 'b' => "bishop"
+      case 'Q' | 'q' => "queen"
+      case 'H' | 'h' => "horse"
+      case 'R' | 'r' => "rook"
+      case _ => "none"
+    }
+  }
+}

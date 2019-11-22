@@ -9,7 +9,6 @@ class BoardSpec extends WordSpec with Matchers {
       Board(8).Matrix.isInstanceOf[Array[Array[Cell]]] should be (true)
     }
     "have a string representation" in {
-      Board(8).toString should be ("empty Board")
       Board(8).Matrix(0)(0) should be (null)
       val test: Board = BoardCreator(8).create
       test.toString should be (test.toString)
@@ -26,7 +25,7 @@ class BoardSpec extends WordSpec with Matchers {
       }
     }
     "be able to move figures" in {
-      val t1: Board = BoardCreator(8).create
+      val t1: Board = BoardCreator(8).init(BoardCreator(8).create)
       val t2: Board = t1
       t1.move('Z', 'Z', 'Z', 'Z') should be (t2)
       t1.move('A', '2', 'B', '4') should be (t2)

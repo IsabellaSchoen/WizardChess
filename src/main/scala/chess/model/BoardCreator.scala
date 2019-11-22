@@ -11,7 +11,7 @@ case class BoardCreator(size: Int) {
         b1.Matrix(x)(y) = Cell(x, y)
       }
     }
-    init(b1)
+    b1
   }
 
   def init(b1: Board): Board = {

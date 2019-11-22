@@ -7,7 +7,7 @@ import chess.control._
 
 
 object WizardChess {
-  var controller: Controller = new Controller(BoardCreator(8).create)
+  var controller: Controller = new Controller(BoardCreator(8).init(BoardCreator(8).create))
   val tui = new Tui(controller)
   controller.notifyObservers()
 

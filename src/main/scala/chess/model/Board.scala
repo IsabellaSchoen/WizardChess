@@ -6,6 +6,12 @@ package chess.model
 import chess.model.Rules
 
 case class Board(size: Int) {
+  def put(x: Char, y: Char, f: Char, c: Char): Board = {
+    if (xi(x) >= 0 && xi(x) < size && yi(y) >= 0 && yi(y) < size && (c.equals('B') || c.equals('W')))
+      Matrix(xi(x))(yi(y)) = Matrix(xi(x))(yi(y)).set(Figure.translate(f), c)
+    this
+  }
+
   val Matrix: Array[Array[Cell]] = Array.ofDim[Cell](size, size)
 
   def move(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
@@ -28,7 +34,7 @@ case class Board(size: Int) {
   }
 
   override def toString: String = {
-    if (Matrix(0)(0) == null)
+    if (Board(8).Matrix(0)(0) == (null))
       return "empty Board"
     val numbers = "   A  B  C  D  E  F  G  H\n"
     val line1 = ("y " + ((Console.WHITE_B + " x " + Console.RESET + " x ") * (size / 2))) + "\n"

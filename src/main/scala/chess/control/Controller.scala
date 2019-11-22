@@ -4,6 +4,16 @@ import chess.model._
 import chess.util.Observable
 
 class Controller(var board: Board) extends Observable {
+  def put(x: Char, y: Char, f: Char, c: Char): Unit = {
+    board = board.put(x, y, f, c)
+    notifyObservers()
+  }
+
+  def empty(): Unit = {
+    board = BoardCreator(8).create
+    notifyObservers()
+  }
+
 
   def gridToString: String = board.toString
 
@@ -14,6 +24,7 @@ class Controller(var board: Board) extends Observable {
 
   def create(): Unit = {
     board = BoardCreator(8).create
+    board = BoardCreator(8).init(board)
     notifyObservers()
   }
 
