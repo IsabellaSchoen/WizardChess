@@ -41,9 +41,9 @@ case class Board(size: Int) {
       box = box.replaceFirst("y", (col + 1).toString)
       if (Matrix(col)(row).figure.isDefined)
         if (Matrix(col)(row).figure.get.color.equals('W'))
-          box = box.replaceFirst("x ", Console.BLUE + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
+          box = box.replaceFirst("x ", "\u001b[34;1m" + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
         else
-          box = box.replaceFirst("x ", Console.MAGENTA + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
+          box = box.replaceFirst("x ", "\u001b[31;1m" + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
       else
         box = box.replaceFirst("x", " ")
     }
