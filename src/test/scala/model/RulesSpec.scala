@@ -9,51 +9,89 @@ class RulesSpec extends WordSpec with Matchers{
     "not having moved yet" should {
       "be allowed to move one step south" in {
         Rules.valid(test, 0, 1, 0, 2) should be(true)
-        // TODO negativ-beispiel
       }
       "be allowed to move two steps south" in {
         Rules.valid(test, 0, 1, 0, 3) should be (true)
         test.move('A', '2', 'A', '4')
-        // TODO negativ-beispiel
       }
     }
     "already having moved" should {
       "be allowed to move one step south" in {
         Rules.valid(test, 0, 3, 0, 4) should be(true)
-        // TODO negativ-beispiel
       }
       "not be allowed to move two steps south" in {
         Rules.valid(test, 0, 3, 0, 5) should be (false)
       }
     }
   }
+  "a black pawn" should {
+    "not be allowed to move north, east or west" in {
+      Rules.valid(test, 0, 3, 0, 2) should be (false)
+    }
+    "not be allowed to move west" in {
+      Rules.valid(test, 0, 3, 1, 3) should be (false)
+    }
+    "not be allowed to move east" in {
+      Rules.valid(test, 1, 2, 0, 2) should be (false)
+    }
+  }
   "a white pawn" when {
     "not having moved yet" should {
       "be allowed to move one step north" in {
         Rules.valid(test, 0, 6, 0, 5) should be (true)
-        // TODO negativ-beispiel
       }
       "be allowed to move two steps north" in {
         Rules.valid(test, 0, 6, 0, 4) should be (true)
-        // TODO negativ-beispiel
         test.move('A', '7', 'A', '5')
       }
     }
     "already having moved" should {
       "be allowed to move one step north" in {
         Rules.valid(test, 0, 4, 0, 3) should be(true)
-        // TODO negativ-beispiel
       }
       "not be allowed to move two steps north" in {
         Rules.valid(test, 0, 4, 0, 2) should be (false)
       }
     }
   }
+  "a white pawn" should {
+    "not be allowed to move south" in {
+      Rules.valid(test, 0, 4, 0, 5) should be(false)
+    }
+    "not be allowed to move east" in {
+      Rules.valid(test, 0, 4, 1, 4) should be(false)
+    }
+    "not be allowed to move west" in {
+      Rules.valid(test, 1, 6, 0, 6) should be(false)
+    }
+  }
 
   val king: Board = BoardCreator(8).init(BoardCreator(8).create)
-  "a black kind" should {
-    "be able to move south" in {
-
+  king.put('D', '5', 'K', 'B')
+  "a king" should {
+    "be able to move one step south" in {
+      Rules.valid(king, 3, 4, 3, 5) should be (true)
+    }
+    "not be able to move two or more steps south" in {
+      Rules.valid(king, 3, 4, 3, 6) should be (false)
+    }
+    "be able to move one step north" in {
+      Rules.valid(king, 3, 4, 3, 3) should be (true)
+    }
+    "not be able to move two or more steps north" in {
+      Rules.valid(king, 3, 4, 3, 2) should be (false)
+    }
+    "be able to move one step east" in {
+      Rules.valid(king, 3, 4, 4, 4) should be (true)
+    }
+    "not be able to move two or more steps east" in {
+      Rules.valid(king, 3, 4, 5, 4) should be (false)
+    }
+    "be able to move one step west" in {
+      Rules.valid(king, 3, 4, 2, 4) should be (true)
+    }
+    "not be able to move two or more steps west" in {
+      Rules.valid(king, 3, 4, 1, 4) should be (false)
     }
   }
 }
