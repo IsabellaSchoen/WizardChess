@@ -42,11 +42,10 @@ object Rules {
 
     //König - king
     if (start.figure.get.name.equals("king")) {
-      if (start.figure.get.moved) {
-        if (x2 == x1 + 1 && y1 == y2 || x1 == x2 && y2 == y1 - 1 || x2 == x1 - 1 && y1 == y2 ||
-          x1 == x2 && y2 == y1 + 1)
-          return true
-      }
+        return (x2 == (x1 + 1) && y1 == y2) ||
+          (x2 == (x1 - 1) && y1 == y2) ||
+          (x1 == x2 && y2 == (y1 + 1)) ||
+          (x1 == x2 && y2 == (y1 - 1))
     }
 
 
