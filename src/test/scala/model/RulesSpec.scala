@@ -95,8 +95,25 @@ class RulesSpec extends WordSpec with Matchers{
     }
   }
 
+  val rook: Board = BoardCreator(8).init(BoardCreator(8).create)
+  rook.put('D', '5', 'R', 'B')
   "a rook" should {
-
+    "be allowed to move straight" in {
+      Rules.valid(rook, 3, 4, 3, 5) should be (true)
+      Rules.valid(rook, 3, 4, 3, 6) should be (true)
+      Rules.valid(rook, 3, 4, 3, 3) should be (true)
+      Rules.valid(rook, 3, 4, 3, 2) should be (true)
+      Rules.valid(rook, 3, 4, 2, 4) should be (true)
+      Rules.valid(rook, 3, 4, 1, 4) should be (true)
+      Rules.valid(rook, 3, 4, 4, 4) should be (true)
+      Rules.valid(rook, 3, 4, 5, 4) should be (true)
+    }
+    "not be allowed to move diagonal" in {
+      Rules.valid(rook, 3, 4, 4, 5) should be (false)
+      Rules.valid(rook, 3, 4, 4, 3) should be (false)
+      Rules.valid(rook, 3, 4, 2, 5) should be (false)
+      Rules.valid(rook, 3, 4, 2, 3) should be (false)
+    }
   }
 
   "a horse" should {
