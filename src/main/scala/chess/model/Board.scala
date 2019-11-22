@@ -34,7 +34,7 @@ case class Board(size: Int) {
   }
 
   override def toString: String = {
-    if (Board(8).Matrix(0)(0) == (null))
+    if (Matrix(0)(0) == (null))
       return "empty Board"
     val numbers = "   A  B  C  D  E  F  G  H\n"
     val line1 = ("y " + ((Console.WHITE_B + " x " + Console.RESET + " x ") * (size / 2))) + "\n"

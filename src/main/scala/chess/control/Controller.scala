@@ -23,8 +23,7 @@ class Controller(var board: Board) extends Observable {
   }
 
   def create(): Unit = {
-    board = BoardCreator(8).create
-    board = BoardCreator(8).init(board)
+    board = BoardCreator(8).init(BoardCreator(8).create)
     notifyObservers()
   }
 
