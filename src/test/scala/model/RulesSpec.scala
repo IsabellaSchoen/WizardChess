@@ -124,7 +124,7 @@ class RulesSpec extends WordSpec with Matchers {
   bishop.put('D', '4', 'B', 'B')
   println(bishop)
   "a bishop" should {
-    "be able to move rigth down" in {
+    "be able to move right down" in {
       Rules.valid(bishop, 3, 3, 4, 4) should be(true)
       Rules.valid(bishop, 3, 3, 5, 5) should be(true)
     }
@@ -140,9 +140,44 @@ class RulesSpec extends WordSpec with Matchers {
       Rules.valid(bishop, 3, 3, 2, 2) should be(true)
       Rules.valid(bishop, 3, 3, 1, 1) should be(true)
     }
+    " not be allowed to run diagonal" in {
+      Rules.valid(bishop, 3, 3, 3, 4) should be(false)
+      Rules.valid(bishop, 3, 3, 3, 2) should be(false)
+      Rules.valid(bishop, 3, 3, 2, 3) should be(false)
+      Rules.valid(bishop, 3, 3, 4, 3) should be(false)
+    }
   }
 
-  "a queen" should {
 
+
+  val queen: Board = BoardCreator(8).create
+  queen.put('D', '4', 'B', 'B')
+  "a queen" should {
+    "be able to move right down" in {
+      Rules.valid(queen, 3, 3, 4, 4) should be(true)
+      Rules.valid(queen, 3, 3, 5, 5) should be(true)
+    }
+    "be able to move left down" in {
+      Rules.valid(queen, 3, 3, 2, 4) should be(true)
+      Rules.valid(queen, 3, 3, 1, 5) should be(true)
+    }
+    "be able to move right up" in {
+      Rules.valid(queen, 3, 3, 4, 2) should be(true)
+      Rules.valid(queen, 3, 3, 5, 1) should be(true)
+    }
+    "be able to move left up" in {
+      Rules.valid(queen, 3, 3, 2, 2) should be(true)
+      Rules.valid(queen, 3, 3, 1, 1) should be(true)
+    }
+    "be allowed to move straight" in {
+      Rules.valid(queen, 3, 3, 3, 5) should be(true)
+      Rules.valid(queen, 3, 3, 3, 4) should be(true)
+      Rules.valid(queen, 3, 3, 5, 3) should be(true)
+      Rules.valid(queen, 3, 3, 4, 3) should be(true)
+      Rules.valid(queen, 3, 3, 2, 3) should be(true)
+      Rules.valid(queen, 3, 3, 1, 3) should be(true)
+      Rules.valid(queen, 3, 3, 3, 2) should be(true)
+      Rules.valid(queen, 3, 3, 3, 1) should be(true)
+    }
   }
 }
