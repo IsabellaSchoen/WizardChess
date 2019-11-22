@@ -124,20 +124,20 @@ class RulesSpec extends WordSpec with Matchers{
   king.put('D', '4', 'B', 'B')
   "a bishop" should {
     "be able to move rigth down" in{
-      Rules.valid(bishop, 4, 3, 5, 4) should be (true)
-      Rules.valid(bishop, 4, 3, 6, 5) should be (true)
+      Rules.valid(bishop, 3, 3, 4, 4) should be (true)
+      Rules.valid(bishop, 3, 3, 5, 5) should be (true)
     }
     "be able to move left down" in{
-      Rules.valid(bishop, 4, 3, 3, 4) should be (true)
-      Rules.valid(bishop, 4, 3, 2, 5) should be (true)
+      Rules.valid(bishop, 3, 3, 2, 4) should be (true)
+      Rules.valid(bishop, 3, 3, 1, 5) should be (true)
     }
     "be able to move right up" in {
-      Rules.valid(bishop, 4, 3, 5, 2) should be(true)
-      Rules.valid(bishop, 4, 3, 6, 1) should be(true)
+      Rules.valid(bishop, 3, 3, 4, 2) should be(true)
+      Rules.valid(bishop, 3, 3, 5, 1) should be(true)
     }
     "be able to move left up" in {
-      Rules.valid(bishop, 4, 3, 3, 2) should be(true)
-      Rules.valid(bishop, 4, 3, 2, 1) should be(true)
+      Rules.valid(bishop, 3, 3, 2, 2) should be(true)
+      Rules.valid(bishop, 3, 3, 1, 1) should be(true)
     }
   }
 
