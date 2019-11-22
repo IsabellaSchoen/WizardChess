@@ -94,4 +94,20 @@ class RulesSpec extends WordSpec with Matchers{
       Rules.valid(king, 3, 4, 1, 4) should be (false)
     }
   }
+
+  "a rook" should {
+
+  }
+
+  "a horse" should {
+
+  }
+
+  "a bishop" should {
+
+  }
+
+  "a queen" should {
+
+  }
 }
