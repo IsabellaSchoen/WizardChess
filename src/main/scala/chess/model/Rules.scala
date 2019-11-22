@@ -42,37 +42,17 @@ object Rules {
 
     //König - king
     if (start.figure.get.name.equals("king")) {
-      if (start.figure.get.moved) {
-        if (x2 == x1 + 1 && y1 == y2 || x1 == x2 && y2 == y1 - 1 || x2 == x1 - 1 && y1 == y2 ||
-          x1 == x2 && y2 == y1 + 1)
-          return true
-      }
+          if ((x2 == x1 + 1 && y1 == y2) ||
+            (x1 == x2 && y2 == y1 - 1) ||
+            (x2 == x1 - 1 && y1 == y2) ||
+            (x1 == x2 && y2 == y1 + 1))
+            return true
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
     //Turm - rook
     if (start.figure.get.name.equals("rook")) {
-      if (start.figure.get.moved) {
-        if (start.figure.get.color.equals('B')) {
           if ((x2 == x1 && y2 == y1 + 1) || (x2 == x1 && y2 == y1 + 2) || (x2 == x1 && y2 == y1 + 3) ||
             (x2 == x1 && y2 == y1 + 4) || (x2 == x1 && y2 == y1 + 5) || (x2 == x1 && y2 == y1 + 6) ||
             (x2 == x1 && y2 == y1 + 7) ||
@@ -87,53 +67,23 @@ object Rules {
             (x2 == x1 - 4 && y2 == y1) || (x2 == x1 - 5 && y2 == y1) || (x2 == x1 - 6 && y2 == y1) ||
             (x2 == x1 - 7 && y2 == y1))
             return true
-        } else if (start.figure.get.color.equals('W')) {
-          if ((x2 == x1 && y2 == y1 - 1) || (x2 == x1 && y2 == y1 - 2) || (x2 == x1 && y2 == y1 - 3) ||
-            (x2 == x1 && y2 == y1 - 4) || (x2 == x1 && y2 == y1 - 5) || (x2 == x1 && y2 == y1 - 6) ||
-            (x2 == x1 && y2 == y1 - 7) ||
-            (x2 == x1 - 1 && y2 == y1) || (x2 == x1 - 2 && y2 == y1) || (x2 == x1 - 3 && y2 == y1) ||
-            (x2 == x1 - 4 && y2 == y1) || (x2 == x1 - 5 && y2 == y1) || (x2 == x1 - 6 && y2 == y1) ||
-            (x2 == x1 - 7 && y2 == y1) ||
-            //Rückwärts
-            (x2 == x1 && y2 == y1 + 1) || (x2 == x1 && y2 == y1 + 2) || (x2 == x1 && y2 == y1 + 3) ||
-            (x2 == x1 && y2 == y1 + 4) || (x2 == x1 && y2 == y1 + 5) || (x2 == x1 && y2 == y1 + 6) ||
-            (x2 == x1 && y2 == y1 + 7) ||
-            (x2 == x1 + 1 && y2 == y1) || (x2 == x1 + 2 && y2 == y1) || (x2 == x1 + 3 && y2 == y1) ||
-            (x2 == x1 + 4 && y2 == y1) || (x2 == x1 + 5 && y2 == y1) || (x2 == x1 + 6 && y2 == y1) ||
-            (x2 == x1 + 7 && y2 == y1))
-            return true
-        }
-      }
     }
 
 
     //Pferd - horse
     if (start.figure.get.name.equals("horse")) {
-      if (start.figure.get.moved) {
-        if (start.figure.get.color.equals('B')) {
           if ((x2 == x1 - 2 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 2) || (x2 == x1 - 1 && y2 == y1 + 2) ||
             (x2 == x1 + 1 && y2 == y1 + 2) || (x2 == x1 + 2 && y2 == y1 + 1) ||
             //Rückwärts
             (x2 == x1 + 2 && y2 == y1 - 1) || (x2 == x1 + 1 && y2 == y1 - 2) || (x2 == x1 + 1 && y2 == y1 - 2) ||
             (x2 == x1 - 1 && y2 == y1 - 2) || (x2 == x1 - 2 && y2 == y1 - 1))
             return true
-        } else if (start.figure.get.color.equals('W')) {
-          if ((x2 == x1 + 2 && y2 == y1 - 1) || (x2 == x1 + 1 && y2 == y1 - 2) || (x2 == x1 + 1 && y2 == y1 - 2) ||
-            (x2 == x1 - 1 && y2 == y1 - 2) || (x2 == x1 - 2 && y2 == y1 - 1) ||
-            //Rückwärts
-            (x2 == x1 - 2 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 2) || (x2 == x1 - 1 && y2 == y1 + 2) ||
-            (x2 == x1 + 1 && y2 == y1 + 2) || (x2 == x1 + 2 && y2 == y1 + 1))
-            return true
-        }
-      }
     }
 
 
 
     //Läufer - bishop
     if (start.figure.get.name.equals("bishop")) {
-      if (start.figure.get.moved) {
-        if (start.figure.get.color.equals('B')) {
           //nach rechts - vorwärts
           if ((x2 == x1 + 1 && y2 == y1 + 1) || (x2 == x1 + 2 && y2 == y1 + 2) || (x2 == x1 + 3 && y2 == y1 + 3) ||
             (x2 == x1 + 4 && y2 == y1 + 4) || (x2 == x1 + 5 && y2 == y1 + 5) || (x2 == x1 + 6 && y2 == y1 + 6) ||
@@ -151,33 +101,11 @@ object Rules {
             (x2 == x1 + 4 && y2 == y1 - 4) || (x2 == x1 + 5 && y2 == y1 - 5) || (x2 == x1 + 6 && y2 == y1 - 6) ||
             (x2 == x1 + 7 && y2 == y1 - 7))
             return true
-        } else if (start.figure.get.color.equals('W')) {
-          //nach rechts - vorwärts
-          if ((x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 2 && y2 == y1 + 2) || (x2 == x1 - 3 && y2 == y1 + 3) ||
-            (x2 == x1 - 4 && y2 == y1 + 4) || (x2 == x1 - 5 && y2 == y1 + 5) || (x2 == x1 - 6 && y2 == y1 + 6) ||
-            (x2 == x1 - 7 && y2 == y1 + 7) ||
-            //nach links - vorwärts
-            (x2 == x1 + 1 && y2 == y1 - 1) || (x2 == x1 + 2 && y2 == y1 - 2) || (x2 == x1 + 3 && y2 == y1 - 3) ||
-            (x2 == x1 + 4 && y2 == y1 - 4) || (x2 == x1 + 5 && y2 == y1 - 5) || (x2 == x1 + 6 && y2 == y1 - 6) ||
-            (x2 == x1 + 7 && y2 == y1 - 7) ||
-            //nach rechts - rückwärts
-            (x2 == x1 + 1 && y2 == y1 + 1) || (x2 == x1 + 2 && y2 == y1 + 2) || (x2 == x1 + 3 && y2 == y1 + 3) ||
-            (x2 == x1 + 4 && y2 == y1 + 4) || (x2 == x1 + 5 && y2 == y1 + 5) || (x2 == x1 + 6 && y2 == y1 + 6) ||
-            (x2 == x1 + 7 && y2 == y1 + 7) ||
-            //nach links - rückwärts
-            (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 1) ||
-            (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 1) ||
-            (x2 == x1 - 1 && y2 == y1 + 1))
-            return true
-        }
-      }
     }
 
 
     //Königin - Queen
     if (start.figure.get.name.equals("queen")) {
-      if (start.figure.get.moved) {
-        if (start.figure.get.color.equals('B')) {
           //Vorwärts - Turm
           if ((x2 == x1 && y2 == y1 + 1) || (x2 == x1 && y2 == y1 + 2) || (x2 == x1 && y2 == y1 + 3) ||
             (x2 == x1 && y2 == y1 + 4) || (x2 == x1 && y2 == y1 + 5) || (x2 == x1 && y2 == y1 + 6) ||
@@ -209,40 +137,6 @@ object Rules {
             (x2 == x1 + 4 && y2 == y1 - 4) || (x2 == x1 + 5 && y2 == y1 - 5) || (x2 == x1 + 6 && y2 == y1 - 6) ||
             (x2 == x1 + 7 && y2 == y1 - 7))
             return true
-        } else if (start.figure.get.color.equals('W')) {
-          //Vorwärts - Turm
-          if ((x2 == x1 && y2 == y1 - 1) || (x2 == x1 && y2 == y1 - 2) || (x2 == x1 && y2 == y1 - 3) ||
-            (x2 == x1 && y2 == y1 - 4) || (x2 == x1 && y2 == y1 - 5) || (x2 == x1 && y2 == y1 - 6) ||
-            (x2 == x1 && y2 == y1 - 7) ||
-            (x2 == x1 - 1 && y2 == y1) || (x2 == x1 - 2 && y2 == y1) || (x2 == x1 - 3 && y2 == y1) ||
-            (x2 == x1 - 4 && y2 == y1) || (x2 == x1 - 5 && y2 == y1) || (x2 == x1 - 6 && y2 == y1) ||
-            (x2 == x1 - 7 && y2 == y1) ||
-            //Rückwärts - Turm
-            (x2 == x1 && y2 == y1 + 1) || (x2 == x1 && y2 == y1 + 2) || (x2 == x1 && y2 == y1 + 3) ||
-            (x2 == x1 && y2 == y1 + 4) || (x2 == x1 && y2 == y1 + 5) || (x2 == x1 && y2 == y1 + 6) ||
-            (x2 == x1 && y2 == y1 + 7) ||
-            (x2 == x1 + 1 && y2 == y1) || (x2 == x1 + 2 && y2 == y1) || (x2 == x1 + 3 && y2 == y1) ||
-            (x2 == x1 + 4 && y2 == y1) || (x2 == x1 + 5 && y2 == y1) || (x2 == x1 + 6 && y2 == y1) ||
-            (x2 == x1 + 7 && y2 == y1) ||
-            //nach rechts - vorwärts - Läufer
-            (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 2 && y2 == y1 + 2) || (x2 == x1 - 3 && y2 == y1 + 3) ||
-            (x2 == x1 - 4 && y2 == y1 + 4) || (x2 == x1 - 5 && y2 == y1 + 5) || (x2 == x1 - 6 && y2 == y1 + 6) ||
-            (x2 == x1 - 7 && y2 == y1 + 7) ||
-            //nach links - vorwärts - Läufer
-            (x2 == x1 + 1 && y2 == y1 - 1) || (x2 == x1 + 2 && y2 == y1 - 2) || (x2 == x1 + 3 && y2 == y1 - 3) ||
-            (x2 == x1 + 4 && y2 == y1 - 4) || (x2 == x1 + 5 && y2 == y1 - 5) || (x2 == x1 + 6 && y2 == y1 - 6) ||
-            (x2 == x1 + 7 && y2 == y1 - 7) ||
-            //nach rechts - rückwärts - Läufer
-            (x2 == x1 + 1 && y2 == y1 + 1) || (x2 == x1 + 2 && y2 == y1 + 2) || (x2 == x1 + 3 && y2 == y1 + 3) ||
-            (x2 == x1 + 4 && y2 == y1 + 4) || (x2 == x1 + 5 && y2 == y1 + 5) || (x2 == x1 + 6 && y2 == y1 + 6) ||
-            (x2 == x1 + 7 && y2 == y1 + 7) ||
-            //nach links - rückwärts - Läufer
-            (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 1) ||
-            (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 1) ||
-            (x2 == x1 - 1 && y2 == y1 + 1))
-            return true
-        }
-      }
     }
 
 
