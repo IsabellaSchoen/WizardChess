@@ -14,10 +14,14 @@ class TuiSpec extends WordSpec with Matchers {
       new Tui(new Controller(BoardCreator(8).create)).inputprocess("exit") should be (-1)
     }
     "tell the controller to move one figure to another position" in {
-      new Tui(new Controller(BoardCreator(8).create)).inputprocess("A2 A4") should be (1)
+      new Tui(new Controller(BoardCreator(8).init(BoardCreator(8).create))).inputprocess("A2 A4") should be (1)
     }
     "not react to other inputs" in {
       new Tui(new Controller(BoardCreator(8).create)).inputprocess("random input") should be (0)
+    }
+    "be able to put figures on a board" in {
+      new Tui(new Controller(BoardCreator(8).create)).inputprocess("ppa1") should be (4)
+      new Tui(new Controller(BoardCreator(8).create)).inputprocess("ppa1B") should be (3)
     }
   }
 }

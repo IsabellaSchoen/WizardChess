@@ -25,7 +25,7 @@ class RulesSpec extends WordSpec with Matchers {
     }
   }
   "a black pawn" should {
-    "not be allowed to move north, east or west" in {
+    "not be allowed to move north" in {
       Rules.valid(test, 0, 3, 0, 2) should be(false)
     }
     "not be allowed to move west" in {
@@ -98,15 +98,21 @@ class RulesSpec extends WordSpec with Matchers {
   val rook: Board = BoardCreator(8).create
   rook.put('D', '5', 'R', 'B')
   "a rook" should {
-    "be allowed to move straight" in {
+    "be allowed to move south" in {
       Rules.valid(rook, 3, 4, 3, 5) should be(true)
       Rules.valid(rook, 3, 4, 3, 6) should be(true)
+    }
+    "be allowed to move north" in {
       Rules.valid(rook, 3, 4, 3, 3) should be(true)
       Rules.valid(rook, 3, 4, 3, 2) should be(true)
-      Rules.valid(rook, 3, 4, 2, 4) should be(true)
-      Rules.valid(rook, 3, 4, 1, 4) should be(true)
+    }
+    "be allowed to move east" in {
       Rules.valid(rook, 3, 4, 4, 4) should be(true)
       Rules.valid(rook, 3, 4, 5, 4) should be(true)
+    }
+    "be allowed to move west" in {
+      Rules.valid(rook, 3, 4, 2, 4) should be(true)
+      Rules.valid(rook, 3, 4, 1, 4) should be(true)
     }
     "not be allowed to move diagonal" in {
       Rules.valid(rook, 3, 4, 4, 5) should be(false)
@@ -122,7 +128,6 @@ class RulesSpec extends WordSpec with Matchers {
 
   val bishop: Board = BoardCreator(8).create
   bishop.put('D', '4', 'B', 'B')
-  println(bishop)
   "a bishop" should {
     "be able to move rigth down" in {
       Rules.valid(bishop, 3, 3, 4, 4) should be(true)
