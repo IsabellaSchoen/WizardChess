@@ -6,19 +6,41 @@ package chess.model
 //Position und Board übergeben
 
 object Rules {
-  var start: Cell
-  var end: Cell
+  var start: Cell = Cell(-1, -1)
+  var end: Cell = Cell(-1, -1)
+  var x1: Int = -1
+  var x2: Int = -1
+  var y1: Int = -1
+  var y2: Int = -1
+  var fig: String = "none"
+
+  var rule = fig match {
+    case "pawn" => pawnRule(x1, y1, x2, y2)
+    case "king" => kingRule(x1, y1, x2, y2)
+    case "rook" => rookRule(x1, y1, x2, y2)
+    case "horse" => horseRule(x1, y1, x2, y2)
+    case "bishop" => bishopRule(x1, y1, x2, y2)
+    case "queen" => queenRule(x1, y1, x2, y2)
+  }
+
+
   //Kontrolle, ob move erlaubt:
   def valid(board: Board, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
-    val start: Cell = board.Matrix(x1)(y1)
-    val end: Cell = board.Matrix(x2)(y2)
+    start = board.Matrix(x1)(y1)
+    end = board.Matrix(x2)(y2)
+    this.x1 = x1
+    this.y1 = y1
+    this.x2 = x2
+    this.y2 = y2
 
     if (start.isEmpty)
       return false
 
-    //Regeln:
+    fig = start.figure.get.name
 
+    return rule
   }
+
   def pawnRule(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     //Bauern - pawn:
     if (start.figure.get.name.equals ("pawn") ) {
@@ -47,105 +69,117 @@ object Rules {
 
 
     //König - king
+  def kingRule (x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     if (start.figure.get.name.equals("king")) {
-          if ((x2 == x1 + 1 && y1 == y2) ||
-            (x1 == x2 && y2 == y1 - 1) ||
-            (x2 == x1 - 1 && y1 == y2) ||
-            (x1 == x2 && y2 == y1 + 1))
-            return true
+      if ((x2 == x1 + 1 && y1 == y2) ||
+        (x1 == x2 && y2 == y1 - 1) ||
+        (x2 == x1 - 1 && y1 == y2) ||
+        (x1 == x2 && y2 == y1 + 1))
+        return true
     }
+    return false
+  }
 
 
 
     //Turm - rook
+  def rookRule (x1: Int, y1: Int, x2: Int, y2: Int) : Boolean = {
     if (start.figure.get.name.equals("rook")) {
-          if ((x2 == x1 && y2 == y1 + 1) || (x2 == x1 && y2 == y1 + 2) || (x2 == x1 && y2 == y1 + 3) ||
-            (x2 == x1 && y2 == y1 + 4) || (x2 == x1 && y2 == y1 + 5) || (x2 == x1 && y2 == y1 + 6) ||
-            (x2 == x1 && y2 == y1 + 7) ||
-            (x2 == x1 + 1 && y2 == y1) || (x2 == x1 + 2 && y2 == y1) || (x2 == x1 + 3 && y2 == y1) ||
-            (x2 == x1 + 4 && y2 == y1) || (x2 == x1 + 5 && y2 == y1) || (x2 == x1 + 6 && y2 == y1) ||
-            (x2 == x1 + 7 && y2 == y1) ||
-            //Rückwärts
-            (x2 == x1 && y2 == y1 - 1) || (x2 == x1 && y2 == y1 - 2) || (x2 == x1 && y2 == y1 - 3) ||
-            (x2 == x1 && y2 == y1 - 4) || (x2 == x1 && y2 == y1 - 5) || (x2 == x1 && y2 == y1 - 6) ||
-            (x2 == x1 && y2 == y1 - 7) ||
-            (x2 == x1 - 1 && y2 == y1) || (x2 == x1 - 2 && y2 == y1) || (x2 == x1 - 3 && y2 == y1) ||
-            (x2 == x1 - 4 && y2 == y1) || (x2 == x1 - 5 && y2 == y1) || (x2 == x1 - 6 && y2 == y1) ||
-            (x2 == x1 - 7 && y2 == y1))
-            return true
+      if ((x2 == x1 && y2 == y1 + 1) || (x2 == x1 && y2 == y1 + 2) || (x2 == x1 && y2 == y1 + 3) ||
+        (x2 == x1 && y2 == y1 + 4) || (x2 == x1 && y2 == y1 + 5) || (x2 == x1 && y2 == y1 + 6) ||
+        (x2 == x1 && y2 == y1 + 7) ||
+        (x2 == x1 + 1 && y2 == y1) || (x2 == x1 + 2 && y2 == y1) || (x2 == x1 + 3 && y2 == y1) ||
+        (x2 == x1 + 4 && y2 == y1) || (x2 == x1 + 5 && y2 == y1) || (x2 == x1 + 6 && y2 == y1) ||
+        (x2 == x1 + 7 && y2 == y1) ||
+        //Rückwärts
+        (x2 == x1 && y2 == y1 - 1) || (x2 == x1 && y2 == y1 - 2) || (x2 == x1 && y2 == y1 - 3) ||
+        (x2 == x1 && y2 == y1 - 4) || (x2 == x1 && y2 == y1 - 5) || (x2 == x1 && y2 == y1 - 6) ||
+        (x2 == x1 && y2 == y1 - 7) ||
+        (x2 == x1 - 1 && y2 == y1) || (x2 == x1 - 2 && y2 == y1) || (x2 == x1 - 3 && y2 == y1) ||
+        (x2 == x1 - 4 && y2 == y1) || (x2 == x1 - 5 && y2 == y1) || (x2 == x1 - 6 && y2 == y1) ||
+        (x2 == x1 - 7 && y2 == y1))
+        return true
     }
+    return false
+  }
 
 
     //Pferd - horse
+  def horseRule (x1: Int, y1: Int, x2: Int, y2: Int) : Boolean = {
     if (start.figure.get.name.equals("horse")) {
-          if ((x2 == x1 - 2 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 2) || (x2 == x1 - 1 && y2 == y1 + 2) ||
-            (x2 == x1 + 1 && y2 == y1 + 2) || (x2 == x1 + 2 && y2 == y1 + 1) ||
-            //Rückwärts
-            (x2 == x1 + 2 && y2 == y1 - 1) || (x2 == x1 + 1 && y2 == y1 - 2) || (x2 == x1 + 1 && y2 == y1 - 2) ||
-            (x2 == x1 - 1 && y2 == y1 - 2) || (x2 == x1 - 2 && y2 == y1 - 1))
-            return true
+      if ((x2 == x1 - 2 && y2 == y1 + 1) || (x2 == x1 - 1 && y2 == y1 + 2) || (x2 == x1 - 1 && y2 == y1 + 2) ||
+        (x2 == x1 + 1 && y2 == y1 + 2) || (x2 == x1 + 2 && y2 == y1 + 1) ||
+        //Rückwärts
+        (x2 == x1 + 2 && y2 == y1 - 1) || (x2 == x1 + 1 && y2 == y1 - 2) || (x2 == x1 + 1 && y2 == y1 - 2) ||
+        (x2 == x1 - 1 && y2 == y1 - 2) || (x2 == x1 - 2 && y2 == y1 - 1))
+        return true
     }
+    return false
+  }
 
 
 
     //Läufer - bishop
+  def bishopRule (x1: Int, y1: Int, x2: Int, y2: Int) : Boolean = {
     if (start.figure.get.name.equals("bishop")) {
-          //nach rechts oben
-          if ((x2 == x1 + 1 && y2 == y1 - 1) || (x2 == x1 + 2 && y2 == y1 - 2) || (x2 == x1 + 3 && y2 == y1 - 3) ||
-            (x2 == x1 + 4 && y2 == y1 - 4) || (x2 == x1 + 5 && y2 == y1 - 5) || (x2 == x1 + 6 && y2 == y1 - 6) ||
-            (x2 == x1 + 7 && y2 == y1 - 7) ||
-            //nach links oben
-            (x2 == x1 - 1 && y2 == y1 - 1) || (x2 == x1 - 2 && y2 == y1 - 2) || (x2 == x1 - 3 && y2 == y1 - 3) ||
-            (x2 == x1 - 4 && y2 == y1 - 4) || (x2 == x1 - 5 && y2 == y1 - 5) || (x2 == x1 - 6 && y2 == y1 - 6) ||
-            (x2 == x1 - 7 && y2 == y1 - 7) ||
-            //nach rechts unten
-            (x2 == x1 + 1 && y2 == y1 + 1) || (x2 == x1 + 2 && y2 == y1 + 2) || (x2 == x1 + 3 && y2 == y1 + 3) ||
-            (x2 == x1 + 4 && y2 == y1 + 4) || (x2 == x1 + 5 && y2 == y1 + 5) || (x2 == x1 + 6 && y2 == y1 + 6) ||
-            (x2 == x1 + 7 && y2 == y1 + 7) ||
-            //nach links unten
-            (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 2 && y2 == y1 + 2) || (x2 == x1 - 3 && y2 == y1 + 3) ||
-            (x2 == x1 - 4 && y2 == y1 + 4) || (x2 == x1 - 5 && y2 == y1 + 5) || (x2 == x1 - 6 && y2 == y1 + 6) ||
-            (x2 == x1 - 7 && y2 == y1 + 7))
-            return true
+      //nach rechts oben
+      if ((x2 == x1 + 1 && y2 == y1 - 1) || (x2 == x1 + 2 && y2 == y1 - 2) || (x2 == x1 + 3 && y2 == y1 - 3) ||
+        (x2 == x1 + 4 && y2 == y1 - 4) || (x2 == x1 + 5 && y2 == y1 - 5) || (x2 == x1 + 6 && y2 == y1 - 6) ||
+        (x2 == x1 + 7 && y2 == y1 - 7) ||
+        //nach links oben
+        (x2 == x1 - 1 && y2 == y1 - 1) || (x2 == x1 - 2 && y2 == y1 - 2) || (x2 == x1 - 3 && y2 == y1 - 3) ||
+        (x2 == x1 - 4 && y2 == y1 - 4) || (x2 == x1 - 5 && y2 == y1 - 5) || (x2 == x1 - 6 && y2 == y1 - 6) ||
+        (x2 == x1 - 7 && y2 == y1 - 7) ||
+        //nach rechts unten
+        (x2 == x1 + 1 && y2 == y1 + 1) || (x2 == x1 + 2 && y2 == y1 + 2) || (x2 == x1 + 3 && y2 == y1 + 3) ||
+        (x2 == x1 + 4 && y2 == y1 + 4) || (x2 == x1 + 5 && y2 == y1 + 5) || (x2 == x1 + 6 && y2 == y1 + 6) ||
+        (x2 == x1 + 7 && y2 == y1 + 7) ||
+        //nach links unten
+        (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 2 && y2 == y1 + 2) || (x2 == x1 - 3 && y2 == y1 + 3) ||
+        (x2 == x1 - 4 && y2 == y1 + 4) || (x2 == x1 - 5 && y2 == y1 + 5) || (x2 == x1 - 6 && y2 == y1 + 6) ||
+        (x2 == x1 - 7 && y2 == y1 + 7))
+        return true
     }
+    return false
+  }
 
 
     //Königin - Queen
+  def queenRule (x1: Int, y1: Int, x2: Int, y2: Int) : Boolean = {
     if (start.figure.get.name.equals("queen")) {
-          //Vorwärts - Turm
-          if ((x2 == x1 && y2 == y1 + 1) || (x2 == x1 && y2 == y1 + 2) || (x2 == x1 && y2 == y1 + 3) ||
-            (x2 == x1 && y2 == y1 + 4) || (x2 == x1 && y2 == y1 + 5) || (x2 == x1 && y2 == y1 + 6) ||
-            (x2 == x1 && y2 == y1 + 7) ||
-            (x2 == x1 + 1 && y2 == y1) || (x2 == x1 + 2 && y2 == y1) || (x2 == x1 + 3 && y2 == y1) ||
-            (x2 == x1 + 4 && y2 == y1) || (x2 == x1 + 5 && y2 == y1) || (x2 == x1 + 6 && y2 == y1) ||
-            (x2 == x1 + 7 && y2 == y1) ||
-            //Rückwärts - Turm
-            (x2 == x1 && y2 == y1 - 1) || (x2 == x1 && y2 == y1 - 2) || (x2 == x1 && y2 == y1 - 3) ||
-            (x2 == x1 && y2 == y1 - 4) || (x2 == x1 && y2 == y1 - 5) || (x2 == x1 && y2 == y1 - 6) ||
-            (x2 == x1 && y2 == y1 - 7) ||
-            (x2 == x1 - 1 && y2 == y1) || (x2 == x1 - 2 && y2 == y1) || (x2 == x1 - 3 && y2 == y1) ||
-            (x2 == x1 - 4 && y2 == y1) || (x2 == x1 - 5 && y2 == y1) || (x2 == x1 - 6 && y2 == y1) ||
-            (x2 == x1 - 7 && y2 == y1) ||
-            //nach rechts oben
-            (x2 == x1 + 1 && y2 == y1 - 1) || (x2 == x1 + 2 && y2 == y1 - 2) || (x2 == x1 + 3 && y2 == y1 - 3) ||
-            (x2 == x1 + 4 && y2 == y1 - 4) || (x2 == x1 + 5 && y2 == y1 - 5) || (x2 == x1 + 6 && y2 == y1 - 6) ||
-            (x2 == x1 + 7 && y2 == y1 - 7) ||
-            //nach links oben
-            (x2 == x1 - 1 && y2 == y1 - 1) || (x2 == x1 - 2 && y2 == y1 - 2) || (x2 == x1 - 3 && y2 == y1 - 3) ||
-            (x2 == x1 - 4 && y2 == y1 - 4) || (x2 == x1 - 5 && y2 == y1 - 5) || (x2 == x1 - 6 && y2 == y1 - 6) ||
-            (x2 == x1 - 7 && y2 == y1 - 7) ||
-            //nach rechts unten
-            (x2 == x1 + 1 && y2 == y1 + 1) || (x2 == x1 + 2 && y2 == y1 + 2) || (x2 == x1 + 3 && y2 == y1 + 3) ||
-            (x2 == x1 + 4 && y2 == y1 + 4) || (x2 == x1 + 5 && y2 == y1 + 5) || (x2 == x1 + 6 && y2 == y1 + 6) ||
-            (x2 == x1 + 7 && y2 == y1 + 7) ||
-            //nach links unten
-            (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 2 && y2 == y1 + 2) || (x2 == x1 - 3 && y2 == y1 + 3) ||
-            (x2 == x1 - 4 && y2 == y1 + 4) || (x2 == x1 - 5 && y2 == y1 + 5) || (x2 == x1 - 6 && y2 == y1 + 6) ||
-            (x2 == x1 - 7 && y2 == y1 + 7))
-            return true
+      //Vorwärts - Turm
+      if ((x2 == x1 && y2 == y1 + 1) || (x2 == x1 && y2 == y1 + 2) || (x2 == x1 && y2 == y1 + 3) ||
+        (x2 == x1 && y2 == y1 + 4) || (x2 == x1 && y2 == y1 + 5) || (x2 == x1 && y2 == y1 + 6) ||
+        (x2 == x1 && y2 == y1 + 7) ||
+        (x2 == x1 + 1 && y2 == y1) || (x2 == x1 + 2 && y2 == y1) || (x2 == x1 + 3 && y2 == y1) ||
+        (x2 == x1 + 4 && y2 == y1) || (x2 == x1 + 5 && y2 == y1) || (x2 == x1 + 6 && y2 == y1) ||
+        (x2 == x1 + 7 && y2 == y1) ||
+        //Rückwärts - Turm
+        (x2 == x1 && y2 == y1 - 1) || (x2 == x1 && y2 == y1 - 2) || (x2 == x1 && y2 == y1 - 3) ||
+        (x2 == x1 && y2 == y1 - 4) || (x2 == x1 && y2 == y1 - 5) || (x2 == x1 && y2 == y1 - 6) ||
+        (x2 == x1 && y2 == y1 - 7) ||
+        (x2 == x1 - 1 && y2 == y1) || (x2 == x1 - 2 && y2 == y1) || (x2 == x1 - 3 && y2 == y1) ||
+        (x2 == x1 - 4 && y2 == y1) || (x2 == x1 - 5 && y2 == y1) || (x2 == x1 - 6 && y2 == y1) ||
+        (x2 == x1 - 7 && y2 == y1) ||
+        //nach rechts oben
+        (x2 == x1 + 1 && y2 == y1 - 1) || (x2 == x1 + 2 && y2 == y1 - 2) || (x2 == x1 + 3 && y2 == y1 - 3) ||
+        (x2 == x1 + 4 && y2 == y1 - 4) || (x2 == x1 + 5 && y2 == y1 - 5) || (x2 == x1 + 6 && y2 == y1 - 6) ||
+        (x2 == x1 + 7 && y2 == y1 - 7) ||
+        //nach links oben
+        (x2 == x1 - 1 && y2 == y1 - 1) || (x2 == x1 - 2 && y2 == y1 - 2) || (x2 == x1 - 3 && y2 == y1 - 3) ||
+        (x2 == x1 - 4 && y2 == y1 - 4) || (x2 == x1 - 5 && y2 == y1 - 5) || (x2 == x1 - 6 && y2 == y1 - 6) ||
+        (x2 == x1 - 7 && y2 == y1 - 7) ||
+        //nach rechts unten
+        (x2 == x1 + 1 && y2 == y1 + 1) || (x2 == x1 + 2 && y2 == y1 + 2) || (x2 == x1 + 3 && y2 == y1 + 3) ||
+        (x2 == x1 + 4 && y2 == y1 + 4) || (x2 == x1 + 5 && y2 == y1 + 5) || (x2 == x1 + 6 && y2 == y1 + 6) ||
+        (x2 == x1 + 7 && y2 == y1 + 7) ||
+        //nach links unten
+        (x2 == x1 - 1 && y2 == y1 + 1) || (x2 == x1 - 2 && y2 == y1 + 2) || (x2 == x1 - 3 && y2 == y1 + 3) ||
+        (x2 == x1 - 4 && y2 == y1 + 4) || (x2 == x1 - 5 && y2 == y1 + 5) || (x2 == x1 - 6 && y2 == y1 + 6) ||
+        (x2 == x1 - 7 && y2 == y1 + 7))
+        return true
     }
-
-
-    false
+    return false
   }
 }
+
