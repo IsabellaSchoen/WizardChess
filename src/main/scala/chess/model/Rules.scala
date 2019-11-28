@@ -6,6 +6,8 @@ package chess.model
 //Position und Board übergeben
 
 object Rules {
+  var start: Cell
+  var end: Cell
   //Kontrolle, ob move erlaubt:
   def valid(board: Board, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     val start: Cell = board.Matrix(x1)(y1)
@@ -16,27 +18,31 @@ object Rules {
 
     //Regeln:
 
+  }
+  def pawnRule(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     //Bauern - pawn:
-    if (start.figure.get.name.equals("pawn")) {
-      if (start.figure.get.moved) {
-        if (start.figure.get.color.equals('B')) {
-          if (x1 == x2 && y2 == y1 + 1)
-            return true
-        } else if (start.figure.get.color.equals('W')) {
-          if (x1 == x2 && y2 == y1 - 1)
-            return true
-        }
-      } else {
-        if (start.figure.get.color.equals('B')) {
-          if (x1 == x2 && y2 == y1 + 2 || x1 == x2 && y2 == y1 + 1)
-            return true
-        } else if (start.figure.get.color.equals('W')) {
-          if (x1 == x2 && y2 == y1 - 2 || x1 == x2 && y2 == y1 - 1)
-            return true
-        }
-      }
-      return false
-    }
+    if (start.figure.get.name.equals ("pawn") ) {
+    if (start.figure.get.moved) {
+    if (start.figure.get.color.equals ('B') ) {
+    if (x1 == x2 && y2 == y1 + 1)
+    return true
+  } else if (start.figure.get.color.equals ('W') ) {
+    if (x1 == x2 && y2 == y1 - 1)
+    return true
+  }
+  } else {
+    if (start.figure.get.color.equals ('B') ) {
+    if (x1 == x2 && y2 == y1 + 2 || x1 == x2 && y2 == y1 + 1)
+    return true
+  } else if (start.figure.get.color.equals ('W') ) {
+    if (x1 == x2 && y2 == y1 - 2 || x1 == x2 && y2 == y1 - 1)
+    return true
+  }
+  }
+    return false
+  }
+  return false
+  }
 
 
 
