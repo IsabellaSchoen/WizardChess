@@ -8,35 +8,24 @@ package chess.model
 object Rules {
   var start: Cell = Cell(-1, -1)
   var end: Cell = Cell(-1, -1)
-  var x1: Int = -1
-  var x2: Int = -1
-  var y1: Int = -1
-  var y2: Int = -1
-  var fig: String = "none"
-
-  var rule = fig match {
-    case "pawn" => pawnRule(x1, y1, x2, y2)
-    case "king" => kingRule(x1, y1, x2, y2)
-    case "rook" => rookRule(x1, y1, x2, y2)
-    case "horse" => horseRule(x1, y1, x2, y2)
-    case "bishop" => bishopRule(x1, y1, x2, y2)
-    case "queen" => queenRule(x1, y1, x2, y2)
-  }
-
 
   //Kontrolle, ob move erlaubt:
   def valid(board: Board, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     start = board.Matrix(x1)(y1)
     end = board.Matrix(x2)(y2)
-    this.x1 = x1
-    this.y1 = y1
-    this.x2 = x2
-    this.y2 = y2
 
     if (start.isEmpty)
       return false
 
-    fig = start.figure.get.name
+    val fig: String = start.figure.get.name
+    val rule = fig match {
+      case "pawn" => pawnRule(x1, y1, x2, y2)
+      case "king" => kingRule(x1, y1, x2, y2)
+      case "rook" => rookRule(x1, y1, x2, y2)
+      case "horse" => horseRule(x1, y1, x2, y2)
+      case "bishop" => bishopRule(x1, y1, x2, y2)
+      case "queen" => queenRule(x1, y1, x2, y2)
+    }
 
     return rule
   }
