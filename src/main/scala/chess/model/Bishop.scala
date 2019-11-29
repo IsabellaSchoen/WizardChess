@@ -1,5 +1,5 @@
 package chess.model
 
-class Bishop {
+case class Bishop(color: Char) extends Figure(color: Char) {
 
 }

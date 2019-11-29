@@ -1,6 +1,8 @@
 package chess.model
 
-abstract class Figure(color: Char)
+abstract class Figure(color: Char) {
+
+}
 
 object Figure {
   def apply(name: String = "pawn", color: Char = 'B'): Figure = {

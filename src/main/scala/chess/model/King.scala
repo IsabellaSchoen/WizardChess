@@ -1,5 +1,5 @@
 package chess.model
 
-case class King(name: String, color: Char, moved: Boolean) extends Figure(name: String, color: Char, moved: Boolean) {
+case class King(color: Char) extends Figure(color: Char) {
 
 }
