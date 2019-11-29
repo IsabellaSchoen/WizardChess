@@ -5,7 +5,7 @@ package chess.model
 //rules kann die Figur sehen
 //Position und Board übergeben
 
-object Rules {
+object RulesAll {
   var start: Cell = Cell(-1, -1)
   var end: Cell = Cell(-1, -1)
 
