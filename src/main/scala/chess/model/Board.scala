@@ -13,10 +13,13 @@ case class Board(size: Int) {
     this
   }
 
+  def validCoords(x1: Char, y1: Char, x2: Char, y2: Char): Boolean =
+    (xi(x1) != -1) && (yi(y1) != -1) && (xi(x2) != -1) && (yi(y2) != -1)
+
   val Matrix: Array[Array[Cell]] = Array.ofDim[Cell](size, size)
 
   def moveBlack(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
-    if ((xi(x1) == -1) || (yi(y1) == -1) || (xi(x2) == -1) || (yi(y2) == -1)) {
+    if (!validCoords(x1, y1, x2, y2)) {
       println("not allowed!")
       state = 2
       return this
@@ -31,7 +34,7 @@ case class Board(size: Int) {
   }
 
   def moveWhite(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
-    if ((xi(x1) == -1) || (yi(y1) == -1) || (xi(x2) == -1) || (yi(y2) == -1)) {
+    if (!validCoords(x1, y1, x2, y2)) {
       println("not allowed!")
       state = 1
       return this
@@ -46,6 +49,10 @@ case class Board(size: Int) {
   }
 
   def move(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
+    if (!validCoords(x1, y1, x2, y2)) {
+      println("not allowed!")
+      return this
+    }
     val start: Cell = Matrix(xi(x1))(yi(y1))
     val end: Cell = Matrix(xi(x2))(yi(y2))
     if (end.figure.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
