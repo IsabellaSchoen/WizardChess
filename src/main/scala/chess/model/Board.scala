@@ -6,6 +6,7 @@ package chess.model
 import chess.model.RulesAll
 
 case class Board(size: Int) {
+  var state: Int = 0
   def put(x: Char, y: Char, f: Char, c: Char): Board = {
     if (xi(x) >= 0 && xi(x) < size && yi(y) >= 0 && yi(y) < size && (c.equals('B') || c.equals('W')))
       Matrix(xi(x))(yi(y)) = Matrix(xi(x))(yi(y)).set(Figure.translate(f), c)
@@ -17,31 +18,37 @@ case class Board(size: Int) {
   def moveBlack(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     if ((xi(x1) == -1) || (yi(y1) == -1) || (xi(x2) == -1) || (yi(y2) == -1)) {
       println("not allowed!")
+      state = 2
       return this
     }
     if (!RulesBlack.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
       println("Not a valid move!")
+      state = 2
       return this
     }
+    state = 1
     move(x1, y1, x2, y2)
   }
 
   def moveWhite(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     if ((xi(x1) == -1) || (yi(y1) == -1) || (xi(x2) == -1) || (yi(y2) == -1)) {
       println("not allowed!")
+      state = 1
       return this
     }
     if (!RulesWhite.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
       println("Not a valid move!")
+      state = 1
       return this
     }
+    state = 2
     move(x1, y1, x2, y2)
   }
 
   def move(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     val start: Cell = Matrix(xi(x1))(yi(y1))
     val end: Cell = Matrix(xi(x2))(yi(y2))
-    if (end.figure.isEmpty) {
+    if (end.figure.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
       Matrix(xi(x2))(yi(y2)) = end.set(start.figure.get.toString, start.figure.get.color, moved = true)
       Matrix(xi(x1))(yi(y1)) = start.set("none")
     } else

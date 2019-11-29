@@ -14,6 +14,10 @@ class Tui(controller: Controller) extends Observer {
       case "exit" => -1// Beenden des Programmes
       case "e" => controller.empty()
         2
+      case "deactivate players" => controller.setState(0)
+        5
+      case "activate players" => controller.setState(1)
+        -5
       case _ =>
         input.toList.filter(c => c != ' ') match {
           case 'p' :: f :: x :: y :: c :: Nil => controller.put(x, y, f, c)
