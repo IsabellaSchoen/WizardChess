@@ -1,5 +1,5 @@
 package chess.model
 
-class Pawn {
+class Pawn(color: Char) extends Figure(color: Char) {
 
 }
