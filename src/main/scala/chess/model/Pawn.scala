@@ -1,5 +1,5 @@
 package chess.model
 
-case class Pawn(color: Char) extends Figure(color: Char) {
-
+class Pawn(color: Char) extends Figure(color: Char) {
+  override def figRule(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
 }

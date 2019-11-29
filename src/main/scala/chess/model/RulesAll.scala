@@ -17,20 +17,8 @@ object RulesAll {
     if (start.isEmpty)
       return false
 
-    val fig: String = start.figure.get.name
-    val rule = fig match {
-      case "pawn" => pawnRule(x1, y1, x2, y2)
-      case "king" => kingRule(x1, y1, x2, y2)
-      case "rook" => rookRule(x1, y1, x2, y2)
-      case "horse" => horseRule(x1, y1, x2, y2)
-      case "bishop" => bishopRule(x1, y1, x2, y2)
-      case "queen" => queenRule(x1, y1, x2, y2)
+    start.figure.get.rule(board, x1, y1, x2, y2)
     }
-
-    return rule
-  }
-
-
 
     def pawnRule(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
       //Bauern - pawn:
