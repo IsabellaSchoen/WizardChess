@@ -23,7 +23,8 @@ object RulesAll {
     def pawnRule(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
       //Bauern - pawn:
       if (start.figure.get.name.equals("pawn")) {
-        if (start.figure.get.moved) {
+        if (start.figure.get.PawnState.state == PawnState.twoStep) {
+          PawnState.handle(oneStepPawn())
           if (start.figure.get.color.equals('B')) {
             if (x1 == x2 && y2 == y1 + 1)
               return true

@@ -1,13 +1,14 @@
-import chess.model.Figure
+object GameStatus extends Enumeration{
+  type GameStatus = Value
+  val IDLE, SOLVED, NOT_SOLVABLE = Value
 
-var x: Vector[Figure] = Vector(Figure("bishop"))
+  val map = Map[GameStatus, String](
+    IDLE -> "",
+    SOLVED ->"Game successfully solved",
+    NOT_SOLVABLE ->"Game not solvable")
 
-x = x.appended(Figure("queen")) :+ Figure("king")
+  def message(gameStatus: GameStatus) = {
+    map(gameStatus)
+  }
 
-x.toString()
-
-x = x.filterNot(o => o == Figure("queen"))
-
-x.toString()
-
-print(Console.RED + "hello")
+}
