@@ -9,7 +9,7 @@ class FigureSpec extends WordSpec with Matchers{
       Figure("king").toString should be ("king")
     }
     "have a color" in {
-      Figure("king").color should be ('B')
+      Figure("king").col should be ('B')
     }
     "have an identification Char" in {
       Figure().caption should be ('P')

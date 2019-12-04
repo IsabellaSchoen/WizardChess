@@ -9,7 +9,7 @@ case class Cell(x: Int, y: Int, figure: Option[Figure] = None) {
   //    val king : Option[Figure] = Some(Figure("King")
   def set(new_figure: String, color: Char = 'B', moved: Boolean = false): Cell = {
     if (!new_figure.equals("none"))
-      copy(figure = Some(Figure(new_figure, color, moved)))
+      copy(figure = Some(Figure(new_figure, color)))
     else
       copy(figure = None)
   }

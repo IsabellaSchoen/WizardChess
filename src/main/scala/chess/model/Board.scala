@@ -56,7 +56,7 @@ case class Board(size: Int) {
     val start: Cell = Matrix(xi(x1))(yi(y1))
     val end: Cell = Matrix(xi(x2))(yi(y2))
     if (end.figure.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
-      Matrix(xi(x2))(yi(y2)) = end.set(start.figure.get.toString, start.figure.get.color, moved = true)
+      Matrix(xi(x2))(yi(y2)) = end.set(start.figure.get.toString, start.figure.get.col, moved = true)
       Matrix(xi(x1))(yi(y1)) = start.set("none")
     } else
       println("Not allowed")
@@ -76,7 +76,7 @@ case class Board(size: Int) {
     } {
       box = box.replaceFirst("y", (col + 1).toString)
       if (Matrix(col)(row).figure.isDefined)
-        if (Matrix(col)(row).figure.get.color.equals('W'))
+        if (Matrix(col)(row).figure.get.col.equals('W'))
           box = box.replaceFirst("x ", "\u001b[34;1m" + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
         else
           box = box.replaceFirst("x ", "\u001b[31;1m" + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)

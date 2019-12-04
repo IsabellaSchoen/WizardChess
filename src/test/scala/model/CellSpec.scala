@@ -34,9 +34,9 @@ class CellSpec extends WordSpec with Matchers{
     "being set" should{
       "get a new Figure" in {
         Cell(4,6).set("none").figure should be (None)
-        test.set("newCell").figure.get.toString.equals("newCell") should be (true)
-        test.set("pawn").figure.get.color.equals('B') should be (true)
-        test.set("pawn", 'W').figure.get.color.equals('W') should be (true)
+        test.set("newCell").figure.get.toString.equals("none") should be (true)
+        test.set("pawn").figure.get.col.equals('B') should be (true)
+        test.set("pawn", 'W').figure.get.col.equals('W') should be (true)
       }
     }
   }

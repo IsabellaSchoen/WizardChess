@@ -14,9 +14,11 @@ class Tui(controller: Controller) extends Observer {
       case "exit" => -1// Beenden des Programmes
       case "e" => controller.empty()
         2
-      case "deactivate players" => controller.setState(0)
+      case "deactivate players" => println("deactivated playersystem")
+        controller.setState(0)
         5
-      case "activate players" => controller.setState(1)
+      case "activate players" => println("activated playersystem")
+        controller.setState(1)
         -5
       case _ =>
         input.toList.filter(c => c != ' ') match {
@@ -26,7 +28,8 @@ class Tui(controller: Controller) extends Observer {
             4
           case x1 :: y1 :: x2 :: y2 :: Nil => controller.move(x1, y1, x2, y2)
             1
-          case _ => 0 // continue
+          case _ => println("no valid command")
+            0 // continue
         }
     }
   }
