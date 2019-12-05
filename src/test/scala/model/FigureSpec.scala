@@ -7,6 +7,11 @@ class FigureSpec extends WordSpec with Matchers{
   "A Figure" should {
     "have a name" in {
       Figure("king").toString should be ("king")
+      Figure("pawn").toString should be ("pawn")
+      Figure("queen").toString should be ("queen")
+      Figure("bishop").toString should be ("bishop")
+      Figure("rook").toString should be ("rook")
+      Figure("horse").toString should be ("horse")
     }
     "have a color" in {
       Figure("king").col should be ('B')

@@ -10,6 +10,7 @@ class BoardSpec extends WordSpec with Matchers {
     }
     "have a string representation" in {
       Board(8).Matrix(0)(0) should be (null)
+      Board(8).toString should be ("empty Board")
       val test: Board = BoardCreator(8).create
       test.toString should be (test.toString)
     }
