@@ -35,6 +35,26 @@ class BoardSpec extends WordSpec with Matchers {
       t1.Matrix(0)(3).figure.caption should be ('P')
     }
   }
+  "Figures" when {
+    "black" should {
+      "not be moved when it's player one's turn" in {
+        BoardCreator(8).init(BoardCreator(8).create).moveBlack('A', '7', 'A', 'Z') should be (BoardCreator(8).init(BoardCreator(8).create))
+        BoardCreator(8).init(BoardCreator(8).create).moveBlack('A', '7', 'A', '6') should be (BoardCreator(8).init(BoardCreator(8).create))
+      }
+      "be moved when it's player two's turn" in {
+        BoardCreator(8).init(BoardCreator(8).create).moveBlack('A', '2', 'A', '3').Matrix(0)(1).figure.isInstanceOf[None] should be (true)
+      }
+    }
+    "white" should {
+      "not be moved when it's player two's turn" in {
+        BoardCreator(8).init(BoardCreator(8).create).moveWhite('A', '2', 'A', 'Z') should be (BoardCreator(8).init(BoardCreator(8).create))
+        BoardCreator(8).init(BoardCreator(8).create).moveWhite('A', '2', 'A', '3') should be (BoardCreator(8).init(BoardCreator(8).create))
+      }
+      "be moved when it's player one's turn" in {
+        BoardCreator(8).init(BoardCreator(8).create).moveWhite('A', '7', 'A', '6').Matrix(0)(6).figure.isInstanceOf[None] should be (true)
+      }
+    }
+  }
 }
 
 //"\n" + "   A  B  C  D  E  F  G  H\n" + ((("y " + ((Console.WHITE_B + " x " +
