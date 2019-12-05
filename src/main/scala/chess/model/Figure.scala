@@ -8,7 +8,7 @@ abstract class Figure(color: Char) {
   }
 
   def checkStart(board: Board, x1: Int, y1: Int): Boolean = {
-    board.size > x1 && board.size > y1 && x1 >= 0 && y1 >= 0 && board.Matrix(x1)(y1).figure.get == this
+    board.size > x1 && board.size > y1 && x1 >= 0 && y1 >= 0 && board.Matrix(x1)(y1).figure == this
   }
 
   def checkEnd(board: Board, x2: Int, y2: Int): Boolean = {
