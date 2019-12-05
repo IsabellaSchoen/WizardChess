@@ -4,7 +4,7 @@ import org.scalatest.{Matchers, WordSpec}
 import chess.model._
 
 class CellSpec extends WordSpec with Matchers{
-  var test : Cell = Cell(1, 7, Some(Figure("TEST")))
+  var test : Cell = Cell(1, 7, Figure("TEST"))
   "A Cell" should {
     "have a x value" in {
       Cell(0, 0).x should be (0)
@@ -33,10 +33,10 @@ class CellSpec extends WordSpec with Matchers{
     }
     "being set" should{
       "get a new Figure" in {
-        Cell(4,6).set("none").figure should be (None)
-        test.set("newCell").figure.get.toString.equals("none") should be (true)
-        test.set("pawn").figure.get.col.equals('B') should be (true)
-        test.set("pawn", 'W').figure.get.col.equals('W') should be (true)
+        Cell(4,6).set("none").figure.isInstanceOf[None] should be (true)
+        test.set("newCell").figure.toString.equals("none") should be (true)
+        test.set("pawn").figure.col.equals('B') should be (true)
+        test.set("pawn", 'W').figure.col.equals('W') should be (true)
       }
     }
   }

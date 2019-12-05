@@ -1,6 +1,6 @@
 package model
 
-import chess.model.{Board, BoardCreator, RulesAll}
+import chess.model.{Board, BoardCreator, None, Pawn, RulesAll}
 import org.scalatest.{Matchers, WordSpec}
 
 class RulesAllSpec extends WordSpec with Matchers {
@@ -8,11 +8,10 @@ class RulesAllSpec extends WordSpec with Matchers {
   "a black pawn" when {
     "not having moved yet" should {
       "be allowed to move one step south" in {
-        RulesAll.valid(test, 0, 1, 0, 2) should be(true)
+        RulesAll.valid(BoardCreator(8).init(BoardCreator(8).create), 0, 1, 0, 2) should be(true)
       }
       "be allowed to move two steps south" in {
-        RulesAll.valid(test, 0, 1, 0, 3) should be(true)
-        test.move('A', '2', 'A', '4')
+        test.move('A', '2', 'A', '4').Matrix(0)(1).figure.isInstanceOf[None] should be(true)
       }
     }
     "already having moved" should {
@@ -24,6 +23,7 @@ class RulesAllSpec extends WordSpec with Matchers {
       }
     }
   }
+
   "a black pawn" should {
     "not be allowed to move north" in {
       RulesAll.valid(test, 0, 3, 0, 2) should be(false)
@@ -35,34 +35,36 @@ class RulesAllSpec extends WordSpec with Matchers {
       RulesAll.valid(test, 1, 2, 0, 2) should be(false)
     }
   }
+
+  var test2: Board = BoardCreator(8).init(BoardCreator(8).create)
+
   "a white pawn" when {
     "not having moved yet" should {
       "be allowed to move one step north" in {
-        RulesAll.valid(test, 0, 6, 0, 5) should be(true)
+        RulesAll.valid(BoardCreator(8).init(BoardCreator(8).create), 0, 6, 0, 5) should be(true)
       }
       "be allowed to move two steps north" in {
-        RulesAll.valid(test, 0, 6, 0, 4) should be(true)
-        test.move('A', '7', 'A', '5')
+        test2.move('A', '7', 'A', '5').Matrix(0)(4).figure.isInstanceOf[None] should be(false)
       }
     }
     "already having moved" should {
       "be allowed to move one step north" in {
-        RulesAll.valid(test, 0, 4, 0, 3) should be(true)
+        RulesAll.valid(test2, 0, 4, 0, 3) should be(true)
       }
       "not be allowed to move two steps north" in {
-        RulesAll.valid(test, 0, 4, 0, 2) should be(false)
+        RulesAll.valid(test2, 0, 4, 0, 2) should be(false)
       }
     }
   }
   "a white pawn" should {
     "not be allowed to move south" in {
-      RulesAll.valid(test, 0, 4, 0, 5) should be(false)
+      RulesAll.valid(test2, 0, 4, 0, 5) should be(false)
     }
     "not be allowed to move east" in {
-      RulesAll.valid(test, 0, 4, 1, 4) should be(false)
+      RulesAll.valid(test2, 0, 4, 1, 4) should be(false)
     }
     "not be allowed to move west" in {
-      RulesAll.valid(test, 1, 6, 0, 6) should be(false)
+      RulesAll.valid(test2, 1, 6, 0, 6) should be(false)
     }
   }
 
@@ -123,7 +125,6 @@ class RulesAllSpec extends WordSpec with Matchers {
   }
 
 
-
   val horse: Board = BoardCreator(8).create
   horse.put('D', '5', 'H', 'B')
   "a horse" should {
@@ -148,7 +149,6 @@ class RulesAllSpec extends WordSpec with Matchers {
       RulesAll.valid(horse, 3, 4, 2, 4) should be(false)
       RulesAll.valid(horse, 3, 4, 5, 4) should be(false)
     }
-
 
 
     val bishop: Board = BoardCreator(8).create
@@ -178,7 +178,6 @@ class RulesAllSpec extends WordSpec with Matchers {
         RulesAll.valid(bishop, 3, 3, 4, 3) should be(false)
       }
     }
-
 
 
     val queen: Board = BoardCreator(8).create

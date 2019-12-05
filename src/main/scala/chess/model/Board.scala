@@ -55,8 +55,8 @@ case class Board(size: Int) {
     }
     val start: Cell = Matrix(xi(x1))(yi(y1))
     val end: Cell = Matrix(xi(x2))(yi(y2))
-    if (end.figure.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
-      Matrix(xi(x2))(yi(y2)) = end.set(start.figure.get.toString, start.figure.get.col, moved = true)
+    if (end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
+      Matrix(xi(x2))(yi(y2)) = end.mv(start.figure)
       Matrix(xi(x1))(yi(y1)) = start.set("none")
     } else
       println("Not allowed")
@@ -64,7 +64,7 @@ case class Board(size: Int) {
   }
 
   override def toString: String = {
-    if (Matrix(0)(0) == (null))
+    if (Matrix(0)(0) == null)
       return "empty Board"
     val numbers = "   A  B  C  D  E  F  G  H\n"
     val line1 = ("y " + ((Console.WHITE_B + " x " + Console.RESET + " x ") * (size / 2))) + "\n"
@@ -75,11 +75,11 @@ case class Board(size: Int) {
       col <- 0 until size
     } {
       box = box.replaceFirst("y", (col + 1).toString)
-      if (Matrix(col)(row).figure.isDefined)
-        if (Matrix(col)(row).figure.get.col.equals('W'))
-          box = box.replaceFirst("x ", "\u001b[34;1m" + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
+      if (!Matrix(col)(row).figure.isInstanceOf[None])
+        if (Matrix(col)(row).figure.col.equals('W'))
+          box = box.replaceFirst("x ", "\u001b[34;1m" + Matrix(col)(row).figure.caption.toString + " " + Console.RESET)
         else
-          box = box.replaceFirst("x ", "\u001b[31;1m" + Matrix(col)(row).figure.get.caption.toString + " " + Console.RESET)
+          box = box.replaceFirst("x ", "\u001b[31;1m" + Matrix(col)(row).figure.caption.toString + " " + Console.RESET)
       else
         box = box.replaceFirst("x", " ")
     }

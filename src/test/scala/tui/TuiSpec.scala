@@ -23,5 +23,14 @@ class TuiSpec extends WordSpec with Matchers {
       new Tui(new Controller(BoardCreator(8).create)).inputprocess("ppa1") should be (4)
       new Tui(new Controller(BoardCreator(8).create)).inputprocess("ppa1B") should be (3)
     }
+    "be able to deactivate the player system" in {
+      new Tui(new Controller(BoardCreator(8).create)).inputprocess("deactivate players") should be (5)
+    }
+    "be able to activate the player system" in {
+      new Tui(new Controller(BoardCreator(8).create)).inputprocess("activate players") should be (-5)
+    }
+    "be able to create an empty board" in {
+      new Tui(new Controller(BoardCreator(8).create)).inputprocess("e") should be (2)
+    }
   }
 }
