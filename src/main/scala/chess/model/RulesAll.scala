@@ -17,5 +17,8 @@ object RulesAll {
 
     start.figure.rule(board, x1, y1, x2, y2)
     }
+  def a() ={
+    println(22222)
+  }
 }
 
