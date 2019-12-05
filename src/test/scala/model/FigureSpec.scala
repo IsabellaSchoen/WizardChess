@@ -20,5 +20,9 @@ class FigureSpec extends WordSpec with Matchers{
       Figure("horse").caption should be ('H')
       Figure("none").caption should be (' ')
     }
+    "have a movement rule" in {
+      Figure("none").figRule(0, 0, 0, 0) should be (false)
+      Figure.translate('n') should be ("none")
+    }
   }
 }
