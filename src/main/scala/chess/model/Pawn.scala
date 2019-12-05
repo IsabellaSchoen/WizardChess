@@ -15,7 +15,6 @@ class Pawn(color: Char) extends Figure(color: Char) {
     }
 
     def twoStep: () => Boolean = {
-      println("twostep")
       color match {
         case 'B' => () => oneStep() || (xs == xe && ye == ys + 2)
         case 'W' => () => oneStep() || (xs == xe && ye == ys - 2)
@@ -23,7 +22,6 @@ class Pawn(color: Char) extends Figure(color: Char) {
     }
 
     def oneStep: () => Boolean = {
-      println("onestep")
       color match {
         case 'B' => () => xs == xe && ye == ys + 1
         case 'W' => () => xs == xe && ye == ys - 1
