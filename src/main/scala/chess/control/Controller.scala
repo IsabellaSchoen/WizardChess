@@ -47,6 +47,15 @@ class Controller(var board: Board) extends Observable {
     notifyObservers()
   }
 
+  def back(x1: Char, y1: Char, x2: Char, y2: Char) = {
+    board = board.back(x1, y1, x2, y2)
+    state match {
+      case 1 => state = 2
+      case 2 => state = 1
+    }
+    notifyObservers()
+  }
+
   def create(): Unit = {
     board = BoardCreator(8).init(BoardCreator(8).create)
     notifyObservers()
