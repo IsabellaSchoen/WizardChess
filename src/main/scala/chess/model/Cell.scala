@@ -11,7 +11,7 @@ case class Cell(x: Int, y: Int, figure: Figure = Figure("none")) {
       copy(figure = Figure("none"))
   }
 
-  def mv(fig: Figure): Cell = {
+  def mv(fig: Figure): Cell = { //kopiert Figur auf ein anderes Feld
     copy(figure = fig)
   }
 

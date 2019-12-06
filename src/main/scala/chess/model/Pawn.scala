@@ -4,14 +4,14 @@ class Pawn(color: Char) extends Figure(color: Char) {
   override def figRule(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = PawnState.handle(x1, y1, x2, y2)
 
   object PawnState {
-    var state: () => Boolean = twoStep
+    var state: () => Boolean = twoStep //Parameterlose Funktion, aber Rückgabewert ist boolea
     var xs, ys, xe, ye = -1
     def handle(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
       xs = x1; ys = y1; xe = x2; ye = y2
       val backup = state
-      if (backup())
-        state = oneStep
-      backup ()
+      if (backup()) //() -> führe diese Funktion aus - Abfrage, darf er laufen
+        state = oneStep //wenn er gelaufen ist, darf er nur noch oneStep, egal ob zwei oder einen Schritt
+      backup() //Rückgabewert ist unser backup, da es geändert wird zu oneStep, wenn er gelaufen ist
     }
 
     def twoStep: () => Boolean = {

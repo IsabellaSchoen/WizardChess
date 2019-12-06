@@ -15,10 +15,12 @@ class Controller(var board: Board) extends Observable {
     notifyObservers()
   }
 
-  def gridToString: String = board.toString
+  def boardToString: String = board.toString
 
-  def setState(state: Int): Unit =
+  def setState(state: Int): Unit = {
     this.state = state
+    notifyObservers()
+  }
 
   def move(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     state match {
