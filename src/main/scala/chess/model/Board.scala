@@ -63,6 +63,18 @@ case class Board(size: Int) {
     this
   }
 
+  def back(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
+    val start: Cell = Matrix(xi(x1))(yi(y1))
+    val end: Cell = Matrix(xi(x2))(yi(y2))
+    Matrix(xi(x1))(yi(y1)) = start.mv(end.figure)
+    Matrix(xi(x2))(yi(y2)) = end.set("none")
+    Matrix(xi(x1))(yi(y1)).figure match {
+      case pawn: Pawn => pawn.PawnState.atStart(yi(y1))
+      case _ =>
+    }
+    this
+  }
+
   override def toString: String = {
     if (Matrix(0)(0) == null)
       return "empty Board"

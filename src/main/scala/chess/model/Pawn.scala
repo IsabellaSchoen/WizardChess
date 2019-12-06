@@ -6,6 +6,12 @@ class Pawn(color: Char) extends Figure(color: Char) {
   object PawnState {
     var state: () => Boolean = twoStep
     var xs, ys, xe, ye = -1
+
+    def atStart(y: Int): Unit = {
+      if ((color == 'B' && y == 1) || (color == 'W' && y == 6)) //Zielposition = Startposition?
+        state = twoStep
+    }
+
     def handle(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
       xs = x1; ys = y1; xe = x2; ye = y2
       val backup = state
