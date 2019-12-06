@@ -1,10 +1,11 @@
 package chess.control
 
 import chess.model._
-import chess.util.Observable
+import chess.util.{Observable, UndoManager}
 
 class Controller(var board: Board) extends Observable {
-  private var state: Int = 1
+  var state: Int = 1
+  private val undoManager = new UndoManager
   def put(x: Char, y: Char, f: Char, c: Char): Unit = {
     board = board.put(x, y, f, c)
     notifyObservers()
@@ -23,15 +24,16 @@ class Controller(var board: Board) extends Observable {
   }
 
   def move(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
-    state match {
-      case 0 => moveAll(x1, y1, x2, y2)
-      case 1 => moveOne(x1, y1, x2, y2)
-      case 2 => moveTwo(x1, y1, x2, y2)
-    }
+    undoManager.doStep(new MoveCommand(this, x1, y1, x2, y2))
   }
 
   def moveAll(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     board = board.move(x1, y1, x2, y2)
+    notifyObservers()
+  }
+
+  def undo = {
+    undoManager.undoStep
     notifyObservers()
   }
 
