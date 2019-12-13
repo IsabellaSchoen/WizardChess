@@ -20,7 +20,6 @@ class Controller(var board: Board) extends Observable {
 
   def setState(state: Int): Unit = {
     this.state = state
-    notifyObservers()
   }
 
   def move(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
@@ -34,6 +33,11 @@ class Controller(var board: Board) extends Observable {
 
   def undo = {
     undoManager.undoStep
+    notifyObservers()
+  }
+
+  def redo: Unit = {
+    undoManager.redoStep
     notifyObservers()
   }
 
