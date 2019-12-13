@@ -7,19 +7,13 @@ scalaVersion := "2.13.1"
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.8"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8"
 
-
+//// Add dependency on ScalaFX library
 libraryDependencies += "org.scalafx" %% "scalafx" % "12.0.2-R18"
 
-/*
-libraryDependencies += "org.scalafx" %% "scalafx" % "12.0.2-R18"
-resolvers += Resolver.sonatypeRepo("snapshots")
+//// Add dependency on JavaFX library
+libraryDependencies += "org.openjfx" % "javafx" % "12.0.2" pomOnly()
 
-scalacOptions ++= Seq("-unchecked", "-deprecation", "-Xcheckinit", "-encoding", "utf8", "-feature")
-
-// Fork a new JVM for 'run' and 'test:run', to avoid JavaFX double initialization problems
-fork := true
-
-// Determine OS version of JavaFX binaries
+//add a OS-specific dependency for the JavaFX binaries
 lazy val osName = System.getProperty("os.name") match {
   case n if n.startsWith("Linux") => "linux"
   case n if n.startsWith("Mac") => "mac"
@@ -29,6 +23,6 @@ lazy val osName = System.getProperty("os.name") match {
 
 // Add JavaFX dependencies
 lazy val javaFXModules = Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
-libraryDependencies ++= javaFXModules.map(m =>
-  "org.openjfx" % s"javafx-$m" % "12.0.2" classifier osName
-) */
+libraryDependencies ++= javaFXModules.map( m=>
+  "org.openjfx" % s"javafx-$m" % "11" classifier osName
+)
