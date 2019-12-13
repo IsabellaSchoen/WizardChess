@@ -10,45 +10,22 @@ import scalafx.scene.paint.Color._
 import scalafx.scene.paint.{Stops, LinearGradient}
 import scalafx.scene.text.Text
 
-object ScalaFXHelloWorld extends JFXApp {
+
+
+object ScalaGui extends JFXApp {
 
   stage = new PrimaryStage {
     title = "WizardChess - This is your Game!"
-    scene = new Scene {
-      fill = White
-      content = new HBox {
-        padding = Insets(20)
-        children = Seq(
-          new Text {
-            text = "Let's go"
-            style = "-fx-font-size: 48pt"
-          }
-        )
-      }
-    }
+    scene = new Scene(400, 400)
+
+
   }
 }
 
 
 
-import java.beans.EventHandler
-
-import javafx.event
-import javafx.scene.layout.GridPane
-import scalafx.application.JFXApp
-import scalafx.application.JFXApp.PrimaryStage
-import scalafx.scene.{Node, Scene}
-import scalafx.scene.control._
-import scalafx.scene.input._
-import scalafx.scene.image.ImageView
-import scalafx.scene.layout.{BorderPane, VBox}
-import scalafx.geometry.Insets
-import scalafx.scene.control.Alert.AlertType
-
-import scala.swing.{Action, Orientation}
-import scala.swing.event.ActionEvent
-
-object GUI extends JFXApp {
+//ISY
+/*object GUI extends JFXApp {
   stage = new PrimaryStage {
     title = "MenuBar Test"
     scene = new Scene(300, 300) {
@@ -74,7 +51,7 @@ object GUI extends JFXApp {
       root = rootPane
     }
   }
-}
+}*/
 
 
 //val button = new Button("Click Me!")
