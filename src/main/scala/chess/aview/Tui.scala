@@ -1,4 +1,4 @@
-package chess.tui
+package chess.aview
 
 import chess.control.Controller
 import chess.util.Observer
