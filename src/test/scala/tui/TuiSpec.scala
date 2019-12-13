@@ -1,8 +1,8 @@
 package tui
 
+import chess.aview.Tui
 import chess.control.Controller
 import chess.model.BoardCreator
-import chess.tui.Tui
 import org.scalatest.{Matchers, WordSpec}
 
 class TuiSpec extends WordSpec with Matchers {

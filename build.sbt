@@ -8,7 +8,7 @@ libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.8"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8"
 
 
-// Add dependency on ScalaFX library
+
 libraryDependencies += "org.scalafx" %% "scalafx" % "12.0.2-R18"
 resolvers += Resolver.sonatypeRepo("snapshots")
 
