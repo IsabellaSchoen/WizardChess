@@ -1,8 +1,10 @@
 package chess.aview.gui
 
+import java.awt.Panel
+
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.geometry.Insets
+import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.{Node, Scene}
 import scalafx.scene.control._
 import scalafx.scene.layout.{BorderPane, HBox, VBox}
@@ -12,7 +14,8 @@ import scalafx.scene.text.Text
 object GUI extends JFXApp {
   stage = new PrimaryStage {
     title = "WizardChess"
-
+    width = 1920
+    height = 1080
     scene = new Scene {
 
 
@@ -34,24 +37,38 @@ object GUI extends JFXApp {
         //top = menuBar
         //left = new Button("djkfhsdajklhjsdfh" )
         //right = new Button("djkfhsdajklhjsdfh" )
-        center = new Text {
-          text = "Welcome to WizardChess - this is your game!"
-          style = "-fx-font-size: 48pt"
-          fill = Black
+        top = new BorderPane {
+          prefHeight = 200
+          center = new Text {
+            text = "Welcome to WizardChess - this is your game!"
+            style = "-fx-font-size: 48pt"
+            fill = Black
+          }
+
         }
-        bottom = new Button {
+
+        val buttonGo = new Button {
           text = "Let's go"
+          style = "-fx-font-size: 28px"
+          prefHeight = 100
+          prefWidth = 200
           fill = GreenYellow
           onAction = { _ => println("changing to the next window to choose the game option") }
         }
 
-        top = new Button {
+        val buttonRules = new Button() {
           text = "Rules"
+          style = "-fx-font-size: 28px"
+          prefHeight = 100
+          prefWidth = 200
+        }
+
+        center = new VBox {
+          alignment = Pos.Center
+          children = List(buttonGo, buttonRules)
         }
       }
       root = rootPane
     }
   }
 }
-
-
