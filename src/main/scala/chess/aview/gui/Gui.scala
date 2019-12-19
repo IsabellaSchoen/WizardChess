@@ -22,7 +22,7 @@ object Gui extends JFXApp {
     height = 1080
     scene = new Scene {
 
-      /*val menuBar: MenuBar = new MenuBar { //edit
+      val menuBar: MenuBar = new MenuBar { //edit
         useSystemMenuBar = true
         minWidth = 100
         val menuList: Menu = new Menu("Edit") {
@@ -31,19 +31,15 @@ object Gui extends JFXApp {
           items.add(new MenuItem("Save"))
         }
         menus.add(menuList)
-      }*/
+      }
 
-      val rootPane: StackPane = new StackPane { //layout - innen drinnen aufgesplittet in top center left right and bottom
-
-        //top = menuBar
-        //left = new Button("djkfhsdajklhjsdfh" )
-        //right = new Button("djkfhsdajklhjsdfh" )
+      val rootPane: StackPane = new StackPane {
 
         children = new BorderPane {
           var title1: Node = new Text {
             text = "Welcome to WizardChess - this is your game!"
             style = "-fx-font-size: 48pt"
-            fill = Black
+            fill = FireBrick
           }
 
           top = new BorderPane {
@@ -58,6 +54,7 @@ object Gui extends JFXApp {
             prefWidth = 300
             onAction = { _ => {
               println("changing to the next window to choose the game option")
+              play()
             }
             }
             background = null
@@ -79,6 +76,12 @@ object Gui extends JFXApp {
 
       }
       root = rootPane
+    }
+
+  }
+  def play(): Unit = {
+    stage.scene = new Scene {
+
     }
   }
 }
