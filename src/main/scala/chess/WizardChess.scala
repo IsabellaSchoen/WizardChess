@@ -1,6 +1,7 @@
 package chess
 
 import chess.aview.Tui
+import chess.aview.gui.Gui
 import model._
 
 import scala.io.StdIn.readLine
