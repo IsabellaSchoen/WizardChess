@@ -1,0 +1,29 @@
+Welcome to WizardChess!
+
+You don't know the rules? That's no problem, here are the basics:
+
+Colour:
+Depending on your colour, white is allowed to start.
+
+Figures:
+- pawn: The pawn is allowed to go only straight forward! You can choose, at the beginning you can go two steps and then only one step.
+	Or you only go one step forward.
+- rook: The rook can only go straigt forward or to the left or right. How many steps depends on you ;)
+- horse: The horse is a bit more difficult. You have think three steps, here all the options:
+		1) one straight and two left/right
+		2) two straigt and one left/right
+- bishop: The bishop is more easy. Here you have to think now in a diagonal way. Many steps as you want.
+- queen: The queen is the most powerful figure in the whole game and actually the funniest as well. Her rule is the mixture out of
+	 of the rook and bishop. If you don't remeber, check out their rules. Here as well: many steps as you want.
+- king: When you think about the king the first thing that comes to your mind, he is powerful....wrong - sorry.
+	He is not at all. He is the most sensitive figure and you have to protect him the whole game! If your king gets hit, you lose.
+	You only can go to the right, left, forward and back - only one step.
+
+
+Oh aaaaand..... with every figure (except the pawns) you always can go back ;)
+
+
+
+Enjoy your game :D
+
+

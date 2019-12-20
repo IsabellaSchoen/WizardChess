@@ -1,15 +1,15 @@
 package chess.aview.gui
 
+import scalafx.Includes.when
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.control._
 import scalafx.scene.image.ImageView
-import scalafx.scene.layout.{BorderPane, GridPane, StackPane, VBox}
+import scalafx.scene.layout.{BorderPane, StackPane, VBox}
 import scalafx.scene.paint.Color._
 import scalafx.scene.text.Text
 import scalafx.scene.{Node, Scene}
-import scalafx.Includes.when
 
 object Gui extends JFXApp {
 
@@ -35,14 +35,15 @@ object Gui extends JFXApp {
         val buttonGo = new Button {
           text = "Let's go"
           val stdStyle = "-fx-font-size: 40px;" +
-            "-fx-background-radius: 5em;" + //alone: very small; with all: rand
-            "-fx-min-width: 30px" +
-            "-fx-min-height: 30px" +
-            "-fx-max-width: 500px;" +
-            "-fx-max-height: 100px" +
+            "-fx-background-radius: 5em;" +
+            "-fx-min-width: 30px;" +
+            "-fx-min-height: 30px;" +
+            "-fx-max-width: 180px;" +
+            "-fx-max-height: 100px;" +
             "-fx-padding:5;" +
-            "-fx-background-color: transparent;"
-          style <== when(hover) choose stdStyle + "-fx-border-color: black;" otherwise stdStyle
+            "-fx-background-color: transparent;" +
+            "-fx-text-fill: white;"
+          style <== when(hover) choose stdStyle + "-fx-border-color: white;" otherwise stdStyle
 
           prefHeight = 80
           prefWidth = 200
@@ -57,14 +58,15 @@ object Gui extends JFXApp {
         val buttonRules = new Button {
           text = "Rules"
           val stdStyle = "-fx-font-size: 35px;" +
-            "-fx-background-radius: 5em;" + //alone: very small; with all: rand
-            "-fx-min-width: 30px" +
-            "-fx-min-height: 30px" +
-            "-fx-max-width: 500px;" +
-            "-fx-max-height: 100px" +
+            "-fx-background-radius: 5em;" +
+            "-fx-min-width: 30px;" +
+            "-fx-min-height: 60px;" +
+            "-fx-max-width: 150px;" +
+            "-fx-max-height: 100px;" +
             "-fx-padding:5;" +
-            "-fx-background-color: transparent;"
-          style <== when(hover) choose stdStyle + "-fx-border-color: black;" otherwise stdStyle
+            "-fx-background-color: transparent;" +
+            "-fx-text-fill: white;"
+          style <== when(hover) choose stdStyle + "-fx-border-color: white;" otherwise stdStyle
 
           prefHeight = 50
           prefWidth = 150
@@ -100,13 +102,11 @@ object Gui extends JFXApp {
             children = List(wizard, normal)
           }
         }
-      }*/
-
-
+      }
         bottom = new VBox {
           alignment = Pos.Center
           children = List(white, black)
-        }
+        }*/
 
 
       }
@@ -120,66 +120,52 @@ object Gui extends JFXApp {
     def play(): Unit = {
       stage.scene = new Scene {
 
-        val borderPane = new BorderPane {
-          var title1: Node = new Text {
-            text = "WizardChess"
-            style = "-fx-font-size: 48pt"
-            fill = FireBrick
-          }
-          val grid = new GridPane() {
-            val buttonRules = new Button() {
-              text = "Rules"
-              style = "-fx-font-size: 28px"
-              prefHeight = 100
-              prefWidth = 300
-              background = null
-            }
-          }
-        }
-
-        /*val stackPane: StackPane = new StackPane
-      val background = new ImageView("file:chessbg.png")
-      stackPane.getChildren.addAll(background, borderPane)
-      root = stackPane*/
+        val stackPane: StackPane = new StackPane
+        val background = new ImageView("file:chessbg.png")
+        stackPane.getChildren.addAll(background)
+        root = stackPane
       }
     }
 
 
     def rule() = {
       stage.scene = new Scene {
-        val borderPane = new BorderPane {
-          val grid = new GridPane() {
-            var buttonBack = new Button() {
-              text = "Go Back"
-              prefHeight = 80
-              prefWidth = 200
+        val stackPane: StackPane = new StackPane
+            val button = new Button("Go Back") {
+              style = "-fx-font-size: 28px"
+              prefHeight = 100
+              prefWidth = 300
+              background = null
               onAction = { _ => {
-              println("chess's rules")
-              stage
+                println("Going back")
+                stage.scene
+              }
+              }
             }
+        stackPane.getChildren.addAll(button)
+        root = stackPane
             }
+    }
+
+
+
+
+      /*def createMenuBar = {
+
+        val menuBar: MenuBar = new MenuBar {
+          useSystemMenuBar = true
+          minWidth = 100
+          val menuList: Menu = new Menu("Edit") {
+            items.add(new MenuItem("Exit"))
+            items.add(new MenuItem("Redo"))
+            items.add(new MenuItem("Save"))
           }
+          menus.add(menuList)
         }
-      }
-    }
-    }
-
-
-    def createMenuBar = {
-
-      val menuBar: MenuBar = new MenuBar {
-        useSystemMenuBar = true
-        minWidth = 100
-        val menuList: Menu = new Menu("Edit") {
-          items.add(new MenuItem("Exit"))
-          items.add(new MenuItem("Redo"))
-          items.add(new MenuItem("Save"))
-        }
-        menus.add(menuList)
-      }
+      }*/
     }
   }
-}
+
 
 
 // for the chess game later
