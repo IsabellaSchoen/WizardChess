@@ -1,5 +1,7 @@
 package chess.aview.gui
 
+import chess.control.Controller
+import chess.util.Observer
 import scalafx.Includes.when
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -14,7 +16,9 @@ import scalafx.scene.{Node, Scene}
 
 import scala.io.Source
 
-object Gui extends JFXApp {
+class Gui(controller: Controller) extends JFXApp with Observer {
+
+  controller.add(this)
 
   val HEIGHT = 720
   val WIDTH = 1400
@@ -237,6 +241,8 @@ object Gui extends JFXApp {
       }
     }*/
   }
+
+  override def update(): Unit = ???
 }
 
 
