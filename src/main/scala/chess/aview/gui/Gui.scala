@@ -8,16 +8,27 @@ import scalafx.scene.control._
 import scalafx.scene.image.ImageView
 import scalafx.scene.layout.{BorderPane, StackPane, VBox}
 import scalafx.scene.paint.Color._
+import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
 import scalafx.scene.{Node, Scene}
 
+import scala.io.Source
+
 object Gui extends JFXApp {
+
+  val HEIGHT = 720
+  val WIDTH = 1400
 
   stage = new PrimaryStage {
     title = "WizardChess"
-    width = 1400
-    height = 720
-    scene = new Scene {
+    width = WIDTH
+    height = HEIGHT
+  }
+
+  initialize()
+
+  def initialize(): Unit = {
+    stage.scene = new Scene {
 
 
       val borderPane = new BorderPane {
@@ -118,63 +129,75 @@ object Gui extends JFXApp {
     }
 
     def play(): Unit = {
-      stage.scene = new Scene {
+      stage.setFullScreen(true)
 
+      stage.scene = new Scene {
         val stackPane: StackPane = new StackPane
-        val background = new ImageView("file:chessbg.png")
+        val background = new ImageView("file:schachbrett.jpg")
+        background.setFitHeight(stage.getHeight)
+        background.setFitWidth(stage.getHeight)
         stackPane.getChildren.addAll(background)
         root = stackPane
       }
+      stage.setFullScreen(true)
     }
 
 
     def rule() = {
       stage.scene = new Scene {
         val stackPane: StackPane = new StackPane
-        val button = new Button("Go Back") {
-          val stdStyle = "-fx-font-size: 35px;" +
-            "-fx-background-radius: 5em;" +
-            "-fx-min-width: 30px;" +
-            "-fx-min-height: 30px;" +
-            "-fx-max-width: 150px;" +
-            "-fx-max-height: 80px;" +
-            "-fx-padding:5;" +
-            "-fx-background-color: transparent;" +
-            "-fx-text-fill: black;"
-          style <== when(hover) choose stdStyle + "-fx-border-color: black;" otherwise stdStyle
-              prefHeight = 100
-              prefWidth = 300
-              background = null
-              onAction = { _ => {
-                println("Going back")
-                stage.scene
-              }
-              }
+        val tmpPane = new BorderPane {
+          top = new Button("Go Back") {
+            val stdStyle = "-fx-font-size: 25px;" +
+              "-fx-background-radius: 5em;" +
+              "-fx-min-width: 30px;" +
+              "-fx-min-height: 30px;" +
+              "-fx-max-width: 120px;" +
+              "-fx-max-height: 60px;" +
+              "-fx-padding:5;" +
+              "-fx-background-color: transparent;" +
+              "-fx-text-fill: black;"
+            style <== when(hover) choose stdStyle + "-fx-border-color: black;" otherwise stdStyle
+            prefHeight = 100
+            prefWidth = 300
+            background = null
+            onAction = { _ => {
+              println("Going back")
+              initialize()
             }
-        stackPane.getChildren.addAll(button)
-        root = stackPane
             }
-    }
-
-
-
-
-      /*def createMenuBar = {
-
-        val menuBar: MenuBar = new MenuBar {
-          useSystemMenuBar = true
-          minWidth = 100
-          val menuList: Menu = new Menu("Edit") {
-            items.add(new MenuItem("Exit"))
-            items.add(new MenuItem("Redo"))
-            items.add(new MenuItem("Save"))
           }
-          menus.add(menuList)
         }
-      }*/
+        stackPane.getChildren.addAll(tmpPane, new Rectangle {
+          width = 950
+          height = 800
+          fill = FireBrick
+        },
+          new Text(Source.fromFile("Rules.txt").mkString) {
+            style = "-fx-font-size: 15px"
+          })
+        root = stackPane
+      }
     }
-  }
 
+
+
+
+    /*def createMenuBar = {
+
+      val menuBar: MenuBar = new MenuBar {
+        useSystemMenuBar = true
+        minWidth = 100
+        val menuList: Menu = new Menu("Edit") {
+          items.add(new MenuItem("Exit"))
+          items.add(new MenuItem("Redo"))
+          items.add(new MenuItem("Save"))
+        }
+        menus.add(menuList)
+      }
+    }*/
+  }
+}
 
 
 // for the chess game later
