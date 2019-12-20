@@ -11,6 +11,8 @@ import chess.control._
 object WizardChess {
   var controller: Controller = new Controller(BoardCreator(8).init(BoardCreator(8).create))
   val tui = new Tui(controller)
+  val gui = new Gui(controller)
+  gui.main(Array())
   controller.notifyObservers()
 
   def main(args:Array[String]): Unit = {
