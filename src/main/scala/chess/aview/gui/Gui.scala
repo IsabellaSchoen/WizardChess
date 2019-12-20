@@ -131,8 +131,17 @@ object Gui extends JFXApp {
     def rule() = {
       stage.scene = new Scene {
         val stackPane: StackPane = new StackPane
-            val button = new Button("Go Back") {
-              style = "-fx-font-size: 28px"
+        val button = new Button("Go Back") {
+          val stdStyle = "-fx-font-size: 35px;" +
+            "-fx-background-radius: 5em;" +
+            "-fx-min-width: 30px;" +
+            "-fx-min-height: 30px;" +
+            "-fx-max-width: 150px;" +
+            "-fx-max-height: 80px;" +
+            "-fx-padding:5;" +
+            "-fx-background-color: transparent;" +
+            "-fx-text-fill: black;"
+          style <== when(hover) choose stdStyle + "-fx-border-color: black;" otherwise stdStyle
               prefHeight = 100
               prefWidth = 300
               background = null
