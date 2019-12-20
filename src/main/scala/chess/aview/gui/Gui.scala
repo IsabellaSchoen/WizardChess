@@ -6,7 +6,7 @@ import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.control._
 import scalafx.scene.image.ImageView
-import scalafx.scene.layout.{BorderPane, StackPane, VBox}
+import scalafx.scene.layout.{BorderPane, GridPane, StackPane, VBox}
 import scalafx.scene.paint.Color._
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
@@ -136,9 +136,43 @@ object Gui extends JFXApp {
         val background = new ImageView("file:schachbrett.jpg")
         background.setFitHeight(stage.getHeight)
         background.setFitWidth(stage.getHeight)
-        stackPane.getChildren.addAll(background)
+
+        val figures = new GridPane {
+          alignment = Pos.Center
+        }
+
+        /*for (i <- 0 to 7) {
+          for (j <- 0 to 7) {
+            figures.add(new ImageView() {
+              prefWidth = (stage.getHeight - 100) / 8
+              prefHeight = (stage.getHeight - 100) / 8
+            }, i, j)
+          }
+        }*/
+
+        val grid = new GridPane
+
+        grid.setAlignment(Pos.Center)
+
+        for (i <- 0 to 7) {
+          for (j <- 0 to 7) {
+            grid.add(new Button {
+              style = "-fx-background-color: transparent"
+              onAction = { _ => print(i + " " + j + "\n") }
+              prefWidth = (stage.getHeight - 100) / 8
+              prefHeight = (stage.getHeight - 100) / 8
+            }, i, j)
+          }
+        }
+
+        val tmp: BorderPane = new BorderPane {
+          center = grid
+        }
+
+        stackPane.getChildren.addAll(background, tmp)
         root = stackPane
       }
+
       stage.setFullScreen(true)
     }
 
@@ -168,18 +202,24 @@ object Gui extends JFXApp {
             }
           }
         }
-        stackPane.getChildren.addAll(tmpPane, new Rectangle {
+
+        val rect = new Rectangle {
           width = 950
           height = 800
           fill = FireBrick
-        },
+          opacity = 0.5
+        }
+
+        rect.setArcHeight(100)
+        rect.setArcWidth(100)
+
+        stackPane.getChildren.addAll(tmpPane, rect,
           new Text(Source.fromFile("Rules.txt").mkString) {
             style = "-fx-font-size: 15px"
           })
         root = stackPane
       }
     }
-
 
 
 
