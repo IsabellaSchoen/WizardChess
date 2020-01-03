@@ -7,8 +7,8 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.control._
-import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{Background, BorderPane, GridPane, StackPane, VBox}
+import scalafx.scene.image.ImageView
+import scalafx.scene.layout.{BorderPane, GridPane, StackPane, VBox}
 import scalafx.scene.paint.Color._
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
