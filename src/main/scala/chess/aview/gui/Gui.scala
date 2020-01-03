@@ -165,13 +165,13 @@ class Gui(controller: Controller) extends JFXApp with Observer {
             grid.add(new Button {
               style = "-fx-background-color: transparent;"
               onAction = { _ => print(i + " " + j + "\n") }
-              prefWidth = (stage.getHeight - 150) / 8
-              prefHeight = (stage.getHeight - 150) / 8
+              prefWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
+              prefHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
             }, i, j)
 
             fig.add(new ImageView("file:pawn.png") {
-              fitWidth = (stage.getHeight - 150) / 8
-              fitHeight = (stage.getHeight - 150) / 8
+              fitWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
+              fitHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
             }, i, j)
           }
         }
