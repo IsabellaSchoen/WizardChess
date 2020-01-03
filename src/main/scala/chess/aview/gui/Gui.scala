@@ -169,7 +169,7 @@ class Gui(controller: Controller) extends JFXApp with Observer {
               prefHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
             }, i, j)
 
-            fig.add(new ImageView("file:pawn.png") {
+            fig.add(new ImageView("file:" + controller.getFig(i, j) + ".png") {
               fitWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
               fitHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
             }, i, j)
