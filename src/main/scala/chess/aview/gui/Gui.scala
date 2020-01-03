@@ -7,8 +7,8 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Pos
 import scalafx.scene.control._
-import scalafx.scene.image.ImageView
-import scalafx.scene.layout.{BorderPane, GridPane, StackPane, VBox}
+import scalafx.scene.image.{Image, ImageView}
+import scalafx.scene.layout.{Background, BorderPane, GridPane, StackPane, VBox}
 import scalafx.scene.paint.Color._
 import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
@@ -155,25 +155,36 @@ class Gui(controller: Controller) extends JFXApp with Observer {
         }*/
 
         val grid = new GridPane
+        val fig = new GridPane
 
         grid.setAlignment(Pos.Center)
+        fig.setAlignment(Pos.Center)
 
         for (i <- 0 to 7) {
           for (j <- 0 to 7) {
             grid.add(new Button {
-              style = "-fx-background-color: transparent"
+              style = "-fx-background-color: transparent;"
               onAction = { _ => print(i + " " + j + "\n") }
-              prefWidth = (stage.getHeight - 100) / 8
-              prefHeight = (stage.getHeight - 100) / 8
+              prefWidth = (stage.getHeight - 150) / 8
+              prefHeight = (stage.getHeight - 150) / 8
+            }, i, j)
+
+            fig.add(new ImageView("file:pawn.png") {
+              fitWidth = (stage.getHeight - 150) / 8
+              fitHeight = (stage.getHeight - 150) / 8
             }, i, j)
           }
+        }
+
+        val tmpfig: BorderPane = new BorderPane {
+          center = fig
         }
 
         val tmp: BorderPane = new BorderPane {
           center = grid
         }
 
-        stackPane.getChildren.addAll(background, tmp)
+        stackPane.getChildren.addAll(background, tmpfig, tmp)
         root = stackPane
       }
 
