@@ -56,6 +56,10 @@ class Controller(var board: Board) extends Observable {
     board.Matrix(i)(j).figure.toString match {
       case "pawn" => "pawn"
       case "king" => "king_black"
+      case "queen" => "queen_black"
+      case "rook" => "rook_black"
+      case "horse" => "horse_black"
+      case "bishop" => "bishop_black"
       case _ => ""
     }
   }
