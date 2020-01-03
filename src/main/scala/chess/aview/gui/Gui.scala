@@ -23,8 +23,6 @@ class Gui(controller: Controller) extends JFXApp with Observer {
   var x: Int = -1
   var y: Int = -1
 
-  var fig = new GridPane
-
   val HEIGHT = 720
   val WIDTH = 1400
 
@@ -161,6 +159,7 @@ class Gui(controller: Controller) extends JFXApp with Observer {
       }*/
 
       val grid = new GridPane
+      var fig = new GridPane
 
       grid.setAlignment(Pos.Center)
       fig.setAlignment(Pos.Center)
