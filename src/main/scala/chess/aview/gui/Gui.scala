@@ -164,7 +164,7 @@ class Gui(controller: Controller) extends JFXApp with Observer {
           for (j <- 0 to 7) {
             grid.add(new Button {
               style = "-fx-background-color: transparent;"
-              onAction = { _ => print(i + " " + j + "\n") }
+              onAction = { _ => click(i, j) }
               prefWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
               prefHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
             }, i, j)
@@ -189,6 +189,10 @@ class Gui(controller: Controller) extends JFXApp with Observer {
       }
 
       stage.setFullScreen(true)
+    }
+
+    def click(i: Integer, j: Integer): Unit = {
+      print(i + " " + j + "\n")
     }
 
 

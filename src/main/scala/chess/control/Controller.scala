@@ -84,7 +84,6 @@ class Controller(var board: Board) extends Observable {
       case 'B' => tmp += "black"
       case 'W' => tmp += "white"
     }
-    println(tmp)
     tmp
   }
 
