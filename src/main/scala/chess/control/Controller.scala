@@ -60,6 +60,7 @@ class Controller(var board: Board) extends Observable {
       case "rook" => "rook"
       case "horse" => "horse"
       case "bishop" => "bishop"
+      case "pawn" => "pawn_white"
       case _ => ""
     }
     tmp += "_"
