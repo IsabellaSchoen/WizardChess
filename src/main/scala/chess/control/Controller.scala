@@ -70,6 +70,7 @@ class Controller(var board: Board) extends Observable {
   def getFig(i: Int, j: Int): String = {
     board.Matrix(i)(j).figure.toString match {
       case "pawn" => "pawn"
+      case "king" => "king_black"
       case _ => ""
     }
   }
