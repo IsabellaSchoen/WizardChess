@@ -3,8 +3,6 @@
 
 package chess.model
 
-import chess.model.RulesAll
-
 case class Board(size: Int) {
   var state: Int = 0
   def put(x: Char, y: Char, f: Char, c: Char): Board = {
