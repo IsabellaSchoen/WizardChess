@@ -42,12 +42,18 @@ class Controller(var board: Board) extends Observable {
     notifyObservers()
   }
 
+  /**
+    * der erste Player hat die weisse Farbe
+    */
   def moveOne(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     board = board.moveWhite(x1, y1, x2, y2)
     state = board.state
     notifyObservers()
   }
 
+  /**
+    * der zweite Player hat die schwarze Farbe
+    */
   def moveTwo(x1: Char, y1: Char, x2: Char, y2: Char) : Unit = {
     board = board.moveBlack(x1, y1, x2, y2)
     state = board.state
