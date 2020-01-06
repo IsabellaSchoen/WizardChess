@@ -137,7 +137,7 @@ class Gui(controller: Controller) extends JFXApp with Observer {
   }
 
   def play(): Unit = {
-    stage.setFullScreen(true)
+    //stage.setFullScreen(true)
 
     stage.scene = new Scene {
       val stackPane: StackPane = new StackPane

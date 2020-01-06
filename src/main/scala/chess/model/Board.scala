@@ -5,25 +5,34 @@ package chess.model
 
 case class Board(size: Int) {
   var state: Int = 0
+
   def put(x: Char, y: Char, f: Char, c: Char): Board = {
     if (xi(x) >= 0 && xi(x) < size && yi(y) >= 0 && yi(y) < size && (c.equals('B') || c.equals('W')))
       Matrix(xi(x))(yi(y)) = Matrix(xi(x))(yi(y)).set(Figure.translate(f), c)
     this
   }
 
+  /**
+    * überprüft, ob die KO, die man im Terminal eingibt, auch im Spielfeld exisitieren
+    */
   def validCoords(x1: Char, y1: Char, x2: Char, y2: Char): Boolean =
     (xi(x1) != -1) && (yi(y1) != -1) && (xi(x2) != -1) && (yi(y2) != -1)
 
+
   val Matrix: Array[Array[Cell]] = Array.ofDim[Cell](size, size)
 
+
+  /**
+    * Kontrolle der schwarzen Farbe
+    */
   def moveBlack(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     if (!validCoords(x1, y1, x2, y2)) {
-      println("not allowed!")
+      println("Move not allowed cause of wrong KOs")
       state = 2
       return this
     }
     if (!RulesBlack.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
-      println("Not a valid move!")
+      println("Not a valid move because not an allowed rule for black colour!")
       state = 2
       return this
     }
@@ -31,14 +40,18 @@ case class Board(size: Int) {
     move(x1, y1, x2, y2)
   }
 
+
+  /**
+    * Kontrolle der weissen Farbe
+    */
   def moveWhite(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     if (!validCoords(x1, y1, x2, y2)) {
-      println("not allowed!")
+      println("Move not allowed cause of wrong KOs") //
       state = 1
       return this
     }
     if (!RulesWhite.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
-      println("Not a valid move!")
+      println("Not a valid move because not an allowed rule for white colour!")
       state = 1
       return this
     }
@@ -46,6 +59,10 @@ case class Board(size: Int) {
     move(x1, y1, x2, y2)
   }
 
+
+  /**
+    * Kontrolle, ob die Figure - abhängig von Farbe - bewegt werden darf
+    */
   def move(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     if (!validCoords(x1, y1, x2, y2)) {
       println("not allowed!")
@@ -61,12 +78,33 @@ case class Board(size: Int) {
     this
   }
 
+
+  /**
+  * Methode für das werfen einer Figur durch eine andere Figur - Bauer fehlt nocht!
+  */
+
+  def werfen(x1: Char, y1: Char, x2: Char, y2: Char) : Board = {
+
+    val start: Cell = Matrix(xi(x1))(yi(y1))
+    val end: Cell = Matrix(xi(x2))(yi(y2))
+
+    if(!end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2)) &&
+    (!end.figure.col.equals(start.figure.col))) {
+      Matrix(xi(x2))(yi(y2)) = end.mv(start.figure)
+      Matrix(xi(x1))(yi(y1)) = start.set("none")
+    } else
+      println("Not allowed to kick the other figure")
+    this
+  }
+
+
+
   override def toString: String = {
     if (Matrix(0)(0) == null)
       return "empty Board"
     val numbers = "   A  B  C  D  E  F  G  H\n"
     val line1 = ("y " + ((Console.WHITE_B + " x " + Console.RESET + " x ") * (size / 2))) + "\n"
-    val line2 = ("y " + ((" x " + Console.WHITE_B  + " x " + Console.RESET) * (size / 2))) + "\n"
+    val line2 = ("y " + ((" x " + Console.WHITE_B + " x " + Console.RESET) * (size / 2))) + "\n"
     var box = "\n" + numbers + ((line1 + line2) * (size / 2))
     for {
       row <- 0 until size
