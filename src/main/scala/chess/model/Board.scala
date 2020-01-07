@@ -73,7 +73,7 @@ case class Board(size: Int) {
     if (end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
       Matrix(xi(x2))(yi(y2)) = end.mv(start.figure)
       Matrix(xi(x1))(yi(y1)) = start.set("none")
-    } else if(!end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2)) && !(start.figure.col.equals(end.figure.col))) {
+    } else if(!end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2)) && (!end.figure.col.equals(start.figure.col))) {
       Matrix(xi(x2))(yi(y2)) = end.mv(start.figure)
       Matrix(xi(x1))(yi(y1)) = start.set("none")
     } else
@@ -92,26 +92,6 @@ case class Board(size: Int) {
     }
     this
   }
-
-
-  /**
-  * Methode für das werfen einer Figur durch eine andere Figur - Bauer fehlt nocht!
-  */
-
-  /*def werfen(x1: Char, y1: Char, x2: Char, y2: Char) : Board = {
-
-    val start: Cell = Matrix(xi(x1))(yi(y1))
-    val end: Cell = Matrix(xi(x2))(yi(y2))
-
-    if(!end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2)) &&
-    (!end.figure.col.equals(start.figure.col))) {
-      Matrix(xi(x2))(yi(y2)) = end.mv(start.figure)
-      Matrix(xi(x1))(yi(y1)) = start.set("none")
-    } else
-      println("Not allowed to kick the other figure")
-    this
-  }*/
-
 
 
   override def toString: String = {

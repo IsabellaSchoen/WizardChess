@@ -1,5 +1,12 @@
 package chess.model
 
+/**
+  * Figur pawn = Bauer
+  * der Bauer darf nur geradeaus gehen
+  * wenn er eine Figur wirft, darf dies nur diagonal passieren
+  * */
+
+
 class Pawn(color: Char) extends Figure(color: Char) {
   override def figRule(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = PawnState.handle(x1, y1, x2, y2)
 
@@ -20,6 +27,10 @@ class Pawn(color: Char) extends Figure(color: Char) {
       backup() //Rückgabewert ist unser backup, da es geändert wird zu oneStep, wenn er gelaufen ist
     }
 
+    /**
+      * wenn der Bauer zwei Schritte am Anfang gehen darf, darf er danach
+      * nur noch einen Schritt gehen
+      */
     def twoStep: () => Boolean = {
       color match {
         case 'B' => () => oneStep() || (xs == xe && ye == ys + 2)
@@ -27,6 +38,10 @@ class Pawn(color: Char) extends Figure(color: Char) {
       }
     }
 
+    /**
+      * wenn der Bauer einen Schritt am Anfang gehen darf, darf er danach
+      * nur noch einen Schritt gehen
+      */
     def oneStep: () => Boolean = {
       color match {
         case 'B' => () => xs == xe && ye == ys + 1
