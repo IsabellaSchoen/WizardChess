@@ -28,15 +28,15 @@ case class Board(size: Int) {
   def moveBlack(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     if (!validCoords(x1, y1, x2, y2)) {
       println("Move not allowed cause of wrong KOs")
-      state = 2
+      state = 1
       return this
     }
     if (!RulesBlack.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
       println("Not a valid move because not an allowed rule for black colour!")
-      state = 2
+      state = 1
       return this
     }
-    state = 1
+    state = 0
     move(x1, y1, x2, y2)
   }
 
@@ -47,15 +47,15 @@ case class Board(size: Int) {
   def moveWhite(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     if (!validCoords(x1, y1, x2, y2)) {
       println("Move not allowed cause of wrong KOs") //
-      state = 1
+      state = 0
       return this
     }
     if (!RulesWhite.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
       println("Not a valid move because not an allowed rule for white color!")
-      state = 1
+      state = 0
       return this
     }
-    state = 2
+    state = 1
     move(x1, y1, x2, y2)
   }
 
@@ -68,10 +68,6 @@ case class Board(size: Int) {
     * Figur darf werfen
     */
   def move(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
-    if (!validCoords(x1, y1, x2, y2)) {
-      println("Wrong KOs!")
-      return this
-    }
     val start: Cell = Matrix(xi(x1))(yi(y1))
     val end: Cell = Matrix(xi(x2))(yi(y2))
     if (end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
@@ -82,6 +78,10 @@ case class Board(size: Int) {
       Matrix(xi(x1))(yi(y1)) = start.set("none")
     } else
       println("Not allowed to move because of wrong used rule!")
+      state match {  // state beibehalten, falls Zug nicht gültig
+        case 1 => state = 0
+        case 0 => state = 1
+      }
     this
   }
 

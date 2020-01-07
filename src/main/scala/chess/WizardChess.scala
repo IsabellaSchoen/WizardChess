@@ -2,10 +2,10 @@ package chess
 
 import chess.aview.Tui
 import chess.aview.gui.Gui
-import model._
+import chess.control._
+import chess.model._
 
 import scala.io.StdIn.readLine
-import chess.control._
 
 
 object WizardChess {
