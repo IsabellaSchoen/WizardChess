@@ -14,7 +14,7 @@ abstract class Figure(color: Char) {
   }
 
   def checkEnd(board: Board, x2: Int, y2: Int): Boolean = {
-    board.size > x2 && board.size > y2 && x2 >= 0 && y2 >= 0 && board.Matrix(x2)(y2).isEmpty
+    board.size > x2 && board.size > y2 && x2 >= 0 && y2 >= 0 //&& board.Matrix(x2)(y2).isEmpty
   }
 
   def figRule(x1: Int, y1: Int, x2: Int, y2: Int) = false //wenn es keine Figur im Spiel ist, dann nicht laufen darf tun
