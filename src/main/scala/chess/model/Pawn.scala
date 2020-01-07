@@ -38,8 +38,8 @@ class Pawn(color: Char) extends Figure(color: Char) {
       */
     def oneStep: () => Boolean = {
       color match {
-        case 'B' => () => (xs == xe && ye == ys + 1) || (ye == ys + 1 && (xe == xs - 1 || xe == xs + 1))
-        case 'W' => () => (xs == xe && ye == ys - 1) || (ye == ys - 1 && (xe == xs - 1 || xe == xs + 1))
+        case 'B' => () => xs == xe && ye == ys + 1
+        case 'W' => () => xs == xe && ye == ys - 1
       }
     }
   }
