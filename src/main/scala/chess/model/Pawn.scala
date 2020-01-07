@@ -44,9 +44,22 @@ class Pawn(color: Char) extends Figure(color: Char) {
       */
     def oneStep: () => Boolean = {
       color match {
-        case 'B' => () => xs == xe && ye == ys + 1
-        case 'W' => () => xs == xe && ye == ys - 1
+        case 'B' => () => (xs == xe && ye == ys + 1) || (ye == ys + 1 && (xe == xs - 1 || xe == xs + 1))
+        case 'W' => () => (xs == xe && ye == ys - 1) || (ye == ys - 1 && (xe == xs - 1 || xe == xs + 1))
       }
+    }
+  }
+
+
+  /**
+    * Wurfmethode für den Bauern
+    * hierbei darf er nur diagonal in einem Schritt werfen
+    * und dabei muss beachtet werden, dass sich nur unterschiedliche Farben werfen dürfen
+    */
+  def hit(xs: Int, ys: Int, xe: Int, ye: Int): Boolean = {
+    color match {
+      case 'B' => ye == ys + 1 && (xe == xs - 1 || xe == xs + 1)
+      case 'W' => ye == ys - 1 && (xe == xs - 1 || xe == xs + 1)
     }
   }
 
