@@ -51,7 +51,7 @@ case class Board(size: Int) {
       return this
     }
     if (!RulesWhite.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
-      println("Not a valid move because not an allowed rule for white colour!")
+      println("Not a valid move because not an allowed rule for white color!")
       state = 1
       return this
     }
@@ -62,6 +62,10 @@ case class Board(size: Int) {
 
   /**
     * Kontrolle, ob die Figure - abhängig von Farbe - bewegt werden darf; werfen integriert
+    * Allgemein die Koordinaten
+    * Implementierung der Anfangs- und Endknoten
+    * Figur darf sich bewegen
+    * Figur darf werfen
     */
   def move(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     if (!validCoords(x1, y1, x2, y2)) {
@@ -73,7 +77,7 @@ case class Board(size: Int) {
     if (end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
       Matrix(xi(x2))(yi(y2)) = end.mv(start.figure)
       Matrix(xi(x1))(yi(y1)) = start.set("none")
-    } else if(!end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2)) && (!end.figure.col.equals(start.figure.col))) {
+    } else if(!end.isEmpty && RulesAll.hit(this, xi(x1), yi(y1), xi(x2), yi(y2)) && (!end.figure.col.equals(start.figure.col))) {
       Matrix(xi(x2))(yi(y2)) = end.mv(start.figure)
       Matrix(xi(x1))(yi(y1)) = start.set("none")
     } else
