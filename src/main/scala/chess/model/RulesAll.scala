@@ -14,7 +14,7 @@ object RulesAll {
   def valid(board: Board, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     start = board.Matrix(x1)(y1)
 
-    //es muss eine Figur an der Startposition stehe
+    //es muss eine Figur an der Startposition stehen
     if (start.isEmpty)
       return false
 
