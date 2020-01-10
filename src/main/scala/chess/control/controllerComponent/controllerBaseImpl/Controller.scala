@@ -3,7 +3,6 @@ package chess.control.controllerComponent.controllerBaseImpl
 import chess.control.controllerComponent.ControllerTrait
 import chess.model._
 import chess.model.boardComponent.BoardTrait
-import chess.util.Observable
 
 class Controller(var board: BoardTrait) extends ControllerTrait {
   private var state: Int = 1
