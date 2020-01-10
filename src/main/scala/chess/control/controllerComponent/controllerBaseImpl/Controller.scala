@@ -6,7 +6,7 @@ import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.UndoManager
 import com.google.inject.name.Names
-import com.google.inject.{Guice, Inject}
+import com.google.inject.{Guice, Inject, Injector}
 import net.codingwell.scalaguice.InjectorExtensions._
 
 
@@ -25,7 +25,7 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
     board.size match {
       case 8 => board = injector.instance[BoardTrait](Names.named("normal"))
       case 16 => board = injector.instance[BoardTrait](Names.named("twice"))
-      case 32 => board = injector.instance[BoardTrait](Names.named("tripple"))
+      case 32 => board = injector.instance[BoardTrait](Names.named("triple"))
       case _ =>
     }
   }
