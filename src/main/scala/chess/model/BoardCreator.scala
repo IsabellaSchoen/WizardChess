@@ -3,10 +3,10 @@
 
 package chess.model
 
-import chess.model.boardComponent.boardBaseImpl.Board
+import chess.model.boardComponent.{BoardTrait, Board}
 
 case class BoardCreator(size: Int) {
-  def create: Board = {
+  def create: BoardTrait = {
     val b1 = Board(size)
     for (y <- 0 to 7) {
       for (x <- 0 to 7) {
@@ -16,7 +16,7 @@ case class BoardCreator(size: Int) {
     b1
   }
 
-  def init(b1: Board): Board = {
+  def init(b1: BoardTrait): BoardTrait = {
     // initialization
 
       // rooks

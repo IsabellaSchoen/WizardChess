@@ -1,6 +1,6 @@
 package chess.model
 
-import chess.model.boardComponent.boardBaseImpl.Board
+import chess.model.boardComponent.BoardTrait
 
 abstract class Figure(color: Char) {
 
@@ -18,7 +18,7 @@ abstract class Figure(color: Char) {
     * hierbei überprüfen wir die Methode checkStart, checkEnd und figRule
     *
     */
-  def rule(board: Board, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
+  def rule(board: BoardTrait, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     checkStart(board, x1, y1) && checkEnd(board, x2, y2) && figRule(x1, y1, x2, y2)
   }
 
@@ -26,7 +26,7 @@ abstract class Figure(color: Char) {
     * Kontrolle, dass die Anfangskoordinaten im Spielfeld sind
     * und die Figur, die wir ansprechen auch im Feld ist
     */
-  def checkStart(board: Board, x1: Int, y1: Int): Boolean = {
+  def checkStart(board: BoardTrait, x1: Int, y1: Int): Boolean = {
     board.size > x1 && board.size > y1 && x1 >= 0 && y1 >= 0 && board.Matrix(x1)(y1).figure == this
   }
 
@@ -34,7 +34,7 @@ abstract class Figure(color: Char) {
     * Kontrolle, dass die Endkoordinaten im Spielfeld sind
     * die letzte Bedingung wurde entfernt, da sie das Werfen beeinflusst und move diese bereits kontrolliert
     */
-  def checkEnd(board: Board, x2: Int, y2: Int): Boolean = {
+  def checkEnd(board: BoardTrait, x2: Int, y2: Int): Boolean = {
     board.size > x2 && board.size > y2 && x2 >= 0 && y2 >= 0 //&& board.Matrix(x2)(y2).isEmpty
   }
 
