@@ -1,5 +1,7 @@
 package chess
 
+
+import chess.control.controllerComponent.ControllerTrait
 import chess.control.controllerComponent.controllerBaseImpl.Controller
 import chess.model.boardComponent.BoardTrait
 import chess.model.boardComponent.boardBaseImpl.Board
@@ -17,10 +19,10 @@ class WizardChessModule extends AbstractModule with ScalaModule {
   override def configure() = {
     bindConstant().annotatedWith(Names.named("DefaultSize")).to(defaultSize)
     bind[BoardTrait].to[Board]
-    bind[Controller].to[Controller]
-    bind[BoardTrait].annotatedWithName("tiny").toInstance(new Board(8))
-    bind[BoardTrait].annotatedWithName("small").toInstance(new Board(16))
-    bind[BoardTrait].annotatedWithName("normal").toInstance(new Board(32))
+    bind[ControllerTrait].to[Controller]
+    bind[BoardTrait].annotatedWithName("normal").toInstance(new Board(8))
+    bind[BoardTrait].annotatedWithName("twice").toInstance(new Board(16))
+    bind[BoardTrait].annotatedWithName("triple").toInstance(new Board(32))
 
   }
 
