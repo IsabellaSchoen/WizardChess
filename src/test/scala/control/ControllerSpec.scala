@@ -1,6 +1,6 @@
 package control
 
-import chess.control.Controller
+import chess.control.controllerComponent.controllerBaseImpl.Controller
 import chess.model.{BoardCreator, None}
 import org.scalatest.{Matchers, WordSpec}
 

@@ -3,6 +3,7 @@ package chess
 import chess.aview.Tui
 import chess.aview.gui.Gui
 import chess.control._
+import chess.control.controllerComponent.controllerBaseImpl.Controller
 import chess.model._
 
 import scala.io.StdIn.readLine

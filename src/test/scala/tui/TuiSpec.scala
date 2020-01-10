@@ -1,7 +1,7 @@
 package tui
 
 import chess.aview.Tui
-import chess.control.Controller
+import chess.control.controllerComponent.controllerBaseImpl.Controller
 import chess.model.BoardCreator
 import org.scalatest.{Matchers, WordSpec}
 

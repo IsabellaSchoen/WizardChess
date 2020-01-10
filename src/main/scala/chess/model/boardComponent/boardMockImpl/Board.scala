@@ -1,7 +1,7 @@
 package chess.model.boardComponent.boardMockImpl
 
 import chess.model.Cell
-import chess.model.boardComponent.{BoardTrait, boardBaseImpl}
+import chess.model.boardComponent.BoardTrait
 
 case class Board(size: Int = 0) extends BoardTrait {
   override var state: Int = 0
