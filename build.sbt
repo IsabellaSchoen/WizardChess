@@ -13,6 +13,11 @@ libraryDependencies += "org.scalafx" %% "scalafx" % "12.0.2-R18"
 //// Add dependency on JavaFX library
 libraryDependencies += "org.openjfx" % "javafx" % "12.0.2" pomOnly()
 
+//DependencyInjection
+
+libraryDependencies += "com.google.inject" % "guice" % "4.1.0"
+libraryDependencies += "net.codingwell" %% "scala-guice" % "4.2.6"
+
 //add a OS-specific dependency for the JavaFX binaries
 lazy val osName = System.getProperty("os.name") match {
   case n if n.startsWith("Linux") => "linux"
