@@ -1,6 +1,6 @@
 package chess.aview.gui
 
-import chess.control.Controller
+import chess.control.controllerComponent.controllerBaseImpl.Controller
 import chess.util.Observer
 import scalafx.Includes.when
 import scalafx.application.JFXApp

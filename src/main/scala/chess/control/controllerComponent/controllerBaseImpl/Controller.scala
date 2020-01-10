@@ -1,35 +1,36 @@
-package chess.control
+package chess.control.controllerComponent.controllerBaseImpl
 
+import chess.control.controllerComponent.ControllerTrait
 import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.Observable
 import chess.util.{Observable, UndoManager}
 
-class Controller(var board: BoardTrait) extends Observable {
-  var state: Int = 1
+class Controller(var board: BoardTrait) extends Observable with ControllerTrait {
+  private var state: Int = 1
   private val undoManager = new UndoManager
-  def put(x: Char, y: Char, f: Char, c: Char): Unit = {
+  override def put(x: Char, y: Char, f: Char, c: Char): Unit = {
     board = board.put(x, y, f, c)
     notifyObservers()
   }
 
-  def empty(): Unit = {
+  override def empty(): Unit = {
     board = BoardCreator(8).create
     notifyObservers()
   }
 
-  def boardToString: String = board.toString
+  override def boardToString: String = board.toString
 
-  def setState(state: Int): Unit = {
+  override def setState(state: Int): Unit = {
     this.state = state
     notifyObservers()
   }
 
-  def move(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
+  override def move(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     undoManager.doStep(new MoveCommand(this, x1, y1, x2, y2))
   }
 
-  def moveAll(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
+  override def moveAll(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     board = board.move(x1, y1, x2, y2)
     notifyObservers()
   }
@@ -47,7 +48,7 @@ class Controller(var board: BoardTrait) extends Observable {
   /**
     * der erste Player hat die weisse Farbe
     */
-  def moveOne(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
+  override def moveOne(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     board = board.moveWhite(x1, y1, x2, y2)
     state = board.state
     notifyObservers()
@@ -56,7 +57,7 @@ class Controller(var board: BoardTrait) extends Observable {
   /**
     * der zweite Player hat die schwarze Farbe
     */
-  def moveTwo(x1: Char, y1: Char, x2: Char, y2: Char) : Unit = {
+  override def moveTwo(x1: Char, y1: Char, x2: Char, y2: Char) : Unit = {
     board = board.moveBlack(x1, y1, x2, y2)
     state = board.state
     notifyObservers()
@@ -71,12 +72,12 @@ class Controller(var board: BoardTrait) extends Observable {
     notifyObservers()
   }
 
-  def create(): Unit = {
+  override def create(): Unit = {
     board = BoardCreator(8).init(BoardCreator(8).create)
     notifyObservers()
   }
 
-  def getFig(i: Int, j: Int): String = {
+  override def getFig(i: Int, j: Int): String = {
     var tmp = board.Matrix(i)(j).figure.toString match {
       case "pawn" => "pawn"
       case "king" => "king"
