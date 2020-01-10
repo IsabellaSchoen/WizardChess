@@ -5,7 +5,12 @@ import chess.control.controllerComponent.ControllerTrait
 import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.UndoManager
+import com.google.inject.name.Names
 import com.google.inject.{Guice, Inject}
+import net.codingwell.scalaguice.InjectorExtensions._
+
+
+
 import chess.util.Observable
 import chess.util.{Observable, UndoManager}
 
@@ -14,6 +19,17 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
   private val undoManager = new UndoManager
   val injector = Guice.createInjector(new WizardChessModule)
   val undoManager = new UndoManager
+
+
+  def createNewBoard(): Unit = {
+    board.size match {
+      case 8 => board = injector.instance[BoardTrait](Names.named("normal"))
+      case 16 => board = injector.instance[BoardTrait](Names.named("twice"))
+      case 32 => board = injector.instance[BoardTrait](Names.named("tripple"))
+      case _ =>
+    }
+  }
+
 
   override def put(x: Char, y: Char, f: Char, c: Char): Unit = {
     board = board.put(x, y, f, c)
