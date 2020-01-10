@@ -5,6 +5,7 @@ import chess.control.controllerComponent.ControllerTrait
 import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.UndoManager
+import com.google.inject.{Guice, Inject}
 
 class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
   private var state: Int = 1
