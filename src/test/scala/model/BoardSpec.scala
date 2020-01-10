@@ -1,7 +1,7 @@
 package model
 
 import chess.model._
-import chess.model.boardComponent.boardBaseImpl.Board
+import chess.model.boardComponent.{Board, BoardTrait}
 import org.scalatest.{Matchers, WordSpec}
 
 class BoardSpec extends WordSpec with Matchers {
@@ -12,7 +12,7 @@ class BoardSpec extends WordSpec with Matchers {
     "have a string representation" in {
       Board(8).Matrix(0)(0) should be (null)
       Board(8).toString should be ("empty Board")
-      val test: Board = BoardCreator(8).create
+      val test: BoardTrait = BoardCreator(8).create
       test.toString should be (test.toString)
     }
     "have Cells" which {
@@ -27,8 +27,8 @@ class BoardSpec extends WordSpec with Matchers {
       }
     }
     "be able to move figures" in {
-      val t1: Board = BoardCreator(8).init(BoardCreator(8).create)
-      val t2: Board = t1
+      val t1: BoardTrait = BoardCreator(8).init(BoardCreator(8).create)
+      val t2: BoardTrait = t1
       t1.move('Z', 'Z', 'Z', 'Z') should be (t2)
       t1.move('A', '2', 'B', '4') should be (t2)
       t1.move('A', '1', 'A', '2') should be (t2)

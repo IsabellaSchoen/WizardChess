@@ -36,4 +36,8 @@ class Board(s: Int = 0) extends BoardTrait {
     * Figur darf werfen
     */
   override def move(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait = this
+
+  override def xi(x: Char): Int = -1
+
+  override def yi(y: Char): Int = -1
 }

@@ -5,7 +5,7 @@ import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.Observable
 
-class Controller(var board: BoardTrait) extends Observable with ControllerTrait {
+class Controller(var board: BoardTrait) extends ControllerTrait {
   private var state: Int = 1
   override def put(x: Char, y: Char, f: Char, c: Char): Unit = {
     board = board.put(x, y, f, c)

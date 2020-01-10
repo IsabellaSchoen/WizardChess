@@ -35,6 +35,10 @@ trait BoardTrait {
     * Figur darf werfen
     */
   def move(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait
+
+  def xi(x: Char): Int
+
+  def yi(y: Char): Int
 }
 
 object Board {

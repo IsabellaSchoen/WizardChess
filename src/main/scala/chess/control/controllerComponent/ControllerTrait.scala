@@ -1,6 +1,9 @@
 package chess.control.controllerComponent
 
-trait ControllerTrait {
+import chess.model.boardComponent.BoardTrait
+import chess.util.Observable
+
+trait ControllerTrait extends Observable {
 
   def put(x: Char, y: Char, f: Char, c: Char): Unit
 
@@ -27,4 +30,10 @@ trait ControllerTrait {
   def create(): Unit
 
   def getFig(i: Int, j: Int): String
+}
+
+object Controller {
+  def apply(board: BoardTrait): ControllerTrait = {
+    new controllerBaseImpl.Controller(board)
+  }
 }
