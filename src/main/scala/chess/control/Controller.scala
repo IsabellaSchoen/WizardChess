@@ -1,9 +1,11 @@
 package chess.control
 
 import chess.model._
+import chess.model.boardComponent.BoardTrait
+import chess.util.Observable
 import chess.util.{Observable, UndoManager}
 
-class Controller(var board: Board) extends Observable {
+class Controller(var board: BoardTrait) extends Observable {
   var state: Int = 1
   private val undoManager = new UndoManager
   def put(x: Char, y: Char, f: Char, c: Char): Unit = {
@@ -75,7 +77,7 @@ class Controller(var board: Board) extends Observable {
   }
 
   def getFig(i: Int, j: Int): String = {
-    board.Matrix(i)(j).figure.toString match {
+    var tmp = board.Matrix(i)(j).figure.toString match {
       case "pawn" => "pawn"
       case "king" => "king"
       case "queen" => "queen"
