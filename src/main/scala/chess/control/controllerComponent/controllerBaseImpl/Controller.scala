@@ -1,14 +1,18 @@
 package chess.control.controllerComponent.controllerBaseImpl
 
+import chess.WizardChessModule
 import chess.control.controllerComponent.ControllerTrait
 import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.Observable
 import chess.util.{Observable, UndoManager}
 
-class Controller(var board: BoardTrait) extends ControllerTrait {
+class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
   private var state: Int = 1
   private val undoManager = new UndoManager
+  val injector = Guice.createInjector(new WizardChessModule)
+  val undoManager = new UndoManager
+
   override def put(x: Char, y: Char, f: Char, c: Char): Unit = {
     board = board.put(x, y, f, c)
     notifyObservers()
