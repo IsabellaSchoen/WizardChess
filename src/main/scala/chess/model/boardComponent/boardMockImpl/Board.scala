@@ -3,27 +3,27 @@ package chess.model.boardComponent.boardMockImpl
 import chess.model.Cell
 import chess.model.boardComponent.{BoardTrait, boardBaseImpl}
 
-class Board extends BoardTrait {
+case class Board(size: Int = 0) extends BoardTrait {
   override var state: Int = 0
 
-  override def put(x: Char, y: Char, f: Char, c: Char): Board = this
+  override def put(x: Char, y: Char, f: Char, c: Char): BoardTrait = this
 
   /**
     * überprüft, ob die KO, die man im Terminal eingibt, auch im Spielfeld exisitieren
     */
   override def validCoords(x1: Char, y1: Char, x2: Char, y2: Char): Boolean = true
 
-  override val Matrix: Array[Array[Cell]] = _
+  override val Matrix: Array[Array[Cell]] = Array(Array())
 
   /**
     * Kontrolle der schwarzen Farbe
     */
-  override def moveBlack(x1: Char, y1: Char, x2: Char, y2: Char): boardBaseImpl.Board = ???
+  override def moveBlack(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait = this
 
   /**
     * Kontrolle der weissen Farbe
     */
-  override def moveWhite(x1: Char, y1: Char, x2: Char, y2: Char): boardBaseImpl.Board = ???
+  override def moveWhite(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait = this
 
   /**
     * Kontrolle, ob die Figure - abhängig von Farbe - bewegt werden darf; werfen integriert
@@ -32,5 +32,5 @@ class Board extends BoardTrait {
     * Figur darf sich bewegen
     * Figur darf werfen
     */
-  override def move(x1: Char, y1: Char, x2: Char, y2: Char): boardBaseImpl.Board = ???
+  override def move(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait = this
 }

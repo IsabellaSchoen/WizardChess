@@ -7,7 +7,7 @@ trait BoardTrait {
 
   var state: Int
 
-  def put(x: Char, y: Char, f: Char, c: Char): Board
+  def put(x: Char, y: Char, f: Char, c: Char): BoardTrait
 
   /**
     * überprüft, ob die KO, die man im Terminal eingibt, auch im Spielfeld exisitieren
@@ -19,12 +19,12 @@ trait BoardTrait {
   /**
     * Kontrolle der schwarzen Farbe
     */
-  def moveBlack(x1: Char, y1: Char, x2: Char, y2: Char): Board
+  def moveBlack(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait
 
   /**
     * Kontrolle der weissen Farbe
     */
-  def moveWhite(x1: Char, y1: Char, x2: Char, y2: Char): Board
+  def moveWhite(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait
 
   /**
     * Kontrolle, ob die Figure - abhängig von Farbe - bewegt werden darf; werfen integriert
@@ -33,5 +33,5 @@ trait BoardTrait {
     * Figur darf sich bewegen
     * Figur darf werfen
     */
-  def move(x1: Char, y1: Char, x2: Char, y2: Char): Board
+  def move(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait
 }

@@ -145,19 +145,6 @@ class Gui(controller: Controller) extends JFXApp with Observer {
       background.setFitHeight(stage.getHeight)
       background.setFitWidth(stage.getHeight)
 
-      val figures: GridPane = new GridPane {
-        alignment = Pos.Center
-      }
-
-      /*for (i <- 0 to 7) {
-        for (j <- 0 to 7) {
-          figures.add(new ImageView() {
-            prefWidth = (stage.getHeight - 100) / 8
-            prefHeight = (stage.getHeight - 100) / 8
-          }, i, j)
-        }
-      }*/
-
       val grid = new GridPane
       var fig = new GridPane
 
@@ -271,18 +258,6 @@ class Gui(controller: Controller) extends JFXApp with Observer {
 
 
   override def update(): Unit = {
-    /*fig = new GridPane
-    fig.setAlignment(Pos.Center)
-
-    for (i <- 0 to 7) {
-      for (j <- 0 to 7) {
-        fig.add(new ImageView("file:" + controller.getFig(i, j) + ".png") {
-          fitWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
-          fitHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
-        }, i, j)
-      }
-    }*/
-
     play()
   }
 }
