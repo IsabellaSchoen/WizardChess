@@ -1,6 +1,6 @@
 package chess.aview.gui
 
-import chess.control.controllerComponent.controllerBaseImpl.Controller
+import chess.control.controllerComponent.ControllerTrait
 import chess.util.Observer
 import scalafx.Includes.when
 import scalafx.application.JFXApp
@@ -16,7 +16,7 @@ import scalafx.scene.{Node, Scene}
 
 import scala.io.Source
 
-class Gui(controller: Controller) extends JFXApp with Observer {
+class Gui(controller: ControllerTrait) extends JFXApp with Observer {
 
   controller.add(this)
 

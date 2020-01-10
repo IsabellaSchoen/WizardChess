@@ -1,9 +1,9 @@
 package chess.aview
 
-import chess.control.controllerComponent.controllerBaseImpl.Controller
+import chess.control.controllerComponent.ControllerTrait
 import chess.util.Observer
 
-class Tui(controller: Controller) extends Observer {
+class Tui(controller: ControllerTrait) extends Observer {
 
   controller.add(this)
 

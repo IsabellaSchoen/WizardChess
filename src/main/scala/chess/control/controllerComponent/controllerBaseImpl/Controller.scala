@@ -6,7 +6,7 @@ import chess.model.boardComponent.BoardTrait
 import chess.util.Observable
 import chess.util.{Observable, UndoManager}
 
-class Controller(var board: BoardTrait) extends Observable with ControllerTrait {
+class Controller(var board: BoardTrait) extends ControllerTrait {
   private var state: Int = 1
   private val undoManager = new UndoManager
   override def put(x: Char, y: Char, f: Char, c: Char): Unit = {

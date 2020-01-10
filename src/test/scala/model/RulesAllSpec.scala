@@ -1,11 +1,11 @@
 package model
 
-import chess.model.boardComponent.boardBaseImpl.Board
+import chess.model.boardComponent.BoardTrait
 import chess.model.{BoardCreator, None, Pawn, RulesAll}
 import org.scalatest.{Matchers, WordSpec}
 
 class RulesAllSpec extends WordSpec with Matchers {
-  val test: Board = BoardCreator(8).init(BoardCreator(8).create)
+  val test: BoardTrait = BoardCreator(8).init(BoardCreator(8).create)
   "a black pawn" when {
     "not having moved yet" should {
       "be allowed to move one step south" in {
@@ -37,7 +37,7 @@ class RulesAllSpec extends WordSpec with Matchers {
     }
   }
 
-  var test2: Board = BoardCreator(8).init(BoardCreator(8).create)
+  var test2: BoardTrait = BoardCreator(8).init(BoardCreator(8).create)
 
   "a white pawn" when {
     "not having moved yet" should {
@@ -69,7 +69,7 @@ class RulesAllSpec extends WordSpec with Matchers {
     }
   }
 
-  val king: Board = BoardCreator(8).create
+  val king: BoardTrait = BoardCreator(8).create
   king.put('D', '5', 'K', 'B')
   "a king" should {
     "be able to move one step south" in {
@@ -98,7 +98,7 @@ class RulesAllSpec extends WordSpec with Matchers {
     }
   }
 
-  val rook: Board = BoardCreator(8).create
+  val rook: BoardTrait = BoardCreator(8).create
   rook.put('D', '5', 'R', 'B')
   "a rook" should {
     "be allowed to move south" in {
@@ -126,7 +126,7 @@ class RulesAllSpec extends WordSpec with Matchers {
   }
 
 
-  val horse: Board = BoardCreator(8).create
+  val horse: BoardTrait = BoardCreator(8).create
   horse.put('D', '5', 'H', 'B')
   "a horse" should {
     "be able to move right up in three steps" in {
@@ -152,7 +152,7 @@ class RulesAllSpec extends WordSpec with Matchers {
     }
 
 
-    val bishop: Board = BoardCreator(8).create
+    val bishop: BoardTrait = BoardCreator(8).create
     bishop.put('D', '4', 'B', 'B')
     println(bishop)
     "a bishop" should {
@@ -181,7 +181,7 @@ class RulesAllSpec extends WordSpec with Matchers {
     }
 
 
-    val queen: Board = BoardCreator(8).create
+    val queen: BoardTrait = BoardCreator(8).create
     queen.put('D', '4', 'Q', 'B')
     "a queen" should {
       "be able to move right down" in {

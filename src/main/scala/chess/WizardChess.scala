@@ -3,14 +3,14 @@ package chess
 import chess.aview.Tui
 import chess.aview.gui.Gui
 import chess.control._
-import chess.control.controllerComponent.controllerBaseImpl.Controller
+import chess.control.controllerComponent.{ControllerTrait, Controller}
 import chess.model._
 
 import scala.io.StdIn.readLine
 
 
 object WizardChess {
-  var controller: Controller = new Controller(BoardCreator(8).init(BoardCreator(8).create))
+  var controller: ControllerTrait = Controller(BoardCreator(8).init(BoardCreator(8).create))
   val tui = new Tui(controller)
   val gui = new Gui(controller)
   gui.main(Array())
