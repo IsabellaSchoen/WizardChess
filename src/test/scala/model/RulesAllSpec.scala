@@ -1,6 +1,7 @@
 package model
 
-import chess.model.{Board, BoardCreator, None, Pawn, RulesAll}
+import chess.model.boardComponent.boardBaseImpl.Board
+import chess.model.{BoardCreator, None, Pawn, RulesAll}
 import org.scalatest.{Matchers, WordSpec}
 
 class RulesAllSpec extends WordSpec with Matchers {

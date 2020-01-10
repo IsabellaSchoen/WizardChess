@@ -1,12 +1,12 @@
-//64 Matrizen in einer ganzen Matrix
-//Figuren bereits auf ihren Pläten
+package chess.model.boardComponent.boardBaseImpl
 
-package chess.model
+import chess.model.boardComponent.BoardTrait
+import chess.model.{Cell, Figure, None, RulesAll, RulesBlack, RulesWhite}
 
-case class Board(size: Int) {
-  var state: Int = 0
+case class Board(size: Int) extends BoardTrait {
+  override var state: Int = 0
 
-  def put(x: Char, y: Char, f: Char, c: Char): Board = {
+  override def put(x: Char, y: Char, f: Char, c: Char): Board = {
     if (xi(x) >= 0 && xi(x) < size && yi(y) >= 0 && yi(y) < size && (c.equals('B') || c.equals('W')))
       Matrix(xi(x))(yi(y)) = Matrix(xi(x))(yi(y)).set(Figure.translate(f), c)
     this
@@ -15,17 +15,17 @@ case class Board(size: Int) {
   /**
     * überprüft, ob die KO, die man im Terminal eingibt, auch im Spielfeld exisitieren
     */
-  def validCoords(x1: Char, y1: Char, x2: Char, y2: Char): Boolean =
+  override def validCoords(x1: Char, y1: Char, x2: Char, y2: Char): Boolean =
     (xi(x1) != -1) && (yi(y1) != -1) && (xi(x2) != -1) && (yi(y2) != -1)
 
 
-  val Matrix: Array[Array[Cell]] = Array.ofDim[Cell](size, size)
+  override val Matrix: Array[Array[Cell]] = Array.ofDim[Cell](size, size)
 
 
   /**
     * Kontrolle der schwarzen Farbe
     */
-  def moveBlack(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
+  override def moveBlack(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     if (!validCoords(x1, y1, x2, y2)) {
       println("Move not allowed cause of wrong KOs")
       state = 1
@@ -44,7 +44,7 @@ case class Board(size: Int) {
   /**
     * Kontrolle der weissen Farbe
     */
-  def moveWhite(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
+  override def moveWhite(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     if (!validCoords(x1, y1, x2, y2)) {
       println("Move not allowed cause of wrong KOs") //
       state = 0
@@ -67,7 +67,7 @@ case class Board(size: Int) {
     * Figur darf sich bewegen
     * Figur darf werfen
     */
-  def move(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
+  override def move(x1: Char, y1: Char, x2: Char, y2: Char): Board = {
     val start: Cell = Matrix(xi(x1))(yi(y1))
     val end: Cell = Matrix(xi(x2))(yi(y2))
     if (end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
@@ -130,4 +130,3 @@ case class Board(size: Int) {
       -1
   }
 }
-

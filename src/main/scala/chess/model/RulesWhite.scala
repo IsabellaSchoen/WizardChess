@@ -1,5 +1,7 @@
 package chess.model
 
+import chess.model.boardComponent.boardBaseImpl.Board
+
 /**
   * Regeln speziel für die schwarzen Figuren
   * das Anfangsfeld des Spielfeldes darf nicht leer sein und die Farbe muss weiss sein

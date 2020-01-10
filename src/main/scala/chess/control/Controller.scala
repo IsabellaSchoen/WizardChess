@@ -1,9 +1,10 @@
 package chess.control
 
 import chess.model._
+import chess.model.boardComponent.BoardTrait
 import chess.util.Observable
 
-class Controller(var board: Board) extends Observable {
+class Controller(var board: BoardTrait) extends Observable {
   private var state: Int = 1
   def put(x: Char, y: Char, f: Char, c: Char): Unit = {
     board = board.put(x, y, f, c)

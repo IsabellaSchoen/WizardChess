@@ -1,5 +1,7 @@
 package chess.model
 
+import chess.model.boardComponent.boardBaseImpl.Board
+
 abstract class Figure(color: Char) {
 
   /**

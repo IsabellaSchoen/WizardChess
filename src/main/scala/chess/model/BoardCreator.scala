@@ -3,6 +3,8 @@
 
 package chess.model
 
+import chess.model.boardComponent.boardBaseImpl.Board
+
 case class BoardCreator(size: Int) {
   def create: Board = {
     val b1 = Board(size)
