@@ -1,11 +1,12 @@
 package chess.model.boardComponent
 
 import chess.model.Cell
-import chess.model.boardComponent.boardBaseImpl.Board
 
 trait BoardTrait {
 
   var state: Int
+
+  var size: Int
 
   def put(x: Char, y: Char, f: Char, c: Char): BoardTrait
 
@@ -34,4 +35,10 @@ trait BoardTrait {
     * Figur darf werfen
     */
   def move(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait
+}
+
+object Board {
+  def apply(size: Integer) : BoardTrait = {
+    new boardBaseImpl.Board(size)
+  }
 }

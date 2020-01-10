@@ -1,6 +1,6 @@
 package chess.model
 
-import chess.model.boardComponent.boardBaseImpl.Board
+import chess.model.boardComponent.BoardTrait
 
 
 object RulesAll {
@@ -13,7 +13,7 @@ object RulesAll {
   /**
     * Kontrolle, ob move erlaubt bzw. Anfangsbedingungen für die Regeln der Figuren
     */
-  def valid(board: Board, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
+  def valid(board: BoardTrait, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     start = board.Matrix(x1)(y1)
 
     //es muss eine Figur an der Startposition stehen
@@ -29,7 +29,7 @@ object RulesAll {
     * es muss eine Figur am Anfang stehen
     * Abfrage, ob Figur ein Pawn ist; wenn ja, dann hit Methode; wenn nein, dann Regeln für die anderen Figuren
     */
-  def hit(board: Board, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
+  def hit(board: BoardTrait, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     start = board.Matrix(x1)(y1)
 
     if (start.isEmpty)

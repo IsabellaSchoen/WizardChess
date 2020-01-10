@@ -3,8 +3,11 @@ package chess.model.boardComponent.boardMockImpl
 import chess.model.Cell
 import chess.model.boardComponent.BoardTrait
 
-case class Board(size: Int = 0) extends BoardTrait {
+class Board(s: Int = 0) extends BoardTrait {
+
   override var state: Int = 0
+
+  override var size: Int = s
 
   override def put(x: Char, y: Char, f: Char, c: Char): BoardTrait = this
 
