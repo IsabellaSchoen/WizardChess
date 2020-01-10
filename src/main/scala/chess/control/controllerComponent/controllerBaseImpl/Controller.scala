@@ -4,6 +4,8 @@ import chess.WizardChessModule
 import chess.control.controllerComponent.ControllerTrait
 import chess.model._
 import chess.model.boardComponent.BoardTrait
+import chess.util.UndoManager
+import com.google.inject.{Guice, Inject}
 import chess.util.Observable
 import chess.util.{Observable, UndoManager}
 
