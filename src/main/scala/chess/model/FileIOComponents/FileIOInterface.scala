@@ -1,5 +1,12 @@
 package chess.model.FileIOComponents
 
-class FileIOInterface {
+import chess.model.boardComponent.BoardTrait
+
+
+trait FileIOInterface {
+
+  def load: BoardTrait
+
+  def save(board: BoardTrait): Unit
 
 }
