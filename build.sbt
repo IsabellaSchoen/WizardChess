@@ -31,3 +31,10 @@ lazy val javaFXModules = Seq("base", "controls", "fxml", "graphics", "media", "s
 libraryDependencies ++= javaFXModules.map( m=>
   "org.openjfx" % s"javafx-$m" % "11" classifier osName
 )
+
+
+//FileIO
+//XML
+libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.1.1"
+//JSON
+libraryDependencies += "com.typesafe.play" %% "play-json" % "2."
