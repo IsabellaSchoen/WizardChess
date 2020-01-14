@@ -1,7 +1,10 @@
 ## WizardChess
-Welcome to our project for Software Engineering. In this project we are programming our game called "WizardChess". If you are a Harry Potter fan you may have heard about this Chess. It was part of the first movie. But how excately you can define WizardChess? This is very simple: 
-Wizard = Harry Potter 
-Harry Potte + Chess = Normal chess with figures of Harry Potter's Chess
+Welcome to WizardChess!<br />
+If you are a Harry Potter fan you may have heard about this Chess. It was part of the first movie. <br />
+But how excately you can define WizardChess? This is very simple: <br />
+Wizard = Harry Potter <br />
+Harry Potter + Chess = Normal chess with figures of Harry Potter's Chess <br />
+The result? Let's see this picture
 
 ![WizardChess](http://pm1.narvii.com/5911/905a076f5f18e128a97b760c72af1b438723da41_hq.jpg)
 
