@@ -1,12 +1,9 @@
 package chess.model.FileIOComponents
 
-import chess.model.boardComponent.BoardTrait
+import chess.model.BoardCreator
 
 
 trait FileIOInterface {
-
-  def load: BoardTrait
-
-  def save(board: BoardTrait): Unit
-
+  def load: BoardCreator
+  def save(board: BoardCreator): Unit
 }
