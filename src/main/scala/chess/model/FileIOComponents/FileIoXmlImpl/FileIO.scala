@@ -5,19 +5,22 @@ import java.io.{File, PrintWriter}
 import chess.model.FileIOComponents.FileIOInterface
 import chess.model.boardComponent.BoardTrait
 import chess.model.{BoardCreator, Cell}
-import scala.xml.PrettyPrinter
 
-
+import scala.xml.{Elem, PrettyPrinter}
 
 
 class FileIO extends FileIOInterface {
 
 
+  //
   override def load: BoardCreator = {
-    var board: BoardCreator = null
-    val file = scala.xml.XML.loadFile("boardt.xml")
+    val file: Elem = scala.xml.XML.loadFile("board.xml")
+    loadToXml(file)
   }
 
+  def loadToXml(elem: Elem): BoardCreator = {
+    val  = (Elem \\ "boardcreator" \ "@board").text.toInt
+  }
 
   // den Spielstand speicher - done
   def save(board: BoardTrait): Unit = {
@@ -30,29 +33,24 @@ class FileIO extends FileIOInterface {
 
 
 
-  //da Board speichern - done
-  def boardToXml(board: BoardTrait) = {
+  //Board speichern - done
+  def boardToXml(board: BoardTrait, col: Int, row: Int) = {
     <board size = {board.size.toString}>
       {
       for {
         row <- 0 until board.size
         col <- 0 until board.size
-      } boardToXml(board, row, col)
+      } boardToXml(board, col, row)
       }
     </board>
   }
 
 
-  def cellToXml(cell: Cell) = {
-    <cell row ={row.toString} col={col.toString} given={grid.cell(row,col).given.toString} isHighlighted={grid.isHighlighted(row,col).toString} showCandidates={grid.cell(row, col).showCandidates.toString}>
-
-    {grid.cell(row,col).value}
-
+  //Zelle speicher - done
+  def cellToXml(cell: Cell, row: Int, col: Int) = {
+    <cell row ={row.toString} col={col.toString} Figure = {cell.figure.toString} Figure = {cell.figure.col}>
     </cell>
   }
-
-
-
 
 }
 
