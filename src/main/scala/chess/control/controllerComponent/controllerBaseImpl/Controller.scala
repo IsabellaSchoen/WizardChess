@@ -2,6 +2,7 @@ package chess.control.controllerComponent.controllerBaseImpl
 
 import chess.WizardChessModule
 import chess.control.controllerComponent.ControllerTrait
+import chess.model.FileIOComponents.FileIOInterface
 import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.UndoManager
@@ -19,6 +20,10 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
   private val undoManager = new UndoManager
   val injector = Guice.createInjector(new WizardChessModule)
   val undoManager = new UndoManager
+
+
+  //FileIO
+  val fileIo = injector.instance[FileIOInterface]
 
 
   def createNewBoard(): Unit = {
