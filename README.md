@@ -1,5 +1,9 @@
 # WizardChess
-Welcome to our project for Software Engineering. In this project we are programming our game called "Wizard Chess". It is not like normal chess. First of all you have the opportunity to choose between normal chess and WizardChess which is based on the Harry Potter chess, almost like normal chess but not exacetly the same....to be continued
+Welcome to our project for Software Engineering. In this project we are programming our game called "WizardChess". If you are a Harry Potter fan you may have heard about this Chess. It was part of the first movie. But how excately you can define WizardChess? This is very simple: 
+Wizard = Harry Potter 
+Harry Potte + Chess = Normal chess with figures of Harry Potter's Chess
+
+![WizardChess](C:/Users/Isabe/Downlaods\WizardChess2.jpg?raw=true "WizardChess")
 
 # authors
 Isabella Schön \
