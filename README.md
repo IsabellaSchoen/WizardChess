@@ -1,13 +1,11 @@
-# WizardChess
+## WizardChess
 Welcome to our project for Software Engineering. In this project we are programming our game called "WizardChess". If you are a Harry Potter fan you may have heard about this Chess. It was part of the first movie. But how excately you can define WizardChess? This is very simple: 
 Wizard = Harry Potter 
 Harry Potte + Chess = Normal chess with figures of Harry Potter's Chess
 
-(screenshots/C:/Users/Isabe/Downlaods\WizardChess2.jpg "WizardChess")
+![WizardChess](http://www.relatably.com/q/img/rupert-grint-quotes/93071270adc3b380243662f38d25fcca.jpg)
 
-(C:/Users/Isabe/Downlaods\WizardChess2.jpg)
 
-(C:/Users/Isabe/Downlaods\WizardChess2.jC:/Users/Isabe/Downlaods\WizardChess2.jpgpg?raw=true "WizardChess")
 
 # authors
 Isabella Schön \
