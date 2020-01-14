@@ -3,6 +3,8 @@ Welcome to our project for Software Engineering. In this project we are programm
 Wizard = Harry Potter 
 Harry Potte + Chess = Normal chess with figures of Harry Potter's Chess
 
+![WizardChess](C:/Users/Isabe/Downlaods\WizardChess2.jpg)
+
 ![WizardChess](C:/Users/Isabe/Downlaods\WizardChess2.jpg?raw=true "WizardChess")
 
 # authors
