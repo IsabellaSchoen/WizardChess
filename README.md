@@ -3,7 +3,7 @@ Welcome to our project for Software Engineering. In this project we are programm
 Wizard = Harry Potter 
 Harry Potte + Chess = Normal chess with figures of Harry Potter's Chess
 
-![WizardChess](http://www.relatably.com/q/img/rupert-grint-quotes/93071270adc3b380243662f38d25fcca.jpg)
+![WizardChess](https://duckduckgo.com/?q=Harry+potter+wizard+Chess&atb=v161-7__&iar=images&iax=images&ia=images&iai=http%3A%2F%2Fpm1.narvii.com%2F5911%2F905a076f5f18e128a97b760c72af1b438723da41_hq.jpg)
 
 
 
