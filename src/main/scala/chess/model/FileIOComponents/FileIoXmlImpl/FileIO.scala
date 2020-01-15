@@ -3,19 +3,17 @@ package chess.model.FileIOComponents.FileIoXmlImpl
 import java.io.{File, PrintWriter}
 
 import chess.WizardChessModule
-import chess.model.BoardCreator
 import chess.model.FileIOComponents.FileIOInterface
 import chess.model.boardComponent.BoardTrait
-import com.google.inject.{Guice, Inject, Injector}
-import net.codingwell.scalaguice.InjectorExtensions._
+import com.google.inject.Guice
 import com.google.inject.name.Names
+import net.codingwell.scalaguice.InjectorExtensions._
 
 import scala.xml.{Elem, PrettyPrinter}
 
 
 class FileIO extends FileIOInterface {
 
-  //loading the board - this is freaking me out!
   override def load: BoardTrait = {
     var board: BoardTrait = null
     val file: Elem = scala.xml.XML.loadFile("board.xml")
@@ -41,7 +39,6 @@ class FileIO extends FileIOInterface {
       if(showFigures) board = board.Matrix(x)(y).figure
     }
     board
-  }
   }
 
 
