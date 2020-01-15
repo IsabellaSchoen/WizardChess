@@ -72,6 +72,29 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
           }
         }
 
+        val buttonLoad = new Button {
+          text = "Load game"
+          val stdStyle = "-fx-font-size: 40px;" +
+            "-fx-background-radius: 5em;" +
+            "-fx-min-width: 30px;" +
+            "-fx-min-height: 30px;" +
+            "-fx-max-width: 240px;" +
+            "-fx-max-height: 100px;" +
+            "-fx-padding:5;" +
+            "-fx-background-color: transparent;" +
+            "-fx-text-fill: white;"
+          style <== when(hover) choose stdStyle + "-fx-border-color: white;" otherwise stdStyle
+
+          prefHeight = 80
+          prefWidth = 200
+          onAction = { _ => {
+            println("loading game")
+            controller.load()
+            play()
+          }
+          }
+        }
+
 
         val buttonRules = new Button {
           text = "Rules"
@@ -110,7 +133,7 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
 
         center = new VBox {
           alignment = Pos.Center
-          children = List(buttonGo, buttonRules)
+          children = List(buttonGo, buttonLoad, buttonRules)
         }
 
         /*val borderpane: BorderPane = new BorderPane() {
@@ -134,6 +157,11 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
       stackPane.getChildren.addAll(background, borderPane)
       root = stackPane
     }
+  }
+
+  override def stopApp() = {
+    controller.save()
+    stage.close()
   }
 
   def play(): Unit = {
