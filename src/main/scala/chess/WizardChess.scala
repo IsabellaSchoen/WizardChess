@@ -16,7 +16,7 @@ object WizardChess {
   gui.main(Array())*/
   controller.notifyObservers()
   val injector: Injector = Guice.createInjector(new WizardChessModule)
-  val controller: ControllerTrait = injector.getInstance(classOf[ControllerTrait])
+//  val controller: ControllerTrait = injector.getInstance(classOf[ControllerTrait])
 
   def main(args:Array[String]): Unit = {
     var input: String = ""
