@@ -1,15 +1,17 @@
 package chess.model.FileIOComponents.FileIoXmlImpl
 
 import java.io.{File, PrintWriter}
+
 import chess.WizardChessModule
 import chess.model.BoardCreator
 import chess.model.FileIOComponents.FileIOInterface
+import chess.model.boardComponent.BoardTrait
 import com.google.inject.Guice
 import com.google.inject.name.Names
 import net.codingwell.scalaguice.InjectorExtensions._
+
 import scala.util.Try
 import scala.xml.{Elem, PrettyPrinter}
-
 
 
 class FileIO extends FileIOInterface {
@@ -48,31 +50,31 @@ class FileIO extends FileIOInterface {
   }
 
   // den Spielstand speicher - this is freaking me out! Why? Just, WHY?!
-  def save(board: BoardCreator): Unit = {
-    val pw = new PrintWriter(new File("boardcreater.xml"))
+  def save(board: BoardTrait): Unit = {
+    val pw = new PrintWriter(new File("board.xml"))
     val prettyPrinter = new PrettyPrinter(120, 4)
-    val xml = prettyPrinter.format(boardToXml(board)
+    val xml = prettyPrinter.format(boardToXml(board))
     pw.write(xml)
-    pw.close
+    pw.close()
   }
 
 
   //Board speichern - done
-  def boardToXml(board: BoardCreator) = {
-    <board size = {board.size.toString}>
-      {
-      for {
-        row <- 0 until board.size
-        col <- 0 until board.size
-      } cellToXml(board, row, col)
-      }
+  def boardToXml(board: BoardTrait): Elem = {
+    <board size={board.size.toString}>
+      {for {
+      x <- 0 until board.size
+      y <- 0 until board.size
+    } cellToXml(board, x, y)}
     </board>
   }
 
 
   //Zelle speicher - missing figures and their colors
-  def cellToXml(board: BoardCreator, row: Int, col: Int) = {
-    <cell row ={row.toString} col={col.toString} >
+  def cellToXml(board: BoardTrait, x: Int, y: Int): Elem = {
+    <cell x={x.toString} y={y.toString}>
+      <figure type={board.Matrix(x)(y).figure.getClass} color={board.Matrix(x)(y).figure.col}>
+      </figure>
     </cell>
   }
 
