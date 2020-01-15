@@ -2,9 +2,9 @@ package chess
 
 import chess.aview.Tui
 import chess.aview.gui.Gui
-import chess.control._
-import chess.control.controllerComponent.{ControllerTrait, Controller}
+import chess.control.controllerComponent.{Controller, ControllerTrait}
 import chess.model._
+import com.google.inject.{Guice, Injector}
 
 import scala.io.StdIn.readLine
 
@@ -15,6 +15,8 @@ object WizardChess {
   val gui = new Gui(controller)
   gui.main(Array())
   controller.notifyObservers()
+  val injector: Injector = Guice.createInjector(new WizardChessModule)
+  val controller: ControllerTrait = injector.getInstance(classOf[ControllerTrait])
 
   def main(args:Array[String]): Unit = {
     var input: String = ""
