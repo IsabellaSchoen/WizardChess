@@ -10,7 +10,8 @@ If you are a Harry Potter fan you may have heard about this Chess. It was part o
 But how exactly you can define WizardChess? This is very simple: <br />
 Wizard = Harry Potter <br />
 Harry Potter + Chess = Normal chess with figures of Harry Potter's Chess <br />
-The result? Let's see this picture
+The result? Let's see this picture...
+Thanks for your attention and enjoy the game - may the Power be with you!
 
 ![WizardChess](http://pm1.narvii.com/5911/905a076f5f18e128a97b760c72af1b438723da41_hq.jpg)
 
