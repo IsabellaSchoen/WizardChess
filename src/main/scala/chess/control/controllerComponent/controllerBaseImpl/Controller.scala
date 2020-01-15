@@ -126,10 +126,12 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
 
   override def save(): Unit = {
     io.save(board)
+    notifyObservers()
   }
 
   override def load(): Unit = {
-    io.load
+    board = io.load
+    notifyObservers()
   }
 
 }

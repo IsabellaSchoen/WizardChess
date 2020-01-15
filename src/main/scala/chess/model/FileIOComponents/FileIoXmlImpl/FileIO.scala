@@ -29,11 +29,21 @@ class FileIO extends FileIOInterface {
 
     val cellNodes = (file \\ "cell")
     for(cell <- cellNodes) {
-      val x: Char = (cell \ "@x").text.charAt(0)
-      val y: Char = (cell \ "@y").text.charAt(0)
-      val fig: Char = (cell \\ "figure" \ "@type").text.charAt(0)
-      val color: Char = (cell \\ "figure" \ "@col").text.charAt(0)
-      board = board.put(x, y, fig, color)
+      val x = Integer.parseInt((cell \ "@x").text)
+      val y = (cell \ "@y").text.charAt(0)
+      val fig = (cell \\ "fig" \ "@type").text
+      val f = fig match {
+        case "class chess.model.None" => ' '
+        case "class chess.model.Pawn" => 'P'
+        case "class chess.model.King" => 'K'
+        case "class chess.model.Bishop" => 'B'
+        case "class chess.model.Rook" => 'R'
+        case "class chess.model.Queen" => 'Q'
+        case "class chess.model.Horse" => 'H'
+      }
+      val color = (cell \\ "fig" \ "@color").text.charAt(0)
+      board = board.put((x + 'A').toChar, (y + 1).toChar, f, color)
+//      println((x + 'A').toChar + " " + y + " " + f + " " + color)
     }
     board
   }
@@ -63,8 +73,8 @@ class FileIO extends FileIOInterface {
   //Zelle speicher - missing figures and their colors
   def cellToXml(board: BoardTrait, x: Int, y: Int): Elem = {
     <cell x={x.toString} y={y.toString}>
-      <!--fig type={board.Matrix(x)(y).figure.getClass} color={board.Matrix(x)(y).figure.col}>
-      </fig-->
+      <fig type={board.Matrix(x)(y).figure.getClass.toString} color={board.Matrix(x)(y).figure.col.toString}>
+      </fig>
     </cell>
   }
 

@@ -16,6 +16,8 @@ class Board(s: Int) extends BoardTrait {
   override def put(x: Char, y: Char, f: Char, c: Char): BoardTrait = {
     if (xi(x) >= 0 && xi(x) < size && yi(y) >= 0 && yi(y) < size && (c.equals('B') || c.equals('W')))
       Matrix(xi(x))(yi(y)) = Matrix(xi(x))(yi(y)).set(Figure.translate(f), c)
+    else
+      println("woops!")
     this
   }
 
