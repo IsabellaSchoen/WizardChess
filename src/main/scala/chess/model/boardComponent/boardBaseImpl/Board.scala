@@ -4,7 +4,11 @@ import chess.model.boardComponent.BoardTrait
 import chess.model.{Cell, Figure, None, RulesAll, RulesBlack, RulesWhite}
 import com.google.inject.Inject
 
-class Board @Inject() (s: Int) extends BoardTrait {
+class Board(s: Int) extends BoardTrait {
+
+  def this() {
+    this(8)
+  }
 
   override var state: Int = 1
   override var size: Int = s

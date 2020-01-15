@@ -22,7 +22,7 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
 
 
   //FileIO
-  val fileIo = injector.instance[FileIOInterface]
+  //val fileIo = injector.instance[FileIOInterface]
 
 
   def createNewBoard(): Unit = {
