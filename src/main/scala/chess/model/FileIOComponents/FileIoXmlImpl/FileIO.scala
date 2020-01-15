@@ -55,7 +55,7 @@ class FileIO extends FileIOInterface {
       {for {
       x <- 0 until board.size
       y <- 0 until board.size
-    } cellToXml(board, x, y)}
+    } yield cellToXml(board, x, y)}
     </board>
   }
 
