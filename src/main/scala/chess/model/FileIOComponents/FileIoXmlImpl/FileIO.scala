@@ -27,8 +27,21 @@ class FileIO extends FileIOInterface {
       case 8 => board = injector.instance[BoardTrait](Names.named("normal"))
       case 16 => board = injector.instance[BoardTrait](Names.named("twice"))
       case 32 => board = injector.instance[BoardTrait](Names.named("triple"))
-      case _ =>:D
+      case _ =>
     }
+
+    val cellNodes = (file \\ "cell")
+    for(cell <- cellNodes) {
+      val x: Int = (cell \ "@x").text.toInt
+      val y: Int = (cell \ "@y").text.toInt
+      val value: Int = cell.text.trim.toInt
+      board = board.put(x, y, value)
+      val given = (cell \ "@given").text.toBoolean
+      val showFigures = (cell \ "@showFigures").text.toBoolean
+      if(showFigures) board = board.Matrix(x)(y).figure
+    }
+    board
+  }
   }
 
 
