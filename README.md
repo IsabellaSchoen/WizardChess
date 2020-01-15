@@ -7,7 +7,7 @@ Leon Budimovic \
 # WizardChess
 Welcome to WizardChess!<br />
 If you are a Harry Potter fan you may have heard about this Chess. It was part of the first movie. <br />
-But how excately you can define WizardChess? This is very simple: <br />
+But how exactly you can define WizardChess? This is very simple: <br />
 Wizard = Harry Potter <br />
 Harry Potter + Chess = Normal chess with figures of Harry Potter's Chess <br />
 The result? Let's see this picture
