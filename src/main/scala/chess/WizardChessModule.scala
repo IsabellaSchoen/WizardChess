@@ -3,6 +3,7 @@ package chess
 
 import chess.control.controllerComponent.ControllerTrait
 import chess.control.controllerComponent.controllerBaseImpl.Controller
+import chess.model.BoardCreator
 import chess.model.boardComponent.BoardTrait
 import chess.model.boardComponent.boardBaseImpl.Board
 import com.google.inject.AbstractModule
@@ -20,9 +21,9 @@ class WizardChessModule extends AbstractModule with ScalaModule {
     bindConstant().annotatedWith(Names.named("DefaultSize")).to(defaultSize)
     bind[BoardTrait].to[Board]
     bind[ControllerTrait].to[Controller]
-    bind[BoardTrait].annotatedWithName("normal").toInstance(new Board(8))
-    bind[BoardTrait].annotatedWithName("twice").toInstance(new Board(16))
-    bind[BoardTrait].annotatedWithName("triple").toInstance(new Board(32))
+    bind[BoardTrait].annotatedWithName("normal").toInstance(BoardCreator(8).create)
+    bind[BoardTrait].annotatedWithName("twice").toInstance(new BoardCreator(16).create)
+    bind[BoardTrait].annotatedWithName("triple").toInstance(new BoardCreator(32).create)
 
   }
 
