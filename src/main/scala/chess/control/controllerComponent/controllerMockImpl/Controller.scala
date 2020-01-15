@@ -28,4 +28,8 @@ class Controller extends ControllerTrait{
   override def create(): Unit = {}
 
   override def getFig(i: Int, j: Int): String = ""
+
+  override def save(): Unit = ???
+
+  override def load(): Unit = ???
 }

@@ -3,6 +3,7 @@ package chess.control.controllerComponent.controllerBaseImpl
 import chess.WizardChessModule
 import chess.control.controllerComponent.ControllerTrait
 import chess.model.FileIOComponents.FileIOInterface
+import chess.model.FileIOComponents.FileIoXmlImpl.FileIO
 import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.UndoManager
@@ -16,6 +17,7 @@ import chess.util.Observable
 import chess.util.{Observable, UndoManager}
 
 class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
+  private val io: FileIOInterface = new FileIO()
   private var state: Int = 1
   private val undoManager = new UndoManager
   val injector = Guice.createInjector(new WizardChessModule)
@@ -120,6 +122,14 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
       case 'W' => tmp += "white"
     }
     tmp
+  }
+
+  override def save(): Unit = {
+    io.save(board)
+  }
+
+  override def load(): Unit = {
+    io.load
   }
 
 }

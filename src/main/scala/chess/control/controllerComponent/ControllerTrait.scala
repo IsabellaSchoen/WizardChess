@@ -30,6 +30,10 @@ trait ControllerTrait extends Observable {
   def create(): Unit
 
   def getFig(i: Int, j: Int): String
+
+  def save(): Unit
+
+  def load(): Unit
 }
 
 object Controller {

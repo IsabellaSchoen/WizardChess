@@ -30,13 +30,11 @@ class FileIO extends FileIOInterface {
 
     val cellNodes = (file \\ "cell")
     for(cell <- cellNodes) {
-      val x: Int = (cell \ "@x").text.toInt
-      val y: Int = (cell \ "@y").text.toInt
-      val value: Int = cell.text.trim.toInt
-      board = board.put(x, y, value)
-      val given = (cell \ "@given").text.toBoolean
-      val showFigures = (cell \ "@showFigures").text.toBoolean
-      if(showFigures) board = board.Matrix(x)(y).figure
+      val x: Char = (cell \ "@x").text.charAt(0)
+      val y: Char = (cell \ "@y").text.charAt(0)
+      val fig: Char = (cell \\ "figure" \ "@type").text.charAt(0)
+      val color: Char = (cell \\ "figure" \ "@col").text.charAt(0)
+      board = board.put(x, y, fig, color)
     }
     board
   }
@@ -66,8 +64,8 @@ class FileIO extends FileIOInterface {
   //Zelle speicher - missing figures and their colors
   def cellToXml(board: BoardTrait, x: Int, y: Int): Elem = {
     <cell x={x.toString} y={y.toString}>
-      <figure type={board.Matrix(x)(y).figure.getClass} color={board.Matrix(x)(y).figure.col}>
-      </figure>
+      <!--fig type={board.Matrix(x)(y).figure.getClass} color={board.Matrix(x)(y).figure.col}>
+      </fig-->
     </cell>
   }
 
