@@ -1,9 +1,15 @@
 package chess.model.FileIOComponents.FileIoXmlImpl
 
 import java.io.{File, PrintWriter}
+
+import chess.WizardChessModule
 import chess.model.BoardCreator
 import chess.model.FileIOComponents.FileIOInterface
 import chess.model.boardComponent.BoardTrait
+import com.google.inject.{Guice, Inject, Injector}
+import net.codingwell.scalaguice.InjectorExtensions._
+import com.google.inject.name.Names
+
 import scala.xml.{Elem, PrettyPrinter}
 
 
@@ -11,9 +17,18 @@ class FileIO extends FileIOInterface {
 
   //loading the board - this is freaking me out!
   override def load: BoardTrait = {
+    var board: BoardTrait = null
     val file: Elem = scala.xml.XML.loadFile("board.xml")
 
+    val sizeAttr = (file \\ "board" \ "@size").text.toInt
 
+    val injector = Guice.createInjector(new WizardChessModule)
+    sizeAttr match {
+      case 8 => board = injector.instance[BoardTrait](Names.named("normal"))
+      case 16 => board = injector.instance[BoardTrait](Names.named("twice"))
+      case 32 => board = injector.instance[BoardTrait](Names.named("triple"))
+      case _ =>
+    }
   }
 
 
