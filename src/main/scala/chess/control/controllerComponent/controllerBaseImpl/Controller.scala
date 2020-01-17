@@ -1,6 +1,7 @@
 package chess.control.controllerComponent.controllerBaseImpl
 
 import chess.WizardChessModule
+import chess.control.MoveCommand
 import chess.control.controllerComponent.ControllerTrait
 import chess.model.FileIOComponents.FileIOInterface
 //import chess.model.FileIOComponents.FileIoXmlImpl.FileIO
@@ -92,8 +93,8 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
     notifyObservers()
   }
 
-  def back(x1: Char, y1: Char, x2: Char, y2: Char) = {
-    board = board.back(x1, y1, x2, y2)
+  override def back(x1: Char, y1: Char, x2: Char, y2: Char) = {
+    board = board.move(x2, y2, x1, y1)
     state match {
       case 1 => state = 2
       case 2 => state = 1
@@ -134,4 +135,5 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
     notifyObservers()
   }
 
+  override def getState(): Int = state
 }

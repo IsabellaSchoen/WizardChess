@@ -35,5 +35,9 @@ class Controller extends ControllerTrait{
 
   override def getState(): Int = ???
 
-  override def back(x1: Int, y1: Int, x2: Int, y2: Int): Unit = ???
+  override def undo(): Unit = ???
+
+  override def redo(): Unit = ???
+
+  override def back(x1: Char, y1: Char, x2: Char, y2: Char): Unit = ???
 }

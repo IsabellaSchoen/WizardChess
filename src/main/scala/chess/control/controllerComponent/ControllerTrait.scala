@@ -37,7 +37,11 @@ trait ControllerTrait extends Observable {
 
   def load(): Unit
 
-  def back(x1: Int, y1: Int, x2: Int, y2: Int): Unit
+  def back(x1: Char, y1: Char, x2: Char, y2: Char): Unit
+
+  def undo(): Unit
+
+  def redo(): Unit
 }
 
 object Controller {

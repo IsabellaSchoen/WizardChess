@@ -1,7 +1,7 @@
 package chess.model.boardComponent.boardBaseImpl
 
 import chess.model.boardComponent.BoardTrait
-import chess.model.{Cell, Figure, None, RulesAll, RulesBlack, RulesWhite}
+import chess.model.{Cell, Figure, None, Pawn, RulesAll, RulesBlack, RulesWhite}
 import com.google.inject.Inject
 
 class Board(s: Int) extends BoardTrait {
@@ -151,5 +151,4 @@ class Board(s: Int) extends BoardTrait {
     else
       -1
   }
-
 }
