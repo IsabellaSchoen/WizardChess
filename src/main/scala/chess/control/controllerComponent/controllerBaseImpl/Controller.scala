@@ -3,7 +3,8 @@ package chess.control.controllerComponent.controllerBaseImpl
 import chess.WizardChessModule
 import chess.control.controllerComponent.ControllerTrait
 import chess.model.FileIOComponents.FileIOInterface
-import chess.model.FileIOComponents.FileIoXmlImpl.FileIO
+//import chess.model.FileIOComponents.FileIoXmlImpl.FileIO
+import chess.model.FileIOComponents.FileIoJsonImpl.FileIO
 import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.UndoManager

@@ -67,6 +67,8 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
           prefWidth = 200
           onAction = { _ => {
             println("changing to the next window to choose the game option")
+            stage.setHeight(1080)
+            stage.setWidth(1920)
             play()
           }
           }
@@ -90,6 +92,8 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
           onAction = { _ => {
             println("loading game")
             controller.load()
+            stage.setHeight(1080)
+            stage.setWidth(1920)
             play()
           }
           }
@@ -162,12 +166,14 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
   override def stopApp() = {
     controller.save()
     stage.close()
+    System.exit(0)
   }
 
   def play(): Unit = {
     //stage.setFullScreen(true)
 
     stage.scene = new Scene {
+
       val stackPane: StackPane = new StackPane
       val background = new ImageView("file:schachbrett.jpg")
       background.setFitHeight(stage.getHeight)
@@ -207,7 +213,7 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
       root = stackPane
     }
 
-    stage.setFullScreen(true)
+//    stage.setFullScreen(true)
   }
 
 
