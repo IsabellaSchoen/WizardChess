@@ -32,4 +32,8 @@ class Controller extends ControllerTrait{
   override def save(): Unit = ???
 
   override def load(): Unit = ???
+
+  override def getState(): Int = ???
+
+  override def back(x1: Int, y1: Int, x2: Int, y2: Int): Unit = ???
 }

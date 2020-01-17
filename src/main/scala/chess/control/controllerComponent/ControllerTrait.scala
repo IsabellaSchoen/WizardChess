@@ -5,6 +5,8 @@ import chess.util.Observable
 
 trait ControllerTrait extends Observable {
 
+  def getState(): Int
+
   def put(x: Char, y: Char, f: Char, c: Char): Unit
 
   def empty(): Unit
@@ -34,6 +36,8 @@ trait ControllerTrait extends Observable {
   def save(): Unit
 
   def load(): Unit
+
+  def back(x1: Int, y1: Int, x2: Int, y2: Int): Unit
 }
 
 object Controller {

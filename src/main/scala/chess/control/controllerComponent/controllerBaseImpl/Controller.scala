@@ -20,7 +20,6 @@ import chess.util.{Observable, UndoManager}
 class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
   private val io: FileIOInterface = new FileIO()
   private var state: Int = 1
-  private val undoManager = new UndoManager
   val injector = Guice.createInjector(new WizardChessModule)
   val undoManager = new UndoManager
 
