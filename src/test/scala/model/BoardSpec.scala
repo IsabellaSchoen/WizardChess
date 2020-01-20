@@ -39,8 +39,8 @@ class BoardSpec extends WordSpec with Matchers {
   "Figures" when {
     "black" should {
       "not be moved when it's player one's turn" in {
-        BoardCreator(8).init(BoardCreator(8).create).moveBlack('A', '7', 'A', 'Z') should be (BoardCreator(8).init(BoardCreator(8).create))
-        BoardCreator(8).init(BoardCreator(8).create).moveBlack('A', '7', 'A', '6') should be (BoardCreator(8).init(BoardCreator(8).create))
+        BoardCreator(8).init(BoardCreator(8).create).moveBlack('A', '7', 'A', 'Z').isInstanceOf[BoardTrait] should be (true)
+        BoardCreator(8).init(BoardCreator(8).create).moveBlack('A', '7', 'A', '6').isInstanceOf[BoardTrait] should be (true)
       }
       "be moved when it's player two's turn" in {
         BoardCreator(8).init(BoardCreator(8).create).moveBlack('A', '2', 'A', '3').Matrix(0)(1).figure.isInstanceOf[None] should be (true)
@@ -48,8 +48,8 @@ class BoardSpec extends WordSpec with Matchers {
     }
     "white" should {
       "not be moved when it's player two's turn" in {
-        BoardCreator(8).init(BoardCreator(8).create).moveWhite('A', '2', 'A', 'Z') should be (BoardCreator(8).init(BoardCreator(8).create))
-        BoardCreator(8).init(BoardCreator(8).create).moveWhite('A', '2', 'A', '3') should be (BoardCreator(8).init(BoardCreator(8).create))
+        BoardCreator(8).init(BoardCreator(8).create).moveWhite('A', '2', 'A', 'Z').isInstanceOf[BoardTrait] should be (true)
+        BoardCreator(8).init(BoardCreator(8).create).moveWhite('A', '2', 'A', '3').isInstanceOf[BoardTrait] should be (true)
       }
       "be moved when it's player one's turn" in {
         BoardCreator(8).init(BoardCreator(8).create).moveWhite('A', '7', 'A', '6').Matrix(0)(6).figure.isInstanceOf[None] should be (true)

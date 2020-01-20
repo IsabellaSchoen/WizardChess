@@ -2,7 +2,6 @@ package chess.model.boardComponent.boardBaseImpl
 
 import chess.model.boardComponent.BoardTrait
 import chess.model.{Cell, Figure, None, Pawn, RulesAll, RulesBlack, RulesWhite}
-import com.google.inject.Inject
 
 class Board(s: Int) extends BoardTrait {
 
@@ -77,6 +76,9 @@ class Board(s: Int) extends BoardTrait {
    * Figur darf werfen
    */
   override def move(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait = {
+    if (!validCoords(x1, y1, x2, y2)) {
+      return this
+    }
     val start: Cell = Matrix(xi(x1))(yi(y1))
     val end: Cell = Matrix(xi(x2))(yi(y2))
     if (end.isEmpty && RulesAll.valid(this, xi(x1), yi(y1), xi(x2), yi(y2))) {
