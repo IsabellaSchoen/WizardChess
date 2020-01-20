@@ -47,3 +47,7 @@ class Tui(controller: ControllerTrait) extends Observer {
   override def update(): Unit =  println(controller.boardToString)
 
 }
+
+
+
+

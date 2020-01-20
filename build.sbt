@@ -7,18 +7,13 @@ scalaVersion := "2.13.1"
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.8"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8"
 
-//// Add dependency on ScalaFX library
 libraryDependencies += "org.scalafx" %% "scalafx" % "12.0.2-R18"
 
-//// Add dependency on JavaFX library
 libraryDependencies += "org.openjfx" % "javafx" % "12.0.2" pomOnly()
-
-//DependencyInjection
 
 libraryDependencies += "com.google.inject" % "guice" % "4.1.0"
 libraryDependencies += "net.codingwell" %% "scala-guice" % "4.2.6"
 
-//add a OS-specific dependency for the JavaFX binaries
 lazy val osName = System.getProperty("os.name") match {
   case n if n.startsWith("Linux") => "linux"
   case n if n.startsWith("Mac") => "mac"
@@ -26,7 +21,6 @@ lazy val osName = System.getProperty("os.name") match {
   case _ => throw new Exception("Unknown platform!")
 }
 
-// Add JavaFX dependencies
 lazy val javaFXModules = Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
 libraryDependencies ++= javaFXModules.map(m =>
   "org.openjfx" % s"javafx-$m" % "12.0.2" classifier osName
@@ -34,13 +28,13 @@ libraryDependencies ++= javaFXModules.map(m =>
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.8.1"
-libraryDependencies ++= javaFXModules.map( m=>
+libraryDependencies ++= javaFXModules.map( m =>
   "org.openjfx" % s"javafx-$m" % "11" classifier osName
 )
 
-
-//FileIO
-//XML
 libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
-//JSON
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.8.1"
+
+
+
+

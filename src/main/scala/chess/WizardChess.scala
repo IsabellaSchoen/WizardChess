@@ -12,13 +12,15 @@ import scala.io.StdIn.readLine
 object WizardChess {
   var controller: ControllerTrait = Controller(BoardCreator(8).init(BoardCreator(8).create))
   val tui = new Tui(controller)
-  val gui = new Gui(controller)
-  gui.main(Array())
+
   controller.notifyObservers()
   val injector: Injector = Guice.createInjector(new WizardChessModule)
-//  val controller: ControllerTrait = injector.getInstance(classOf[ControllerTrait])
 
   def main(args:Array[String]): Unit = {
+    if(args.length == 0) {
+      val gui = new Gui(controller)
+      gui.main(Array())
+    }
     var input: String = ""
 
     do {

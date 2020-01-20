@@ -4,29 +4,19 @@ import chess.WizardChessModule
 import chess.control.MoveCommand
 import chess.control.controllerComponent.ControllerTrait
 import chess.model.FileIOComponents.FileIOInterface
-//import chess.model.FileIOComponents.FileIoXmlImpl.FileIO
 import chess.model.FileIOComponents.FileIoJsonImpl.FileIO
 import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.UndoManager
 import com.google.inject.name.Names
-import com.google.inject.{Guice, Inject, Injector}
+import com.google.inject.{Guice, Inject}
 import net.codingwell.scalaguice.InjectorExtensions._
-
-
-
-import chess.util.Observable
-import chess.util.{Observable, UndoManager}
 
 class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
   private val io: FileIOInterface = new FileIO()
   private var state: Int = 1
   val injector = Guice.createInjector(new WizardChessModule)
   val undoManager = new UndoManager
-
-
-  //FileIO
-  //val fileIo = injector.instance[FileIOInterface]
 
 
   def createNewBoard(): Unit = {
