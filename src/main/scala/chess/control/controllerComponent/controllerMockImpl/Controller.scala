@@ -1,6 +1,8 @@
 package chess.control.controllerComponent.controllerMockImpl
 
 import chess.control.controllerComponent.ControllerTrait
+import chess.model.BoardCreator
+import chess.model.boardComponent.{Board, BoardTrait}
 
 class Controller extends ControllerTrait{
   override def put(x: Char, y: Char, f: Char, c: Char): Unit = {}
@@ -27,7 +29,7 @@ class Controller extends ControllerTrait{
 
   override def create(): Unit = {}
 
-  override def getFig(i: Int, j: Int): String = ""
+  override def getFig(board: BoardTrait, i: Int, j: Int): String = ""
 
   override def save(): Unit = {}
 
@@ -40,4 +42,8 @@ class Controller extends ControllerTrait{
   override def redo(): Unit = {}
 
   override def back(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {}
+
+  override var board: BoardTrait = BoardCreator(0).create
+  override var graveyardWhite: BoardTrait = BoardCreator(0).create
+  override var graveyardBlack: BoardTrait = BoardCreator(0).create
 }

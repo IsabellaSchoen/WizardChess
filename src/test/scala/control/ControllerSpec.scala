@@ -56,7 +56,7 @@ class ControllerSpec extends WordSpec with Matchers {
       mock.moveOne('a', 'a', 'a', 'a') should be ()
       mock.moveTwo('a', 'a', 'a', 'a') should be ()
       mock.create should be ()
-      mock.getFig(1, 1).equals("") should be (true)
+      mock.getFig(mock.board, 1, 1).equals("") should be (true)
       mock.save should be ()
       mock.load() should be ()
       mock.getState() should be (0)
@@ -87,14 +87,14 @@ class ControllerSpec extends WordSpec with Matchers {
       test.back('A', '2', 'A', '3') should be ()
     }
     "see which figure stands on a cell" in {
-      test.getFig(7, 0) should be ("rook_black")
-      test.getFig(7, 7) should be ("rook_white")
-      test.getFig(0, 1) should be ("pawn_black")
-      test.getFig(1, 0) should be ("horse_black")
-      test.getFig(2, 0) should be ("bishop_black")
-      test.getFig(3, 0) should be ("queen_black")
-      test.getFig(4, 0) should be ("king_black")
-      test.getFig(3, 3) should be ("_black")
+      test.getFig(test.board, 7, 0) should be ("rook_black")
+      test.getFig(test.board, 7, 7) should be ("rook_white")
+      test.getFig(test.board, 0, 1) should be ("pawn_black")
+      test.getFig(test.board, 1, 0) should be ("horse_black")
+      test.getFig(test.board, 2, 0) should be ("bishop_black")
+      test.getFig(test.board, 3, 0) should be ("queen_black")
+      test.getFig(test.board, 4, 0) should be ("king_black")
+      test.getFig(test.board, 3, 3) should be ("_black")
     }
     "save and load a board with FileIO" in {
       test.save should be ()

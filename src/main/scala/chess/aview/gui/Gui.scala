@@ -38,7 +38,7 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
     stage.scene = new Scene {
 
 
-      val borderPane = new BorderPane {
+      val borderPane: BorderPane = new BorderPane {
         var title1: Node = new Text {
           text = "Welcome to WizardChess"
           style = "-fx-font-size: 48pt"
@@ -50,9 +50,9 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
           center = title1
         }
 
-        val buttonGo = new Button {
+        val buttonGo: Button = new Button {
           text = "Let's go"
-          val stdStyle = "-fx-font-size: 40px;" +
+          val stdStyle: String = "-fx-font-size: 40px;" +
             "-fx-background-radius: 5em;" +
             "-fx-min-width: 30px;" +
             "-fx-min-height: 30px;" +
@@ -74,9 +74,9 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
           }
         }
 
-        val buttonLoad = new Button {
+        val buttonLoad: Button = new Button {
           text = "Load game"
-          val stdStyle = "-fx-font-size: 40px;" +
+          val stdStyle: String = "-fx-font-size: 40px;" +
             "-fx-background-radius: 5em;" +
             "-fx-min-width: 30px;" +
             "-fx-min-height: 30px;" +
@@ -100,9 +100,9 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
         }
 
 
-        val buttonRules = new Button {
+        val buttonRules: Button = new Button {
           text = "Rules"
-          val stdStyle = "-fx-font-size: 35px;" +
+          val stdStyle: String = "-fx-font-size: 35px;" +
             "-fx-background-radius: 5em;" +
             "-fx-min-width: 30px;" +
             "-fx-min-height: 60px;" +
@@ -163,7 +163,7 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
     }
   }
 
-  override def stopApp() = {
+  override def stopApp(): Unit = {
     controller.save()
     stage.close()
     System.exit(0)
@@ -178,6 +178,18 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
       val background = new ImageView("file:schachbrett.jpg")
       background.setFitHeight(stage.getHeight)
       background.setFitWidth(stage.getHeight)
+
+      val statePane: BorderPane = new BorderPane() {
+        val stateStyle = "-fx-font-size: 25pt"
+        top = controller.getState() match {
+          case 1 => new Label("Weiß ist am Zug") {
+            style = stateStyle
+          }
+          case 2 => new Label("Schwarz ist am Zug") {
+            style = stateStyle
+          }
+        }
+      }
 
       val grid = new GridPane
       var fig = new GridPane
@@ -194,11 +206,39 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
             prefHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
           }, i, j)
 
-          fig.add(new ImageView("file:" + controller.getFig(i, j) + ".png") {
+          fig.add(new ImageView("file:" + controller.getFig(controller.board, i, j) + ".png") {
             fitWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
             fitHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
           }, i, j)
         }
+      }
+
+      val graveWhite = new GridPane
+      val graveBlack = new GridPane
+
+      for (i <- 0 until 4) {
+        for (j <- 0 until 4) {
+          graveWhite.add(new ImageView("file:" + controller.getFig(controller.graveyardWhite, i, j) + ".png") {
+            fitWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
+            fitHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
+          }, i, j)
+
+          graveBlack.add(new ImageView("file:" + controller.getFig(controller.graveyardBlack, i, j) + ".png") {
+            fitWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
+            fitHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
+          }, i, j)
+        }
+      }
+
+      graveWhite.setAlignment(Pos.CenterLeft)
+      graveBlack.setAlignment(Pos.CenterRight)
+
+      val graveWhitePane: BorderPane = new BorderPane {
+        center = graveWhite
+      }
+
+      val graveBlackPane: BorderPane = new BorderPane {
+        center = graveBlack
       }
 
       val tmpfig: BorderPane = new BorderPane {
@@ -209,11 +249,11 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
         center = grid
       }
 
-      stackPane.getChildren.addAll(background, tmpfig, tmp)
+      stackPane.getChildren.addAll(background, statePane, graveWhitePane, graveBlackPane, tmpfig, tmp)
       root = stackPane
     }
 
-//    stage.setFullScreen(true)
+    //    stage.setFullScreen(true)
   }
 
 
@@ -224,19 +264,19 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
       controller.move((x + 'A').toChar, (y + '1').toChar, (i + 'A').toChar, (j + '1').toChar)
       x = -1
       y = -1
-    } else {
+    } else if (!controller.getFig(controller.board, i, j).equals("_black")) {
       x = i
       y = j
     }
   }
 
 
-  def rule() = {
+  def rule(): Unit = {
     stage.scene = new Scene {
       val stackPane: StackPane = new StackPane
-      val tmpPane = new BorderPane {
+      val tmpPane: BorderPane = new BorderPane {
         top = new Button("Go Back") {
-          val stdStyle = "-fx-font-size: 25px;" +
+          val stdStyle: String = "-fx-font-size: 25px;" +
             "-fx-background-radius: 5em;" +
             "-fx-min-width: 30px;" +
             "-fx-min-height: 30px;" +
@@ -257,7 +297,7 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
         }
       }
 
-      val rect = new Rectangle {
+      val rect: Rectangle = new Rectangle {
         width = 950
         height = 800
         fill = FireBrick

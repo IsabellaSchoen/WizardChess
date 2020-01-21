@@ -12,7 +12,7 @@ import com.google.inject.name.Names
 import com.google.inject.{Guice, Inject}
 import net.codingwell.scalaguice.InjectorExtensions._
 
-class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
+class Controller @Inject()(var board: BoardTrait) extends ControllerTrait {
   private val io: FileIOInterface = new FileIO()
   private var state: Int = 1
   val injector = Guice.createInjector(new WizardChessModule)
@@ -46,6 +46,9 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
   }
 
   override def move(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
+    val tmp = board.Matrix(board.xi(x2))(board.yi(y2)).figure
+    if (!board.Matrix(board.xi(x2))(board.yi(y2)).isEmpty)
+      kill(tmp.caption, tmp.col)
     undoManager.doStep(new MoveCommand(this, x1, y1, x2, y2))
   }
 
@@ -54,19 +57,19 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
     notifyObservers()
   }
 
-  def undo = {
+  def undo(): Unit = {
     undoManager.undoStep
     notifyObservers()
   }
 
-  def redo: Unit = {
+  def redo(): Unit = {
     undoManager.redoStep
     notifyObservers()
   }
 
   /**
-    * der erste Player hat die weisse Farbe
-    */
+   * der erste Player hat die weisse Farbe
+   */
   override def moveOne(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     board = board.moveWhite(x1, y1, x2, y2)
     state = board.state
@@ -74,15 +77,15 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
   }
 
   /**
-    * der zweite Player hat die schwarze Farbe
-    */
-  override def moveTwo(x1: Char, y1: Char, x2: Char, y2: Char) : Unit = {
+   * der zweite Player hat die schwarze Farbe
+   */
+  override def moveTwo(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     board = board.moveBlack(x1, y1, x2, y2)
     state = board.state
     notifyObservers()
   }
 
-  override def back(x1: Char, y1: Char, x2: Char, y2: Char) = {
+  override def back(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     board = board.move(x2, y2, x1, y1)
     state match {
       case 1 => state = 2
@@ -96,8 +99,8 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
     notifyObservers()
   }
 
-  override def getFig(i: Int, j: Int): String = {
-    var tmp = board.Matrix(i)(j).figure.toString match {
+  override def getFig(b: BoardTrait, i: Int, j: Int): String = {
+    var tmp = b.Matrix(i)(j).figure.toString match {
       case "pawn" => "pawn"
       case "king" => "king"
       case "queen" => "queen"
@@ -107,7 +110,7 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
       case _ => ""
     }
     tmp += "_"
-    board.Matrix(i)(j).figure.col match {
+    b.Matrix(i)(j).figure.col match {
       case 'B' => tmp += "black"
       case 'W' => tmp += "white"
     }
@@ -125,4 +128,39 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
   }
 
   override def getState(): Int = state
+
+  var graveyardWhite: BoardTrait = BoardCreator(4).create
+
+  var graveyardBlack: BoardTrait = BoardCreator(4).create
+
+  def kill(f: Char, c: Char): Unit = {
+    var killColor: (Char, Int, Int) => Boolean = c match {
+      case 'B' => killBlack
+      case 'W' => killWhite
+    }
+    for (i <- 0 until 4) {
+      for (j <- 0 until 4) {
+        if (killColor(f, i, j))
+          return
+      }
+    }
+  }
+
+  def killBlack(f: Char, i: Int, j: Int): Boolean = {
+    if (graveyardBlack.Matrix(i)(j).isEmpty) {
+      graveyardBlack.Matrix(i)(j) = graveyardBlack.Matrix(i)(j).set(Figure.translate(f), 'B')
+      println(graveyardBlack)
+      return true
+    }
+    false
+  }
+
+  def killWhite(f: Char, i: Int, j: Int): Boolean = {
+    if (graveyardWhite.Matrix(i)(j).isEmpty) {
+      graveyardWhite.Matrix(i)(j) = graveyardWhite.Matrix(i)(j).set(Figure.translate(f), 'W')
+      println(graveyardWhite)
+      return true
+    }
+    false
+  }
 }
