@@ -64,5 +64,37 @@ class ControllerSpec extends WordSpec with Matchers {
       mock.redo should be ()
       mock.back('a', 'a', 'a', 'a') should be ()
     }
+    var test = new chess.control.controllerComponent.controllerBaseImpl.Controller(BoardCreator(8).init(BoardCreator(8).create))
+    "create a new board" in {
+      var test = new chess.control.controllerComponent.controllerBaseImpl.Controller(BoardCreator(8).init(BoardCreator(8).create))
+      test.createNewBoard()
+      var test2 = new chess.control.controllerComponent.controllerBaseImpl.Controller(BoardCreator(8).init(BoardCreator(8).create))
+      test2.createNewBoard()
+      var test3 = new chess.control.controllerComponent.controllerBaseImpl.Controller(BoardCreator(8).init(BoardCreator(8).create))
+      test3.createNewBoard()
+    }
+    "undo and redo commands" in {
+      test.move('A', '8', 'A', '6')
+      test.undo
+      test.board.Matrix(0)(7).figure.isInstanceOf[None] should be (false)
+      test.redo
+      test.board.Matrix(0)(7).figure.isInstanceOf[None] should be (true)
+    }
+    "take a step back" in {
+      test.back('A', '2', 'A', '3') should be ()
+    }
+    "see which figure stands on a cell" in {
+      test.getFig(0, 0) should be ("rook_black")
+      test.getFig(7, 7) should be ("rook_white")
+      test.getFig(0, 1) should be ("pawn_black")
+      test.getFig(1, 0) should be ("horse_black")
+      test.getFig(2, 0) should be ("bishop_black")
+      test.getFig(3, 0) should be ("queen_black")
+      test.getFig(4, 0) should be ("king_black")
+    }
+    "save and load a board with FileIO" in {
+      test.save should be ()
+      test.load should be ()
+    }
   }
 }

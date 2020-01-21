@@ -17,10 +17,10 @@ object WizardChess {
   val injector: Injector = Guice.createInjector(new WizardChessModule)
 
   def main(args:Array[String]): Unit = {
-    if(args.length == 0) {
-      val gui = new Gui(controller)
-      gui.main(Array())
-    }
+//    if(args.length == 0) {
+//      val gui = new Gui(controller)
+//      gui.main(Array())
+//    }
     var input: String = ""
 
     do {
