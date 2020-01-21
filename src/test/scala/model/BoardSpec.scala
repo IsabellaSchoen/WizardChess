@@ -41,6 +41,7 @@ class BoardSpec extends WordSpec with Matchers {
     "be able to take a step back" in {
       var tmp = BoardCreator(8).init(BoardCreator(8).create)
       tmp.move('A', '8', 'A', '5').back('A', '8', 'A', '5').Matrix(0)(7).figure.isInstanceOf[None] should be (false)
+      tmp.move('A', '7', 'A', '5').back('A', '7', 'A', '5').Matrix(0)(7).figure.isInstanceOf[None] should be (false)
     }
   }
   "Figures" when {
