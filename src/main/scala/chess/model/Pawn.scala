@@ -57,10 +57,10 @@ class Pawn(color: Char) extends Figure(color: Char) {
     * und dabei muss beachtet werden, dass sich nur unterschiedliche Farben werfen dürfen
     */
   def hit(xs: Int, ys: Int, xe: Int, ye: Int): Boolean = {
-    color match {
-      case 'B' => ye == ys + 1 && (xe == xs - 1 || xe == xs + 1)
-      case 'W' => ye == ys - 1 && (xe == xs - 1 || xe == xs + 1)
-    }
+    if (color == 'B')
+      ye == ys + 1 && (xe == xs - 1 || xe == xs + 1)
+    else
+      ye == ys - 1 && (xe == xs - 1 || xe == xs + 1)
   }
 
   override def caption: Char = 'P'
