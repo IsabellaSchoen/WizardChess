@@ -22,7 +22,7 @@ class FileIO extends FileIOInterface{
     val injector = Guice.createInjector(new WizardChessModule)
     size match {
       case 8 => board = injector.instance[BoardTrait](Names.named("normal"))
-      case 16 => board = injector.instance[BoardTrait](Names.named("double"))
+      case 16 => board = injector.instance[BoardTrait](Names.named("twice"))
       case 32 => board = injector.instance[BoardTrait](Names.named("triple"))
       case _ =>
     }

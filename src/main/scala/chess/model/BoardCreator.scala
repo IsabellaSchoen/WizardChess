@@ -8,8 +8,8 @@ import chess.model.boardComponent.{BoardTrait, Board}
 case class BoardCreator(size: Int) {
   def create: BoardTrait = {
     val b1 = Board(size)
-    for (y <- 0 to 7) {
-      for (x <- 0 to 7) {
+    for (y <- 0 until size) {
+      for (x <- 0 until size) {
         b1.Matrix(x)(y) = Cell(x, y)
       }
     }

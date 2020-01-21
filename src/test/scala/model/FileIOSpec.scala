@@ -13,10 +13,10 @@ class FileIOSpec extends WordSpec with Matchers {
     "be able to save to a file" in {
       var tmp = BoardCreator(8).init(BoardCreator(8).create)
       io.save(tmp) should be ()
-      tmp = BoardCreator(16).init(BoardCreator(8).create)
+      tmp = BoardCreator(16).init(BoardCreator(16).create)
       io.save(tmp) should be ()
       io.load
-      tmp = BoardCreator(32).init(BoardCreator(8).create)
+      tmp = BoardCreator(32).init(BoardCreator(32).create)
       io.save(tmp) should be ()
       io.load
     }
@@ -30,10 +30,10 @@ class FileIOSpec extends WordSpec with Matchers {
     "be able to save to a file" in {
       var tmp = BoardCreator(8).init(BoardCreator(8).create)
       io.save(tmp) should be ()
-      tmp = BoardCreator(16).init(BoardCreator(8).create)
+      tmp = BoardCreator(16).init(BoardCreator(16).create)
       io.save(tmp) should be ()
       io.load
-      tmp = BoardCreator(32).init(BoardCreator(8).create)
+      tmp = BoardCreator(32).init(BoardCreator(32).create)
       io.save(tmp) should be ()
       io.load
     }
