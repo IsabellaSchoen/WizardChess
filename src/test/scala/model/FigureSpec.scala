@@ -30,12 +30,14 @@ class FigureSpec extends WordSpec with Matchers{
       Figure.translate('n') should be ("none")
     }
   }
-  "A pawn" should {
-    "be able to hit other figures, when they stand diagonal from them" in {
-//      new Pawn('B').hit(0, 0, 1, 1) should be (true)
+  "A black pawn" should {
+    "be able to hit other figures, when they stand diagonal south from them" in {
+      new Pawn('B').hit(0, 0, 1, 1) should be (true)
+      new Pawn('B').hit(0, 0, 1, 2) should be (false)
+    }
+    "be able to hit other figures, when they stand diagonal north from them" in {
       new Pawn('W').hit(7, 7, 6, 6) should be (true)
       new Pawn('W').hit(7, 7, 6, 5) should be (false)
-//      new Pawn('B').hit(0, 0, 1, 2) should be (false)
     }
   }
 }
