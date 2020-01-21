@@ -68,9 +68,9 @@ class ControllerSpec extends WordSpec with Matchers {
     "create a new board" in {
       var test = new chess.control.controllerComponent.controllerBaseImpl.Controller(BoardCreator(8).init(BoardCreator(8).create))
       test.createNewBoard()
-      var test2 = new chess.control.controllerComponent.controllerBaseImpl.Controller(BoardCreator(8).init(BoardCreator(8).create))
+      var test2 = new chess.control.controllerComponent.controllerBaseImpl.Controller(BoardCreator(16).init(BoardCreator(16).create))
       test2.createNewBoard()
-      var test3 = new chess.control.controllerComponent.controllerBaseImpl.Controller(BoardCreator(8).init(BoardCreator(8).create))
+      var test3 = new chess.control.controllerComponent.controllerBaseImpl.Controller(BoardCreator(32).init(BoardCreator(32).create))
       test3.createNewBoard()
     }
     "undo and redo commands" in {
@@ -82,9 +82,10 @@ class ControllerSpec extends WordSpec with Matchers {
     }
     "take a step back" in {
       test.back('A', '2', 'A', '3') should be ()
+      test.back('A', '2', 'A', '3') should be ()
     }
     "see which figure stands on a cell" in {
-      test.getFig(0, 0) should be ("rook_black")
+      test.getFig(7, 0) should be ("rook_black")
       test.getFig(7, 7) should be ("rook_white")
       test.getFig(0, 1) should be ("pawn_black")
       test.getFig(1, 0) should be ("horse_black")
