@@ -23,6 +23,11 @@ class RulesAllSpec extends WordSpec with Matchers {
         RulesAll.valid(test, 0, 3, 0, 5) should be(false)
       }
     }
+    "should be able to hit a figure" in {
+      var tmp = BoardCreator(8).create.put('A', '1', 'P', 'B').put('B', '2', 'P', 'W')
+      RulesAll.hit(tmp, 0, 0, 1, 1) should be (true)
+      RulesAll.hit(tmp, 1, 1, 0, 0) should be (true)
+    }
   }
 
   "a black pawn" should {
@@ -209,6 +214,11 @@ class RulesAllSpec extends WordSpec with Matchers {
         RulesAll.valid(queen, 3, 3, 1, 3) should be(true)
         RulesAll.valid(queen, 3, 3, 3, 2) should be(true)
         RulesAll.valid(queen, 3, 3, 3, 1) should be(true)
+      }
+    }
+    "a none" should {
+      "not have any rule" in {
+        RulesAll.valid(BoardCreator(8).create, 0, 0, 1, 1) should be (false)
       }
     }
   }
