@@ -33,6 +33,7 @@ class FigureSpec extends WordSpec with Matchers{
   "A pawn" should {
     "be able to hit other figures, when they stand diagonal from them" in {
       new Pawn('B').hit(0, 0, 1, 1) should be (true)
+      new Pawn('W').hit(2, 2, 1, 1) should be (true)
       new Pawn('B').hit(0, 0, 1, 2) should be (false)
     }
   }

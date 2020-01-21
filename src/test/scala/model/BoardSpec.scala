@@ -43,6 +43,7 @@ class BoardSpec extends WordSpec with Matchers {
       tmp.move('A', '8', 'A', '5').back('A', '8', 'A', '5').Matrix(0)(7).figure.isInstanceOf[None] should be (false)
       tmp.move('A', '7', 'A', '5').back('A', '7', 'A', '5').Matrix(0)(7).figure.isInstanceOf[None] should be (false)
       tmp.move('A', '7', 'A', '6').move('A', '6', 'A', '5').back('A', '6', 'A', '5').Matrix(0)(7).figure.isInstanceOf[None] should be (false)
+      tmp.move('A', '1', 'A', '2').move('A', '2', 'A', '3').back('A', '2', 'A', '3').Matrix(0)(7).figure.isInstanceOf[None] should be (false)
     }
   }
   "Figures" when {
