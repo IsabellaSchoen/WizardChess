@@ -94,6 +94,7 @@ class ControllerSpec extends WordSpec with Matchers {
       test.getFig(2, 0) should be ("bishop_black")
       test.getFig(3, 0) should be ("queen_black")
       test.getFig(4, 0) should be ("king_black")
+      test.getFig(3, 3) should be ("_black")
     }
     "save and load a board with FileIO" in {
       test.save should be ()

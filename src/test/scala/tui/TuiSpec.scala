@@ -32,5 +32,17 @@ class TuiSpec extends WordSpec with Matchers {
     "be able to create an empty board" in {
       new Tui(new Controller(BoardCreator(8).create)).inputprocess("e") should be (2)
     }
+    "be able to save a board" in {
+      new Tui(new Controller(BoardCreator(8).create)).inputprocess("save") should be (100)
+    }
+    "be able to load a board" in {
+      new Tui(new Controller(BoardCreator(8).create)).inputprocess("load") should be (-100)
+    }
+    "be able to undo" in {
+      new Tui(new Controller(BoardCreator(8).create)).inputprocess("undo") should be (40)
+    }
+    "be able to redo" in {
+      new Tui(new Controller(BoardCreator(8).create)).inputprocess("redo") should be (-40)
+    }
   }
 }

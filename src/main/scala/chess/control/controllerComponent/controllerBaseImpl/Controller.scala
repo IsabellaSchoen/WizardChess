@@ -24,7 +24,6 @@ class Controller @Inject() (var board: BoardTrait) extends ControllerTrait {
       case 8 => board = injector.instance[BoardTrait](Names.named("normal"))
       case 16 => board = injector.instance[BoardTrait](Names.named("twice"))
       case 32 => board = injector.instance[BoardTrait](Names.named("triple"))
-      case _ =>
     }
   }
 
