@@ -11,8 +11,14 @@ class FileIOSpec extends WordSpec with Matchers {
   "An XML FileIO system" should {
     var io = new XML
     "be able to save to a file" in {
-      var tmp = BoardCreator(8).create
+      var tmp = BoardCreator(8).init(BoardCreator(8).create)
       io.save(tmp) should be ()
+      tmp = BoardCreator(16).init(BoardCreator(8).create)
+      io.save(tmp) should be ()
+      io.load
+      tmp = BoardCreator(32).init(BoardCreator(8).create)
+      io.save(tmp) should be ()
+      io.load
     }
     "be able to load a board from file" in {
       io.load.isInstanceOf[BoardTrait] should be (true)
@@ -22,8 +28,14 @@ class FileIOSpec extends WordSpec with Matchers {
   "A JSON FileIO system" should {
     var io = new JSON
     "be able to save to a file" in {
-      var tmp = BoardCreator(8).create
+      var tmp = BoardCreator(8).init(BoardCreator(8).create)
       io.save(tmp) should be ()
+      tmp = BoardCreator(16).init(BoardCreator(8).create)
+      io.save(tmp) should be ()
+      io.load
+      tmp = BoardCreator(32).init(BoardCreator(8).create)
+      io.save(tmp) should be ()
+      io.load
     }
     "be able to load a board from file" in {
       io.load.isInstanceOf[BoardTrait] should be (true)
