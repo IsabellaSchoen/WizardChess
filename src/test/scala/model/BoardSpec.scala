@@ -56,6 +56,39 @@ class BoardSpec extends WordSpec with Matchers {
       }
     }
   }
+
+  "A BoardMock" should {
+    var mock = new chess.model.boardComponent.boardMockImpl.Board(8)
+    val mock2 = mock
+    "have a state" in {
+      mock.state should be (0)
+    }
+    "have a size" in {
+      mock.size should be (8)
+    }
+    "not do anything when putting a new figure on it" in {
+      mock.put('A', '1', 'P', 'B') should be (mock2)
+    }
+    "return true if coords are tested for validity, whether or not they are valid" in {
+      mock.validCoords('1', '1', '1', '1') should be (true)
+    }
+    "have an empty Matrix" in {
+      mock.Matrix.isInstanceOf[Array[Array[Cell]]] should be (true)
+    }
+    "not do anything when moving a black figure" in {
+      mock.moveBlack('A', '1', 'A', '3') should be (mock2)
+    }
+    "not do anything when moving a white figure" in {
+      mock.moveWhite('A', '1', 'A', '2') should be (mock2)
+    }
+    "not do anything when moving a figure" in {
+      mock.move('A', '1', 'A', '2') should be (mock2)
+    }
+    "always return -1 when checking the positional value of a char (so every char is not a value of the board)" in {
+      mock.xi('A') should be (-1)
+      mock.yi('A') should be (-1)
+    }
+  }
 }
 
 //"\n" + "   A  B  C  D  E  F  G  H\n" + ((("y " + ((Console.WHITE_B + " x " +
