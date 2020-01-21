@@ -74,6 +74,8 @@ class ControllerSpec extends WordSpec with Matchers {
       test3.createNewBoard()
     }
     "undo and redo commands" in {
+      test.undo should be ()
+      test.redo should be ()
       test.move('A', '8', 'A', '6')
       test.undo
       test.board.Matrix(0)(7).figure.isInstanceOf[None] should be (false)
