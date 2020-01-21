@@ -32,9 +32,6 @@ object RulesAll {
   def hit(board: BoardTrait, x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {
     start = board.Matrix(x1)(y1)
 
-    if (start.isEmpty)
-      return false
-
     if (!board.Matrix(x1)(y1).figure.isInstanceOf[Pawn])
       start.figure.rule(board, x1, y1, x2, y2)
     else

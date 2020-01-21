@@ -216,10 +216,5 @@ class RulesAllSpec extends WordSpec with Matchers {
         RulesAll.valid(queen, 3, 3, 3, 1) should be(true)
       }
     }
-    "a none" should {
-      "not have any rule" in {
-        RulesAll.valid(BoardCreator(8).create, 0, 0, 1, 1) should be (false)
-      }
-    }
   }
 }
