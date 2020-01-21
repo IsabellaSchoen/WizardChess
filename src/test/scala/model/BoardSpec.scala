@@ -35,6 +35,13 @@ class BoardSpec extends WordSpec with Matchers {
       t1.move('A', '2', 'A', '4').Matrix(0)(1).figure.isInstanceOf[None] should be (true)
       t1.Matrix(0)(3).figure.caption should be ('P')
     }
+    "be of size 8 when beeing called without size parameter" in {
+      new chess.model.boardComponent.boardBaseImpl.Board().size should be (8)
+    }
+    "be able to take a step back" in {
+      var tmp = BoardCreator(8).init(BoardCreator(8).create)
+      tmp.move('A', '8', 'A', '5').back('A', '8', 'A', '5').Matrix(0)(7).figure.isInstanceOf[None] should be (false)
+    }
   }
   "Figures" when {
     "black" should {
@@ -54,6 +61,12 @@ class BoardSpec extends WordSpec with Matchers {
       "be moved when it's player one's turn" in {
         BoardCreator(8).init(BoardCreator(8).create).moveWhite('A', '7', 'A', '6').Matrix(0)(6).figure.isInstanceOf[None] should be (true)
       }
+    }
+  }
+  "Figures" should {
+    var tmp = BoardCreator(8).init(BoardCreator(8).create)
+    "be able to hit figures that have another color" in {
+      tmp.move('A', '8', 'A', '2').Matrix(0)(7).figure.isInstanceOf[None] should be (true)
     }
   }
 
@@ -87,6 +100,9 @@ class BoardSpec extends WordSpec with Matchers {
     "always return -1 when checking the positional value of a char (so every char is not a value of the board)" in {
       mock.xi('A') should be (-1)
       mock.yi('A') should be (-1)
+    }
+    "do nothing when taking one step back" in {
+      mock.back('A', '1', 'A', 'A') should be (mock2)
     }
   }
 }

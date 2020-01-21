@@ -39,6 +39,8 @@ trait BoardTrait {
   def xi(x: Char): Int
 
   def yi(y: Char): Int
+
+  def back(x1: Char, y1: Char, x2: Char, y2: Char) : BoardTrait
 }
 
 object Board {

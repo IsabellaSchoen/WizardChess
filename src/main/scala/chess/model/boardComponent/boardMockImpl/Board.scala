@@ -40,4 +40,6 @@ class Board(s: Int = 0) extends BoardTrait {
   override def xi(x: Char): Int = -1
 
   override def yi(y: Char): Int = -1
+
+  override def back(x1: Char, y1: Char, x2: Char, y2: Char): BoardTrait = this
 }
