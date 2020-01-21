@@ -34,7 +34,7 @@ class FigureSpec extends WordSpec with Matchers{
     "be able to hit other figures, when they stand diagonal from them" in {
       new Pawn('B').hit(0, 0, 1, 1) should be (true)
       new Pawn('W').hit(7, 7, 6, 6) should be (true)
-      new Pawn('W').hit(7, 7, 6, 5) should be (true)
+      new Pawn('W').hit(7, 7, 6, 5) should be (false)
       new Pawn('B').hit(0, 0, 1, 2) should be (false)
     }
   }
