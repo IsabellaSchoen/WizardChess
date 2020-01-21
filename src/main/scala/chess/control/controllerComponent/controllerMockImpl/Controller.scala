@@ -29,15 +29,15 @@ class Controller extends ControllerTrait{
 
   override def getFig(i: Int, j: Int): String = ""
 
-  override def save(): Unit = ???
+  override def save(): Unit = {}
 
-  override def load(): Unit = ???
+  override def load(): Unit = {}
 
-  override def getState(): Int = ???
+  override def getState(): Int = 0
 
-  override def undo(): Unit = ???
+  override def undo(): Unit = {}
 
-  override def redo(): Unit = ???
+  override def redo(): Unit = {}
 
-  override def back(x1: Char, y1: Char, x2: Char, y2: Char): Unit = ???
+  override def back(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {}
 }
