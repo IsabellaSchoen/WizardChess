@@ -10,7 +10,7 @@ import scalafx.scene.control._
 import scalafx.scene.image.ImageView
 import scalafx.scene.layout.{BorderPane, GridPane, StackPane, VBox}
 import scalafx.scene.paint.Color._
-import scalafx.scene.shape.Rectangle
+import scalafx.scene.shape.{Circle, Rectangle}
 import scalafx.scene.text.Text
 import scalafx.scene.{Node, Scene}
 
@@ -200,8 +200,13 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
       for (i <- 0 to 7) {
         for (j <- 0 to 7) {
           grid.add(new Button {
-            style = "-fx-background-color: transparent;"
-            onAction = { _ => click(i, j) }
+            style = "-fx-background-color: transparent; -fx-background-radius: 50%"
+            println(style)
+            onAction = { _ => {
+              click(i, j)
+              col(i, j)
+            }
+            }
             prefWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
             prefHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
           }, i, j)
@@ -219,13 +224,13 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
       for (i <- 0 until 4) {
         for (j <- 0 until 4) {
           graveWhite.add(new ImageView("file:" + controller.getFig(controller.graveyardWhite, i, j) + ".png") {
-            fitWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
-            fitHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
+            fitWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 9
+            fitHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 9
           }, i, j)
 
           graveBlack.add(new ImageView("file:" + controller.getFig(controller.graveyardBlack, i, j) + ".png") {
-            fitWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
-            fitHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
+            fitWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 9
+            fitHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 9
           }, i, j)
         }
       }
@@ -268,6 +273,10 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
       x = i
       y = j
     }
+  }
+
+  def col(i: Int, j: Int) = {
+
   }
 
 

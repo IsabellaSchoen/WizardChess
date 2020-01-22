@@ -47,7 +47,7 @@ class Controller @Inject()(var board: BoardTrait) extends ControllerTrait {
 
   override def move(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     val tmp = board.Matrix(board.xi(x2))(board.yi(y2)).figure
-    if (!board.Matrix(board.xi(x2))(board.yi(y2)).isEmpty)
+    if (!board.Matrix(board.xi(x2))(board.yi(y2)).isEmpty && RulesAll.hit(board, board.xi(x1), board.yi(y1), board.xi(x1), board.yi(y1)))
       kill(tmp.caption, tmp.col)
     undoManager.doStep(new MoveCommand(this, x1, y1, x2, y2))
   }
