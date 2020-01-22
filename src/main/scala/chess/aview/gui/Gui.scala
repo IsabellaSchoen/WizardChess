@@ -10,7 +10,7 @@ import scalafx.scene.control._
 import scalafx.scene.image.ImageView
 import scalafx.scene.layout.{BorderPane, GridPane, StackPane, VBox}
 import scalafx.scene.paint.Color._
-import scalafx.scene.shape.{Circle, Rectangle}
+import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
 import scalafx.scene.{Node, Scene}
 
@@ -199,11 +199,11 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
 
       for (i <- 0 to 7) {
         for (j <- 0 to 7) {
-          grid.add(new Button {
+          grid.add(new Button { //Buttons eingefügt
             style = "-fx-background-color: transparent; -fx-background-radius: 50%"
             onAction = { _ => {
               click(i, j)
-              col(i, j)
+              col(this, i, j)
             }
             }
             prefWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
@@ -274,8 +274,8 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
     }
   }
 
-  def col(i: Int, j: Int) = {
-
+  def col(b: Button, i: Int, j: Int) = {
+    b.style = "-fx-background-color: transparent; -fx-background-radius: 40%; -fx-border-color: lightgreen;"
   }
 
 
