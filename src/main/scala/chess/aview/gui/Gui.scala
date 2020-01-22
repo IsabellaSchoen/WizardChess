@@ -201,7 +201,6 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
         for (j <- 0 to 7) {
           grid.add(new Button {
             style = "-fx-background-color: transparent; -fx-background-radius: 50%"
-            println(style)
             onAction = { _ => {
               click(i, j)
               col(i, j)
