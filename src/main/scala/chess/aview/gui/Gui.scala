@@ -199,8 +199,9 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
 
       for (i <- 0 to 7) {
         for (j <- 0 to 7) {
-          grid.add(new Button { //Buttons eingefügt
+          grid.add(new ChessButton { //Buttons eingefügt
             style = "-fx-background-color: transparent; -fx-background-radius: 50%"
+            selected = false
             onAction = { _ => {
               click(i, j)
               col(this, i, j)
@@ -208,6 +209,18 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
             }
             prefWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
             prefHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
+            onMouseEntered = e => {
+              style = "-fx-background-color: rgba(0, 255, 0, 0.2); " +
+                "-fx-effect: dropshadow(gaussian, blue, 50, 0, 0, 0); " +
+                "-fx-background-insets: 10; " +
+                "-fx-outer-border, -fx-inner-border, -fx-body-color;"
+            }
+            onMouseExited = e => {
+              if (selected)
+                col(this, i, j)
+              else
+                style = "-fx-background-color: transparent;"
+            }
           }, i, j)
 
           fig.add(new ImageView("file:" + controller.getFig(controller.board, i, j) + ".png") {
@@ -274,8 +287,11 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
     }
   }
 
-  def col(b: Button, i: Int, j: Int) = {
-    b.style = "-fx-background-color: transparent; -fx-background-radius: 40%; -fx-border-color: lightgreen;"
+  def col(b: ChessButton, i: Int, j: Int) = {
+    b.selected = true
+    b.style = "-fx-background-color: transparent; " +
+      "-fx-background-radius: 40%; " +
+      "-fx-border-color: lightgreen;"
   }
 
 
@@ -358,3 +374,7 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
 //          }
 //          background = null
 //        })
+
+class ChessButton extends Button {
+  var selected = false
+}
