@@ -3,6 +3,8 @@ package chess.model.boardComponent
 import chess.model.Cell
 
 trait BoardTrait {
+  def check(i: Int, j: Int, x: Int, y: Int): Boolean
+
 
   var state: Int
 

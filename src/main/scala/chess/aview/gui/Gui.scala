@@ -1,6 +1,9 @@
 package chess.aview.gui
 
+import java.util
+
 import chess.control.controllerComponent.ControllerTrait
+import chess.model.RulesAll
 import chess.util.Observer
 import scalafx.Includes.when
 import scalafx.application.JFXApp
@@ -14,6 +17,7 @@ import scalafx.scene.shape.Rectangle
 import scalafx.scene.text.Text
 import scalafx.scene.{Node, Scene}
 
+import scala.collection.{immutable, mutable}
 import scala.io.Source
 
 class Gui(controller: ControllerTrait) extends JFXApp with Observer {
@@ -25,6 +29,10 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
 
   val HEIGHT = 720
   val WIDTH = 1400
+
+  var markiert = new Array[Boolean](64)
+
+  var help = false
 
   stage = new PrimaryStage {
     title = "WizardChess"
@@ -59,7 +67,9 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
             "-fx-max-width: 180px;" +
             "-fx-max-height: 100px;" +
             "-fx-padding:5;" +
-            "-fx-background-color: transparent;" +
+            "-fx-background-color: rgba(0, 0, 0, 0.4);" +
+            "-fx-background-radius: 20px;" +
+            "-fx-border-radius: 20px;" +
             "-fx-text-fill: white;"
           style <== when(hover) choose stdStyle + "-fx-border-color: white;" otherwise stdStyle
 
@@ -67,8 +77,8 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
           prefWidth = 200
           onAction = { _ => {
             println("changing to the next window to choose the game option")
-            stage.setHeight(1080)
             stage.setWidth(1920)
+            stage.setHeight(1080)
             play()
           }
           }
@@ -83,7 +93,9 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
             "-fx-max-width: 240px;" +
             "-fx-max-height: 100px;" +
             "-fx-padding:5;" +
-            "-fx-background-color: transparent;" +
+            "-fx-background-color: rgba(0, 0, 0, 0.4);" +
+            "-fx-background-radius: 20px;" +
+            "-fx-border-radius: 20px;" +
             "-fx-text-fill: white;"
           style <== when(hover) choose stdStyle + "-fx-border-color: white;" otherwise stdStyle
 
@@ -99,6 +111,16 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
           }
         }
 
+        val helpButton: RadioButton = new RadioButton("show possible moves") {
+          selected = help
+          style = "-fx-padding: 25px; -fx-font-size: 20pt; -fx-text-fill: white; -fx-background-color: rgba(0, 0, 0, 0.4); -fx-background-radius: 20px;"
+          onAction = { _ => {
+            help = this.selected.value
+            println(help)
+          }
+          }
+        }
+
 
         val buttonRules: Button = new Button {
           text = "Rules"
@@ -109,7 +131,9 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
             "-fx-max-width: 150px;" +
             "-fx-max-height: 100px;" +
             "-fx-padding:5;" +
-            "-fx-background-color: transparent;" +
+            "-fx-background-color: rgba(0, 0, 0, 0.4);" +
+            "-fx-background-radius: 20px;" +
+            "-fx-border-radius: 20px;" +
             "-fx-text-fill: white;"
           style <== when(hover) choose stdStyle + "-fx-border-color: white;" otherwise stdStyle
 
@@ -137,7 +161,7 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
 
         center = new VBox {
           alignment = Pos.Center
-          children = List(buttonGo, buttonLoad, buttonRules)
+          children = List(buttonGo, buttonLoad, helpButton, buttonRules)
         }
 
         /*val borderpane: BorderPane = new BorderPane() {
@@ -164,7 +188,6 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
   }
 
   override def stopApp(): Unit = {
-    controller.save()
     stage.close()
     System.exit(0)
   }
@@ -179,6 +202,94 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
       background.setFitHeight(stage.getHeight)
       background.setFitWidth(stage.getHeight)
 
+      val devPane: BorderPane = new BorderPane {
+        pickOnBounds = false
+        right = new VBox {
+          children = Seq(
+            new Button {
+              text = "devMode"
+              val stdStyle: String = "-fx-font-size: 10pt;" +
+                "-fx-background-color: transparent;"
+              style <== when(hover) choose stdStyle + "-fx-border-color: black;" otherwise stdStyle
+              prefHeight = 50
+              prefWidth = 150
+              onAction = { _ => {
+                if (controller.getState() != 0) {
+                  text.set("normal mode")
+                  println("entering devMode")
+                  controller.setState(0)
+                } else {
+                  text = "devMode"
+                  println("exiting devMode")
+                  controller.setState(1)
+                }
+              }
+              }
+            },
+            new Button("Home") {
+              val stdStyle: String = "-fx-font-size: 25px;" +
+                "-fx-background-radius: 5em;" +
+                "-fx-min-width: 30px;" +
+                "-fx-min-height: 30px;" +
+                "-fx-max-width: 120px;" +
+                "-fx-max-height: 60px;" +
+                "-fx-padding:5;" +
+                "-fx-background-color: transparent;" +
+                "-fx-text-fill: black;"
+              style <== when(hover) choose stdStyle + "-fx-border-color: black;" otherwise stdStyle
+              prefHeight = 100
+              prefWidth = 300
+              background = null
+              onAction = { _ => {
+                println("entering main menu")
+                initialize()
+              }
+              }
+            },
+            new Button("Save game") {
+              val stdStyle: String = "-fx-font-size: 20px;" +
+                "-fx-background-radius: 5em;" +
+                "-fx-min-width: 30px;" +
+                "-fx-min-height: 30px;" +
+                "-fx-max-width: 120px;" +
+                "-fx-max-height: 60px;" +
+                "-fx-padding:5;" +
+                "-fx-background-color: transparent;" +
+                "-fx-text-fill: black;"
+              style <== when(hover) choose stdStyle + "-fx-border-color: black;" otherwise stdStyle
+              prefHeight = 100
+              prefWidth = 300
+              background = null
+              onAction = { _ => {
+                println("saving game")
+                controller.save()
+              }
+              }
+            },
+            new Button("Load game") {
+              val stdStyle: String = "-fx-font-size: 20px;" +
+                "-fx-background-radius: 5em;" +
+                "-fx-min-width: 30px;" +
+                "-fx-min-height: 30px;" +
+                "-fx-max-width: 120px;" +
+                "-fx-max-height: 60px;" +
+                "-fx-padding:5;" +
+                "-fx-background-color: transparent;" +
+                "-fx-text-fill: black;"
+              style <== when(hover) choose stdStyle + "-fx-border-color: black;" otherwise stdStyle
+              prefHeight = 100
+              prefWidth = 300
+              background = null
+              onAction = { _ => {
+                println("loading game")
+                controller.load()
+              }
+              }
+            }
+          )
+        }
+      }
+
       val statePane: BorderPane = new BorderPane() {
         val stateStyle = "-fx-font-size: 25pt"
         top = controller.getState() match {
@@ -188,10 +299,14 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
           case 2 => new Label("Schwarz ist am Zug") {
             style = stateStyle
           }
+          case 0 => new Label("devMode") {
+            style = stateStyle
+          }
         }
       }
 
       val grid = new GridPane
+      markiert = new Array[Boolean](64)
       var fig = new GridPane
 
       grid.setAlignment(Pos.Center)
@@ -201,23 +316,44 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
         for (j <- 0 to 7) {
           grid.add(new ChessButton { //Buttons eingefügt
             style = "-fx-background-color: transparent; -fx-background-radius: 50%"
-            selected = false
             onAction = { _ => {
+              col(this)
+
+              for (x <- 0 until 8) {
+                for (y <- 0 until 8) {
+                  if ((controller.board.check(i, j, x, y) && controller.board.Matrix(x)(y).isEmpty)
+                    || (RulesAll.hit(controller.board, i, j, x, y) && !controller.board.Matrix(x)(y).isEmpty &&
+                    !controller.board.Matrix(i)(j).figure.col.equals(controller.board.Matrix(x)(y).figure.col)
+                    && ((controller.board.check(i, j, x - 1, y - 1) || controller.board.check(i, j, x - 1, y + 1)
+                    || controller.board.check(i, j, x + 1, y - 1) || controller.board.check(i, j, x + 1, y + 1)
+                    || controller.board.check(i, j, x - 1, y) || controller.board.check(i, j, x + 1, y)
+                    || controller.board.check(i, j, x, y - 1) || controller.board.check(i, j, x, y + 1))))) {
+                    val loc = (x * 8) + y
+                    val tmp = grid.children.get(loc)
+                    if (help)
+                      mark(tmp)
+                    markiert(loc) = true
+                  }
+                }
+              }
+
               click(i, j)
-              col(this, i, j)
             }
             }
             prefWidth = (stage.getHeight - (stage.getHeight / 7.2)) / 8
             prefHeight = (stage.getHeight - (stage.getHeight / 7.2)) / 8
             onMouseEntered = e => {
-              style = "-fx-background-color: rgba(0, 255, 0, 0.2); " +
-                "-fx-effect: dropshadow(gaussian, blue, 50, 0, 0, 0); " +
-                "-fx-background-insets: 10; " +
-                "-fx-outer-border, -fx-inner-border, -fx-body-color;"
+              style = "-fx-background-color: rgba(0, 255, 0, 0.3); " +
+                "-fx-outer-border: rgba(0, 255, 0, 0.3); " +
+                "-fx-inner-border: rgba(0, 255, 0, 0.3); " +
+                "-fx-body-color: rgba(0, 255, 0, 0.3); " +
+                "-fx-effect: dropshadow(gaussian, blue, 50, 0, 0, 0); "
             }
             onMouseExited = e => {
               if (selected)
-                col(this, i, j)
+                col(this)
+              else if (markiert((i * 8) + j) && help)
+                mark(this)
               else
                 style = "-fx-background-color: transparent;"
             }
@@ -266,7 +402,7 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
         center = grid
       }
 
-      stackPane.getChildren.addAll(background, statePane, graveWhitePane, graveBlackPane, tmpfig, tmp)
+      stackPane.getChildren.addAll(background, statePane, graveWhitePane, graveBlackPane, tmpfig, tmp, devPane)
       root = stackPane
     }
 
@@ -275,23 +411,37 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
 
 
   def click(i: Integer, j: Integer): Unit = {
-    print(i + " " + j + "\n")
-    if (x != -1) {
-      println("move" + (x + 'A').toChar + (y + '1').toChar + "to" + (i + 'A').toChar + (j + '1').toChar)
+    if (x != -1 && markiert((i * 8) + j)) {
       controller.move((x + 'A').toChar, (y + '1').toChar, (i + 'A').toChar, (j + '1').toChar)
       x = -1
       y = -1
-    } else if (!controller.getFig(controller.board, i, j).equals("_black")) {
+    } else if (x == -1 && !controller.getFig(controller.board, i, j).equals("_black")) {
       x = i
       y = j
+    } else if (x != -1 && !markiert((i * 8) + j)) {
+      x = -1
+      y = -1
+      play()
     }
   }
 
-  def col(b: ChessButton, i: Int, j: Int) = {
+  def col(b: ChessButton): Unit = {
     b.selected = true
-    b.style = "-fx-background-color: transparent; " +
-      "-fx-background-radius: 40%; " +
-      "-fx-border-color: lightgreen;"
+    b.style = "-fx-background-color: rgba(0, 255, 0, 0.3); " +
+      "-fx-background-radius: 25%;" +
+      "-fx-border-radius: 25%; " +
+      "-fx-border-color: rgba(0, 255, 0, 0.4);" +
+      "-fx-border-width: 10pt;" +
+      "-fx-effect: dropshadow(gaussian, green, 50, 0, 0, 0);"
+  }
+
+  def mark(b: javafx.scene.Node): Unit = {
+    b.setStyle("-fx-background-color: rgba(255, 0, 0, 0.3); " +
+      "-fx-background-radius: 25%;" +
+      "-fx-border-radius: 25%; " +
+      "-fx-border-color: rgba(255, 0, 0, 0.4);" +
+      "-fx-border-width: 10pt;" +
+      "-fx-effect: dropshadow(gaussian, red, 50, 0, 0, 0);")
   }
 
 

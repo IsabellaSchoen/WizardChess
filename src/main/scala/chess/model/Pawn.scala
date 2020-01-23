@@ -15,8 +15,12 @@ class Pawn(color: Char) extends Figure(color: Char) {
     var xs, ys, xe, ye = -1
 
     def atStart(y: Int): Unit = {
-      if ((color == 'B' && y == 1) || (color == 'W' && y == 6)) //Zielposition = Startposition?
+      if (isAtStart(y))
         state = twoStep
+    }
+
+    def isAtStart(y: Int): Boolean = {
+      (color == 'B' && y == 1) || (color == 'W' && y == 6) //Zielposition = Startposition?
     }
 
     def handle(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = {

@@ -9,13 +9,13 @@ import chess.model._
 import chess.model.boardComponent.BoardTrait
 import chess.util.UndoManager
 import com.google.inject.name.Names
-import com.google.inject.{Guice, Inject}
+import com.google.inject.{Guice, Inject, Injector}
 import net.codingwell.scalaguice.InjectorExtensions._
 
 class Controller @Inject()(var board: BoardTrait) extends ControllerTrait {
   private val io: FileIOInterface = new FileIO()
   private var state: Int = 1
-  val injector = Guice.createInjector(new WizardChessModule)
+  val injector: Injector = Guice.createInjector(new WizardChessModule)
   val undoManager = new UndoManager
 
 
@@ -47,7 +47,7 @@ class Controller @Inject()(var board: BoardTrait) extends ControllerTrait {
 
   override def move(x1: Char, y1: Char, x2: Char, y2: Char): Unit = {
     val tmp = board.Matrix(board.xi(x2))(board.yi(y2)).figure
-    if (!board.Matrix(board.xi(x2))(board.yi(y2)).isEmpty && RulesAll.hit(board, board.xi(x1), board.yi(y1), board.xi(x1), board.yi(y1)))
+    if (!board.Matrix(board.xi(x2))(board.yi(y2)).isEmpty && RulesAll.hit(board, board.xi(x1), board.yi(y1), board.xi(x1), board.yi(y1)) && !(x1.equals(x2) && y1.equals(y2)))
       kill(tmp.caption, tmp.col)
     undoManager.doStep(new MoveCommand(this, x1, y1, x2, y2))
   }

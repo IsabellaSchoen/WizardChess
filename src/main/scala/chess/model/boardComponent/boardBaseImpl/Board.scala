@@ -151,4 +151,142 @@ class Board(s: Int) extends BoardTrait {
     else
       -1
   }
+
+  override def check(i: Int, j: Int, x: Int, y: Int): Boolean = {
+    if (!Matrix(i)(j).figure.isInstanceOf[Pawn])
+      return RulesAll.valid(this, i, j, x, y) && notJumping(i, j, x, y)
+    if (Matrix(i)(j).figure.asInstanceOf[Pawn].PawnState.isAtStart(j))
+      (i == x && (((y == j + 1 || y == j + 2) && Matrix(i)(j).figure.col == 'B') || ((y == j - 1 || y == j - 2)
+        && Matrix(i)(j).figure.col == 'W'))) && notJumping(i, j, x, y)
+    else
+      i == x && (((y == j + 1) && Matrix(i)(j).figure.col == 'B') || ((y == j - 1) && Matrix(i)(j).figure.col == 'W'))
+  }
+
+  def notJumping(i: Int, j: Int, x: Int, y: Int): Boolean = {
+    Matrix(i)(j).figure.caption match {
+      case 'P' =>
+        if (y == j + 2)
+          Matrix(i)(j + 1).isEmpty
+        else if (y == j - 2)
+          Matrix(i)(j - 1).isEmpty
+        else
+          true
+      case 'R' =>
+        if (x > i) {
+          for (count <- i + 1 to x)
+            if (!Matrix(count)(j).isEmpty)
+              return false
+          return true
+        }
+        else if (y > j) {
+          for (count <- j + 1 to y)
+            if (!Matrix(i)(count).isEmpty)
+              return false
+          return true
+        }
+        else if (x < i) {
+          for (count <- x to i - 1)
+            if (!Matrix(count)(j).isEmpty)
+              return false
+          return true
+        }
+        else if (y < j) {
+          for (count <- y to j - 1)
+            if (!Matrix(i)(count).isEmpty)
+              return false
+          return true
+        }
+        return false
+      case 'B' => {
+        if (x < i) {
+          if (y < j) {
+            for (count <- x to i - 1)
+              if (!Matrix(count)(y + (count - x)).isEmpty)
+                return false
+            return true
+          }
+          else {
+            for (count <- x to i - 1)
+              if (!Matrix(count)(y - (count - x)).isEmpty)
+                return false
+            return true
+          }
+        }
+        else {
+          if (y < j) {
+            for (count <- y to j - 1)
+              if (!Matrix(x - (count - y))(count).isEmpty)
+                return false
+            return true
+          }
+          else {
+            for (count <- i + 1 to x)
+              if (!Matrix(count)(j + (count - i)).isEmpty)
+                return false
+            return true
+          }
+        }
+      }
+      case 'Q' => {
+        if (i == x || j == y) {
+          if (x > i) {
+            for (count <- i + 1 to x)
+              if (!Matrix(count)(j).isEmpty)
+                return false
+            return true
+          }
+          else if (y > j) {
+            for (count <- j + 1 to y)
+              if (!Matrix(i)(count).isEmpty)
+                return false
+            return true
+          }
+          else if (x < i) {
+            for (count <- x to i - 1)
+              if (!Matrix(count)(j).isEmpty)
+                return false
+            return true
+          }
+          else if (y < j) {
+            for (count <- y to j - 1)
+              if (!Matrix(i)(count).isEmpty)
+                return false
+            return true
+          }
+          return false
+        }
+        else {
+          if (x < i) {
+            if (y < j) {
+              for (count <- x to i - 1)
+                if (!Matrix(count)(y + (count - x)).isEmpty)
+                  return false
+              return true
+            }
+            else {
+              for (count <- x to i - 1)
+                if (!Matrix(count)(y - (count - x)).isEmpty)
+                  return false
+              return true
+            }
+          }
+          else {
+            if (y < j) {
+              for (count <- y to j - 1)
+                if (!Matrix(x - (count - y))(count).isEmpty)
+                  return false
+              return true
+            }
+            else {
+              for (count <- i + 1 to x)
+                if (!Matrix(count)(j + (count - i)).isEmpty)
+                  return false
+              return true
+            }
+          }
+        }
+      }
+      case _ => true
+    }
+  }
 }
