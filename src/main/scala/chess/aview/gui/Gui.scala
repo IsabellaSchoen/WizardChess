@@ -436,7 +436,7 @@ class Gui(controller: ControllerTrait) extends JFXApp with Observer {
   }
 
   def mark(b: javafx.scene.Node): Unit = {
-    b.setStyle("-fx-background-color: rgba(255, 0, 0, 0.3); " +
+    b.setStyle("-fx-background-color: rgba(0, 0, 255, 0.3); " +
       "-fx-background-radius: 25%;" +
       "-fx-border-radius: 25%; " +
       "-fx-border-color: rgba(255, 0, 0, 0.4);" +
